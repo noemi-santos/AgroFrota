@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Suport\Facades\Log;
+use Illuminate\Support\Facades\Log;
 use App\Models\Equipamento;
 use App\Models\Categoria;
 
@@ -35,6 +35,19 @@ class EquipamentoController extends Controller
     public function store(Request $request)
     {
         //
+        try {
+            Equipamento::create($request->all());
+            return redirect()->route("equipamentos.index")
+                ->with("sucesso", "Registro inserido!");
+        } catch (\Exception $e) {
+            Log::error("Erro ao salvar o registro do equipamento! " . $e->getMessage(), [
+                'trace' => $e->getTraceAsString(),
+                'request' => $request->all()
+            ]);
+            return redirect()->route("equipamentos.index")
+                ->with("erro", "Erro ao inserir!");
+        }
+
     }
 
     /**
@@ -43,6 +56,8 @@ class EquipamentoController extends Controller
     public function show(string $id)
     {
         //
+        $equipamento = Equipamento::findOrFail($id);
+        return view("equipamentos.show", compact("equipamento"));
     }
 
     /**
@@ -51,6 +66,9 @@ class EquipamentoController extends Controller
     public function edit(string $id)
     {
         //
+        $equipamento = Equipamento::findOrFail($id);
+        $categorias = Categoria::all();
+        return view("equipamentos.edit", compact("equipamento", "categorias"));
     }
 
     /**
@@ -59,6 +77,19 @@ class EquipamentoController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        try {
+            $equipamento = Equipamento::findOrFail($id);
+            $equipamento->update($request->all());
+            return redirect()->route("equipamentos.index")
+                ->with("sucesso", "Registro alterado!");
+        } catch (\Exception $e) {
+            Log::error("Erro ao alterar o registro do equipamento! " . $e->getMessage(), [
+                'trace' => $e->getTraceAsString(),
+                'request' => $request->all()
+            ]);
+            return redirect()->route("equipamentos.index")
+                ->with("erro", "Erro ao alterar!");
+        }
     }
 
     /**
@@ -67,5 +98,18 @@ class EquipamentoController extends Controller
     public function destroy(string $id)
     {
         //
+        try {
+            $equipamento = Equipamento::findOrFail($id);
+            $equipamento->delete();
+            return redirect()->route("equipamentos.index")
+                ->with("sucesso", "Registro excluído!");
+        } catch (\Exception $e) {
+            Log::error("Erro ao excluir o registro do equipamento! " . $e->getMessage(), [
+                'trace' => $e->getTraceAsString(),
+                'id' => $id
+            ]);
+            return redirect()->route("equipamentos.index")
+                ->with("erro", "Erro ao excluir!");
+        }
     }
 }

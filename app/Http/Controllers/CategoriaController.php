@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use App\Models\Categoria;
 
 class CategoriaController extends Controller
 {
@@ -12,6 +14,8 @@ class CategoriaController extends Controller
     public function index()
     {
         //
+        $categorias = Categoria::all();
+        return view("categorias.index", compact("categorias"));
     }
 
     /**
@@ -20,6 +24,8 @@ class CategoriaController extends Controller
     public function create()
     {
         //
+        $categorias = Categoria::all();
+        return view("categorias.create", compact('categorias'));
     }
 
     /**
@@ -28,6 +34,19 @@ class CategoriaController extends Controller
     public function store(Request $request)
     {
         //
+        try {
+            Categoria::create($request->all());
+            return redirect()->route("categorias.index")
+                ->with("sucesso", "Registro inserido!");
+        } catch (\Exception $e) {
+            Log::error("Erro ao salvar o registro da categoria! " . $e->getMessage(), [
+                'trace' => $e->getTraceAsString(),
+                'request' => $request->all()
+            ]);
+            return redirect()->route("categorias.index")
+                ->with("erro", "Erro ao inserir!");
+        }
+
     }
 
     /**
@@ -36,6 +55,8 @@ class CategoriaController extends Controller
     public function show(string $id)
     {
         //
+        $categoria = Categoria::findOrFail($id);
+        return view("categorias.show", compact("categoria"));
     }
 
     /**
@@ -44,6 +65,8 @@ class CategoriaController extends Controller
     public function edit(string $id)
     {
         //
+        $categoria = Categoria::findOrFail($id);
+        return view("categorias.edit", compact("categoria"));
     }
 
     /**
@@ -52,6 +75,19 @@ class CategoriaController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        try {
+            $categoria = Categoria::findOrFail($id);
+            $categoria->update($request->all());
+            return redirect()->route("categorias.index")
+                ->with("sucesso", "Registro alterado!");
+        } catch (\Exception $e) {
+            Log::error("Erro ao alterar o registro da categoria! " . $e->getMessage(), [
+                'trace' => $e->getTraceAsString(),
+                'request' => $request->all()
+            ]);
+            return redirect()->route("categorias.index")
+                ->with("erro", "Erro ao alterar!");
+        }
     }
 
     /**
@@ -60,5 +96,18 @@ class CategoriaController extends Controller
     public function destroy(string $id)
     {
         //
+        try {
+            $categoria = Categoria::findOrFail($id);
+            $categoria->delete();
+            return redirect()->route("categorias.index")
+                ->with("sucesso", "Registro excluído!");
+        } catch (\Exception $e) {
+            Log::error("Erro ao excluir o registro da categoria! " . $e->getMessage(), [
+                'trace' => $e->getTraceAsString(),
+                'id' => $id
+            ]);
+            return redirect()->route("categorias.index")
+                ->with("erro", "Erro ao excluir!");
+        }
     }
 }
