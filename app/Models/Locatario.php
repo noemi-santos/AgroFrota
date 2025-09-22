@@ -8,5 +8,5 @@ class Locatario extends Model
 {
     protected $table = "locatario";
     public $incrementing = true;
-    protected $fillable = ['nome', 'email', 'senha', 'telefone', 'endereco', 'classificacao'];
+    protected $fillable = ['nome', 'email', 'senha', 'telefone', 'endereco'];
 }
