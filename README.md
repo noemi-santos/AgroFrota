@@ -2,6 +2,8 @@
 
 Sistema de gestão para locação de equipamentos agrícolas desenvolvido em Laravel.
 
+> ℹ️ **Nota**: Este projeto usa **migrações Laravel** para criar o banco de dados. Não é mais necessário importar o arquivo `banco.sql` manualmente.
+
 ## 📋 Pré-requisitos
 
 - PHP 8.2 ou superior
@@ -44,17 +46,16 @@ DB_USERNAME=root
 DB_PASSWORD=sua_senha
 ```
 
-### 5. Importe o banco de dados
-- Crie um banco chamado `agrofrota` no MySQL
-- Importe o arquivo `banco.sql` via phpMyAdmin, MySQL Workbench ou linha de comando:
+### 5. Crie o banco de dados
+Crie um banco chamado `agrofrota` no MySQL:
 
-```bash
-# Via linha de comando (se disponível)
-mysql -u root -p agrofrota < banco.sql
+```sql
+CREATE DATABASE agrofrota;
 ```
 
-### 6. Execute as migrações do Laravel
+### 6. Execute as migrações
 ```bash
+# Execute as migrações para criar todas as tabelas
 php artisan migrate
 ```
 
@@ -86,6 +87,25 @@ npm run dev
 
 ## 🛠️ Comandos Úteis
 
+### Migrações
+```bash
+# Executar migrações pendentes
+php artisan migrate
+
+# Ver status das migrações
+php artisan migrate:status
+
+# Resetar banco e executar todas as migrações
+php artisan migrate:fresh
+
+# Reverter última migração
+php artisan migrate:rollback
+
+# Reverter todas as migrações
+php artisan migrate:reset
+```
+
+### Geral
 ```bash
 # Limpar cache
 php artisan cache:clear
@@ -115,4 +135,14 @@ php artisan key:generate
 
 **Erro de conexão com banco**: Verifique as credenciais no `.env`
 
-**Tabela não encontrada**: Certifique-se de que o banco foi importado corretamente
+**Tabela não encontrada**: Execute as migrações
+```bash
+php artisan migrate
+```
+
+**Erro de foreign key**: Execute as migrações na ordem correta (já está configurado)
+
+**Banco desatualizado**: Reset e recriar todas as tabelas
+```bash
+php artisan migrate:fresh
+```
