@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use App\Models\Equipamento;
-use App\Models\Categoria;
 use App\Models\Locador;
 
-class EquipamentoController extends Controller
+class LocadorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +14,8 @@ class EquipamentoController extends Controller
     public function index()
     {
         //
-        $equipamentos = Equipamento::all();
-        return view("equipamentos.index", compact("equipamentos"));
+        $locador = Locador::all();
+        return view("locador.index", compact("locador"));
     }
 
     /**
@@ -25,41 +23,46 @@ class EquipamentoController extends Controller
      */
     public function create()
     {
-        //
-        $categorias = Categoria::all();
-        $locador = Locador::all();
-        return view("equipamentos.create", compact('categorias', 'locador'));
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+        $locador = Locador::all();
+        return view("locador.create", compact('locador'));
+    }
+        //
     public function store(Request $request)
     {
-        //
         try {
-            Equipamento::create($request->all());
-            return redirect()->route("equipamentos.index")
+            $requestData = $request->all();
+
+            // Hash da senha
+            $requestData['senha'] = bcrypt($request->senha);
+
+            // Força o valor para boolean (1 ou 0)
+            $requestData['documentos_validados'] = $request->has('documentos_validados') ? 1 : 0;
+
+            // Criar registro no banco
+            Locador::create($requestData);
+
+            return redirect()->route("locador.index")
                 ->with("sucesso", "Registro inserido!");
         } catch (\Exception $e) {
-            Log::error("Erro ao salvar o registro do equipamento! " . $e->getMessage(), [
+            Log::error("Erro ao salvar o registro do locador! " . $e->getMessage(), [
                 'trace' => $e->getTraceAsString(),
                 'request' => $request->all()
             ]);
-            return redirect()->route("equipamentos.index")
+
+            return redirect()->route("locador.index")
                 ->with("erro", "Erro ao inserir!");
         }
 
     }
-
-    /**
+            /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
         //
-        $equipamento = Equipamento::findOrFail($id);
-        return view("equipamentos.show", compact("equipamento"));
+        $locador = Locador::findOrFail($id);
+        return view("locador.show", compact("locador"));
     }
 
     /**
@@ -68,10 +71,8 @@ class EquipamentoController extends Controller
     public function edit(string $id)
     {
         //
-        $equipamento = Equipamento::findOrFail($id);
-        $categorias = Categoria::all();
-        $locador = Locador::all();
-        return view("equipamentos.edit", compact("equipamento", "categorias", "locador"));
+        $locador = Locador::findOrFail($id);
+        return view("locador.edit", compact("locador"));
     }
 
     /**
@@ -81,16 +82,16 @@ class EquipamentoController extends Controller
     {
         //
         try {
-            $equipamento = Equipamento::findOrFail($id);
-            $equipamento->update($request->all());
-            return redirect()->route("equipamentos.index")
+            $locador = Locador::findOrFail($id);
+            $locador->update($request->all());
+            return redirect()->route("locador.index")
                 ->with("sucesso", "Registro alterado!");
         } catch (\Exception $e) {
-            Log::error("Erro ao alterar o registro do equipamento! " . $e->getMessage(), [
+            Log::error("Erro ao alterar o registro do locador! " . $e->getMessage(), [
                 'trace' => $e->getTraceAsString(),
                 'request' => $request->all()
             ]);
-            return redirect()->route("equipamentos.index")
+            return redirect()->route("locador.index")
                 ->with("erro", "Erro ao alterar!");
         }
     }
@@ -102,16 +103,16 @@ class EquipamentoController extends Controller
     {
         //
         try {
-            $equipamento = Equipamento::findOrFail($id);
-            $equipamento->delete();
-            return redirect()->route("equipamentos.index")
+            $locador = Locador::findOrFail($id);
+            $locador->delete();
+            return redirect()->route("locador.index")
                 ->with("sucesso", "Registro excluído!");
         } catch (\Exception $e) {
-            Log::error("Erro ao excluir o registro do equipamento! " . $e->getMessage(), [
+            Log::error("Erro ao excluir o registro do locador! " . $e->getMessage(), [
                 'trace' => $e->getTraceAsString(),
                 'id' => $id
             ]);
-            return redirect()->route("equipamentos.index")
+            return redirect()->route("locador.index")
                 ->with("erro", "Erro ao excluir!");
         }
     }

@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use App\Models\Equipamento;
-use App\Models\Categoria;
-use App\Models\Locador;
+use App\Models\Locatario;
 
-class EquipamentoController extends Controller
+class LocatarioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +14,8 @@ class EquipamentoController extends Controller
     public function index()
     {
         //
-        $equipamentos = Equipamento::all();
-        return view("equipamentos.index", compact("equipamentos"));
+        $locatario = Locatario::all();
+        return view("locatario.index", compact("locatario"));
     }
 
     /**
@@ -26,9 +24,8 @@ class EquipamentoController extends Controller
     public function create()
     {
         //
-        $categorias = Categoria::all();
-        $locador = Locador::all();
-        return view("equipamentos.create", compact('categorias', 'locador'));
+        $locatario = Locatario::all();
+        return view("locatario.create", compact('locatario'));
     }
 
     /**
@@ -38,15 +35,21 @@ class EquipamentoController extends Controller
     {
         //
         try {
-            Equipamento::create($request->all());
-            return redirect()->route("equipamentos.index")
+           $requestData = $request->all();
+
+            // Hash da senha
+            $requestData['senha'] = bcrypt($request->senha);
+
+            // Criar registro no banco
+            Locatario::create($requestData);
+            return redirect()->route("locatario.index")
                 ->with("sucesso", "Registro inserido!");
         } catch (\Exception $e) {
-            Log::error("Erro ao salvar o registro do equipamento! " . $e->getMessage(), [
+            Log::error("Erro ao salvar o registro do locatario! " . $e->getMessage(), [
                 'trace' => $e->getTraceAsString(),
                 'request' => $request->all()
             ]);
-            return redirect()->route("equipamentos.index")
+            return redirect()->route("locatario.index")
                 ->with("erro", "Erro ao inserir!");
         }
 
@@ -58,8 +61,8 @@ class EquipamentoController extends Controller
     public function show(string $id)
     {
         //
-        $equipamento = Equipamento::findOrFail($id);
-        return view("equipamentos.show", compact("equipamento"));
+        $locatario = Locatario::findOrFail($id);
+        return view("locatario.show", compact("locatario"));
     }
 
     /**
@@ -68,10 +71,8 @@ class EquipamentoController extends Controller
     public function edit(string $id)
     {
         //
-        $equipamento = Equipamento::findOrFail($id);
-        $categorias = Categoria::all();
-        $locador = Locador::all();
-        return view("equipamentos.edit", compact("equipamento", "categorias", "locador"));
+        $locatario = Locatario::findOrFail($id);
+        return view("locatario.edit", compact("locatario"));
     }
 
     /**
@@ -81,16 +82,16 @@ class EquipamentoController extends Controller
     {
         //
         try {
-            $equipamento = Equipamento::findOrFail($id);
-            $equipamento->update($request->all());
-            return redirect()->route("equipamentos.index")
+            $locatario = Locatario::findOrFail($id);
+            $locatario->update($request->all());
+            return redirect()->route("locatario.index")
                 ->with("sucesso", "Registro alterado!");
         } catch (\Exception $e) {
-            Log::error("Erro ao alterar o registro do equipamento! " . $e->getMessage(), [
+            Log::error("Erro ao alterar o registro do locatario! " . $e->getMessage(), [
                 'trace' => $e->getTraceAsString(),
                 'request' => $request->all()
             ]);
-            return redirect()->route("equipamentos.index")
+            return redirect()->route("locatario.index")
                 ->with("erro", "Erro ao alterar!");
         }
     }
@@ -102,16 +103,16 @@ class EquipamentoController extends Controller
     {
         //
         try {
-            $equipamento = Equipamento::findOrFail($id);
-            $equipamento->delete();
-            return redirect()->route("equipamentos.index")
+            $locatario = Locatario::findOrFail($id);
+            $locatario->delete();
+            return redirect()->route("locatario.index")
                 ->with("sucesso", "Registro excluído!");
         } catch (\Exception $e) {
-            Log::error("Erro ao excluir o registro do equipamento! " . $e->getMessage(), [
+            Log::error("Erro ao excluir o registro do locatario! " . $e->getMessage(), [
                 'trace' => $e->getTraceAsString(),
                 'id' => $id
             ]);
-            return redirect()->route("equipamentos.index")
+            return redirect()->route("locatario.index")
                 ->with("erro", "Erro ao excluir!");
         }
     }
