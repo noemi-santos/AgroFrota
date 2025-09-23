@@ -2,7 +2,7 @@
 
 @section('conteudo')
 
-<h2>Equipamentos</h2>
+    <h2>Equipamentos</h2>
     @if(session('sucesso'))
         <p class="text-success">{{ session('sucesso') }}</p>
     @endif
@@ -13,47 +13,77 @@
     <table class="table table-hover table-striped">
         <thead>
             <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Marca</th>
-            <th>modelo</th>
-            <th>ano</th>
-            <th>capacidade</th>
-            <th>preco_periodo</th>
-            <th>disponibilidade_calendario</th>
-            <th>raio_atendimento</th>
-            <th>exige_operador_certificado</th>
-            <th>seguro_obrigatorio</th>
-            <th>caucao_obrigatoria</th>
-            <th>locador_id</th>
-            <th>categoria_id</th>
-            <th>Ações</th>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Marca</th>
+                <th>modelo</th>
+                <th>Locador</th>
+                <th>Categoria</th>
+                <th>Ano</th>
+                <th>Capacidade</th>
+                <th>Preço/Período</th>
+                <th>Disponibilidade</th>
+                <th>Raio</th>
+                <th>Operador Cert.</th>
+                <th>Seguro</th>
+                <th>Caução</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($equipamentos as $c)
-            <tr>
-                <td>{{ $c->id }}</td>
-                <td>{{ $c->nome }}</td>
-                <td>{{ $c->marca }}</td>
-                <td>{{ $c->modelo }}</td>
-                <td>{{ $c->ano }}</td>
-                <td>{{ $c->capacidade }}</td>
-                <td>{{ $c->preco_periodo }}</td>
-                <td>{{ $c->disponibilidade_calendario }}</td>
-                <td>{{ $c->raio_atendimento }}</td>
-                <td>{{ $c->exige_operador_certificado }}</td>
-                <td>{{ $c->seguro_obrigatorio }}</td>
-                <td>{{ $c->caucao_obrigatoria }}</td>
-                <td>{{ $c->locador_id }}</td>
-                <td>{{ $c->categoria_id }}</td>
-                <td class="d-flex gap-2">
-                    <a href="/equipamentos/{{ $c->id }}/edit" class="btn btn-sm btn-warning">Editar</a>
-                    <a href="/equipamentos/{{ $c->id }}" class="btn btn-sm btn-info">Consultar</a>
-                </td>
-            </tr>
+            @foreach($equipamentos as $e)
+                <tr class="text-center">
+                    <td>{{ $e->id }}</td>
+                    <td>{{ $e->nome }}</td>
+                    <td>{{ $e->marca }}</td>
+                    <td>{{ $e->modelo }}</td>
+                    <td>
+                        @foreach ($locador as $l)
+                            @if ($e->locador_id == $l->id)
+                                {{ $l->nome }}
+                            @endif
+                        @endforeach
+                    </td>
+                    <td>
+                        @foreach ($categorias as $c)
+                            @if ($e->categoria_id == $c->id)
+                                {{ $c->titulo }}
+                            @endif
+                        @endforeach
+                    </td>
+                    <td>{{ $e->ano }}</td>
+                    <td>{{ $e->capacidade }}</td>
+                    <td>{{ $e->preco_periodo }}</td>
+                    <td>{{ $e->disponibilidade_calendario }}</td>
+                    <td>{{ $e->raio_atendimento }}</td>
+                    <td>
+                        @if($e->exige_operador_certificado == 0)
+                            <img src="{{ asset('images/xmark.svg') }}" width="20rem">
+                        @else
+                            <img src="{{ asset('images/checkmark.svg') }}" width="20rem">
+                        @endif
+                    </td>
+                    <td>
+                        @if($e->seguro_obrigatorio == 0)
+                            <img src="{{ asset('images/xmark.svg') }}" width="20rem">
+                        @else
+                            <img src="{{ asset('images/checkmark.svg') }}" width="20rem">
+                        @endif
+                    </td>
+                    <td>
+                        @if($e->caucao_obrigatoria == 0)
+                            <img src="{{ asset('images/xmark.svg') }}" width="20rem">
+                        @else
+                            <img src="{{ asset('images/checkmark.svg') }}" width="20rem">
+                        @endif
+                    </td>
+                    <td class="d-flex gap-2">
+                        <a href="/equipamentos/{{ $e->id }}/edit" class="btn btn-sm btn-warning">Editar</a>
+                        <a href="/equipamentos/{{ $e->id }}" class="btn btn-sm btn-info">Consultar</a>
+                    </td>
+                </tr>
             @endforeach
         </tbody>
-    </table>    
+    </table>
 
 @endsection

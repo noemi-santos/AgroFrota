@@ -17,7 +17,9 @@ class EquipamentoController extends Controller
     {
         //
         $equipamentos = Equipamento::all();
-        return view("equipamentos.index", compact("equipamentos"));
+        $categorias = Categoria::all();
+        $locador = Locador::all();
+        return view("equipamentos.index", compact("equipamentos", 'categorias', 'locador'));
     }
 
     /**
@@ -59,7 +61,9 @@ class EquipamentoController extends Controller
     {
         //
         $equipamento = Equipamento::findOrFail($id);
-        return view("equipamentos.show", compact("equipamento"));
+        $categoria = Categoria::findOrFail($equipamento->categoria_id);
+        $locador = Locador::findOrFail($equipamento->locador_id);
+        return view("equipamentos.show", compact("equipamento", "categoria", "locador"));
     }
 
     /**
