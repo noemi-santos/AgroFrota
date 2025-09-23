@@ -53,8 +53,12 @@
             <input type="text" id="caucao_obrigatoria" name="caucao_obrigatoria" class="form-control" required="">
         </div>
         <div class="mb-3">
-            <label for="locador_id" class="form-label">locador_id:</label>
-            <input type="text" id="locador_id" name="locador_id" class="form-control" required="">
+            <label for="locador_id" class="form-label">Selecione o locador:</label>
+            <select class="form-select" name="locador_id" id="locador_id">
+                @foreach($locador as $c)
+                    <option value="{{$c->id}}">{{ $c->nome }}</option>
+                @endforeach
+            </select>
         </div>
 
         <div class="mb-3">

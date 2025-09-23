@@ -27,6 +27,8 @@
                         <ul class="dropdown-menu" aria-labelledby="dropdown1">
                             <li><a class="dropdown-item" href="/categorias">Categorias</a></li>
                             <li><a class="dropdown-item" href="/equipamentos">Equipamentos</a></li>
+                            <li><a class="dropdown-item" href="/locador">Locadores</a></li>
+                            <li><a class="dropdown-item" href="/locatario">Locatários</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">

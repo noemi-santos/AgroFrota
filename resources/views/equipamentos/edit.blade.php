@@ -60,8 +60,15 @@
         </div>
         <div class="mb-3">
             <label for="locador_id" class="form-label">locador_id:</label>
-            <input value="{{$equipamento->locador_id}}" type="text" id="locador_id" name="locador_id" class="form-control"
-                required="">
+            <select class="form-select" name="locador_id" id="locador_id">
+                @foreach($locador as $c)
+                    @if ($equipamento->locador_id == $c->id)
+                        <option selected value="{{$c->id}}">{{ $c->nome }}</option>
+                    @else
+                        <option value="{{$c->id}}">{{ $c->nome }}</option>
+                    @endif
+                @endforeach
+            </select>
         </div>
         
         <div class="mb-3">
