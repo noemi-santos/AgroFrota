@@ -46,41 +46,40 @@
 
         <div class="mb-3">
             <input type="hidden" id="hidden_certificado" name="exige_operador_certificado" value="0">
-            <input type="checkbox" id="exige_operador_certificado" name="exige_operador_certificado" value="1">
+            <input type="checkbox" id="exige_operador_certificado" name="exige_operador_certificado" value="1"
+            @if ($equipamento->exige_operador_certificado == 1)
+            checked            
+            @endif>>
             <label for="exige_operador_certificado" class="form-label">exige operador certificado</label>
         </div>
         <div class="mb-3">
             <input type="hidden" id="hidden_seguro" name="seguro_obrigatorio" value="0">
-            <input type="checkbox" id="seguro_obrigatorio" name="seguro_obrigatorio" value="1">
+            <input type="checkbox" id="seguro_obrigatorio" name="seguro_obrigatorio" value="1"
+            @if ($equipamento->seguro_obrigatorio == 1)
+            checked            
+            @endif>>
             <label for="seguro_obrigatorio" class="form-label">seguro obrigatorio</label>
         </div>
         <div class="mb-3">
             <input type="hidden" id="hidden_caucao" name="caucao_obrigatoria" value="0">
-            <input type="checkbox" id="caucao_obrigatoria" name="caucao_obrigatoria" value="1">
+            <input type="checkbox" id="caucao_obrigatoria" name="caucao_obrigatoria" value="1" 
+            @if ($equipamento->caucao_obrigatoria == 1)
+            checked            
+            @endif>
             <label for="caucao_obrigatoria" class="form-label">caucao obrigatoria</label>
         </div>
 
         <div class="mb-3">
-            <label for="exige_operador_certificado" class="form-label">exige_operador_certificado:</label>
-            <input value="{{$equipamento->exige_operador_certificado}}" type="text" id="exige_operador_certificado"
-                name="exige_operador_certificado" class="form-control" required="">
-        </div>
-        <div class="mb-3">
-            <label for="seguro_obrigatorio" class="form-label">seguro_obrigatorio:</label>
-            <input value="{{$equipamento->seguro_obrigatorio}}" type="text" id="seguro_obrigatorio"
-                name="seguro_obrigatorio" class="form-control" required="">
-        </div>
-        <div class="mb-3">
-            <label for="caucao_obrigatoria" class="form-label">caucao_obrigatoria:</label>
-            <input value="{{$equipamento->caucao_obrigatoria}}" type="text" id="caucao_obrigatoria"
-                name="caucao_obrigatoria" class="form-control" required="">
-        </div>
-
-        
-        <div class="mb-3">
-            <label for="locador_id" class="form-label">locador_id:</label>
-            <input value="{{$equipamento->locador_id}}" type="text" id="locador_id" name="locador_id" class="form-control"
-                required="">
+            <label for="locador_id" class="form-label">Selecione o locador:</label>
+            <select class="form-select" name="locador_id" id="locador_id">
+                @foreach($locador as $l)
+                    @if ($equipamento->locador_id == $l->id)
+                        <option selected value="{{$l->id}}">{{ $l->nome }}</option>
+                    @else
+                        <option value="{{$l->id}}">{{ $l->nome }}</option>
+                    @endif
+                @endforeach
+            </select>
         </div>
         
         <div class="mb-3">
