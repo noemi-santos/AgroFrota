@@ -39,21 +39,23 @@
             <label for="raio_atendimento" class="form-label">raio atendimento (km)</label>
             <input type="number" id="raio_atendimento" name="raio_atendimento" class="form-control" required="">
         </div>
+
         <div class="mb-3">
-            <input type="number" id="hidden_certificado" name="exige_operador_certificado" value="0" hidden>
+            <input type="hidden" id="hidden_certificado" name="exige_operador_certificado" value="0">
             <input type="checkbox" id="exige_operador_certificado" name="exige_operador_certificado" value="1">
             <label for="exige_operador_certificado" class="form-label">exige operador certificado</label>
         </div>
         <div class="mb-3">
-            <input type="number" id="hidden_seguro" name="seguro_obrigatorio" value="0" hidden>
+            <input type="hidden" id="hidden_seguro" name="seguro_obrigatorio" value="0">
             <input type="checkbox" id="seguro_obrigatorio" name="seguro_obrigatorio" value="1">
             <label for="seguro_obrigatorio" class="form-label">seguro obrigatorio</label>
         </div>
         <div class="mb-3">
-            <input type="number" id="hidden_caucao" name="caucao_obrigatoria" value="0" hidden>
+            <input type="hidden" id="hidden_caucao" name="caucao_obrigatoria" value="0">
             <input type="checkbox" id="caucao_obrigatoria" name="caucao_obrigatoria" value="1">
             <label for="caucao_obrigatoria" class="form-label">caucao obrigatoria</label>
         </div>
+
         <div class="mb-3">
             <label for="locador_id" class="form-label">locador_id:</label>
             <input type="text" id="locador_id" name="locador_id" class="form-control" required="">
