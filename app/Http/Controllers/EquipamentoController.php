@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Models\Equipamento;
 use App\Models\Categoria;
+use App\Models\Locador;
 
 class EquipamentoController extends Controller
 {
@@ -26,7 +27,8 @@ class EquipamentoController extends Controller
     {
         //
         $categorias = Categoria::all();
-        return view("equipamentos.create", compact('categorias'));
+        $locador = Locador::all();
+        return view("equipamentos.create", compact('categorias', 'locador'));
     }
 
     /**
@@ -68,7 +70,8 @@ class EquipamentoController extends Controller
         //
         $equipamento = Equipamento::findOrFail($id);
         $categorias = Categoria::all();
-        return view("equipamentos.edit", compact("equipamento", "categorias"));
+        $locador = Locador::all();
+        return view("equipamentos.edit", compact("equipamento", "categorias", "locador"));
     }
 
     /**
