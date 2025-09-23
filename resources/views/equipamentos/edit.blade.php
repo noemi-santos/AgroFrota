@@ -21,7 +21,7 @@
         </div>
         <div class="mb-3">
             <label for="ano" class="form-label">ano:</label>
-            <input value="{{$equipamento->ano}}" type="text" id="ano" name="ano" class="form-control" required="">
+            <input value="{{$equipamento->ano}}" type="number" id="ano" name="ano" class="form-control" required="">
         </div>
         <div class="mb-3">
             <label for="capacidade" class="form-label">capacidade:</label>
@@ -30,7 +30,7 @@
         </div>
         <div class="mb-3">
             <label for="preco_periodo" class="form-label">preco_periodo:</label>
-            <input value="{{$equipamento->preco_periodo}}" type="text" id="preco_periodo" name="preco_periodo"
+            <input value="{{$equipamento->preco_periodo}}" type="number" id="preco_periodo" name="preco_periodo"
                 class="form-control" required="">
         </div>
         <div class="mb-3">
@@ -40,32 +40,43 @@
         </div>
         <div class="mb-3">
             <label for="raio_atendimento" class="form-label">raio_atendimento:</label>
-            <input value="{{$equipamento->raio_atendimento}}" type="text" id="raio_atendimento" name="raio_atendimento"
+            <input value="{{$equipamento->raio_atendimento}}" type="number" id="raio_atendimento" name="raio_atendimento"
                 class="form-control" required="">
         </div>
+
         <div class="mb-3">
-            <label for="exige_operador_certificado" class="form-label">exige_operador_certificado:</label>
-            <input value="{{$equipamento->exige_operador_certificado}}" type="text" id="exige_operador_certificado"
-                name="exige_operador_certificado" class="form-control" required="">
+            <input type="hidden" id="hidden_certificado" name="exige_operador_certificado" value="0">
+            <input type="checkbox" id="exige_operador_certificado" name="exige_operador_certificado" value="1"
+            @if ($equipamento->exige_operador_certificado == 1)
+            checked            
+            @endif>>
+            <label for="exige_operador_certificado" class="form-label">exige operador certificado</label>
         </div>
         <div class="mb-3">
-            <label for="seguro_obrigatorio" class="form-label">seguro_obrigatorio:</label>
-            <input value="{{$equipamento->seguro_obrigatorio}}" type="text" id="seguro_obrigatorio"
-                name="seguro_obrigatorio" class="form-control" required="">
+            <input type="hidden" id="hidden_seguro" name="seguro_obrigatorio" value="0">
+            <input type="checkbox" id="seguro_obrigatorio" name="seguro_obrigatorio" value="1"
+            @if ($equipamento->seguro_obrigatorio == 1)
+            checked            
+            @endif>>
+            <label for="seguro_obrigatorio" class="form-label">seguro obrigatorio</label>
         </div>
         <div class="mb-3">
-            <label for="caucao_obrigatoria" class="form-label">caucao_obrigatoria:</label>
-            <input value="{{$equipamento->caucao_obrigatoria}}" type="text" id="caucao_obrigatoria"
-                name="caucao_obrigatoria" class="form-control" required="">
+            <input type="hidden" id="hidden_caucao" name="caucao_obrigatoria" value="0">
+            <input type="checkbox" id="caucao_obrigatoria" name="caucao_obrigatoria" value="1" 
+            @if ($equipamento->caucao_obrigatoria == 1)
+            checked            
+            @endif>
+            <label for="caucao_obrigatoria" class="form-label">caucao obrigatoria</label>
         </div>
+
         <div class="mb-3">
-            <label for="locador_id" class="form-label">locador_id:</label>
+            <label for="locador_id" class="form-label">Selecione o locador:</label>
             <select class="form-select" name="locador_id" id="locador_id">
-                @foreach($locador as $c)
-                    @if ($equipamento->locador_id == $c->id)
-                        <option selected value="{{$c->id}}">{{ $c->nome }}</option>
+                @foreach($locador as $l)
+                    @if ($equipamento->locador_id == $l->id)
+                        <option selected value="{{$l->id}}">{{ $l->nome }}</option>
                     @else
-                        <option value="{{$c->id}}">{{ $c->nome }}</option>
+                        <option value="{{$l->id}}">{{ $l->nome }}</option>
                     @endif
                 @endforeach
             </select>
