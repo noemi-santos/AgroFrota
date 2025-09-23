@@ -16,4 +16,8 @@ class Equipamento extends Model
     {
         return $this->belongsTo(Categoria::class, 'categoria_id', 'id');
     }
+    public function locador()
+    {
+        return $this->belongsTo(Locador::class, 'locador_id', 'id');
+    }
 }
