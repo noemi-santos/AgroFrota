@@ -10,34 +10,34 @@
         <p class="text-danger">{{ session('erro') }}</p>
     @endif
     <a href="/locador/create" class="btn btn-success mb-3">Novo Registro</a>
-    <table class="table table-hover table-striped">
-        <thead>
-            <tr>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Telefone</th>
-            <th>Endereco</th>
-            <th>CNPJ/CPF</th>
-            <th>Documentos Válidos</th>
-            <th>Reputação Média</th>
-            <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($locador as $c)
-            <tr>
-                <td>{{ $c->nome }}</td>
-                <td>{{ $c->email }}</td>
-                <td>{{ $c->telefone }}</td>
-                <td>{{ $c->endereco }}</td>
-                <td>{{ $c->cnpj_cpf }}</td>
-                <td>{{ $c->getDocumentosValidadosTextoAttribute() }}</td>
-                <td>{{ $c->reputacao_media }}</td>
-                <td class="d-flex gap-2">
-                    <a href="/locador/{{ $c->id }}/edit" class="btn btn-sm btn-warning">Editar</a>
-                    <a href="/locador/{{ $c->id }}" class="btn btn-sm btn-info">Consultar</a>
-                </td>
-            </tr>
+    <div class="table-responsive">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                <th>Nome</th>
+                <th class="text-truncate" style="max-width:200px;">Email</th>
+                <th class="text-truncate" style="max-width:200px;">Telefone</th>
+                <th class="text-truncate" style="max-width:200px;">Endereco</th>
+                <th>Documentos Válidos</th>
+                <th>Reputação Média</th>
+                <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($locador as $c)
+                <tr>
+                    <td>{{ $c->nome }}</td>
+                    <td class="text-truncate" style="max-width:200px;">{{ $c->email }}</td>
+                    <td class="text-truncate" style="max-width:200px;">{{ $c->telefone }}</td>
+                    <td class="text-truncate" style="max-width:200px;">{{ $c->endereco }}</td>
+                    <td>{{ $c->getDocumentosValidadosTextoAttribute() }}</td>
+                    <td>{{ $c->reputacao_media }}</td>
+                    <td class="d-flex gap-2">
+                        <a href="/locador/{{ $c->id }}/edit" class="btn btn-sm btn-warning">Editar</a>
+                        <a href="/locador/{{ $c->id }}" class="btn btn-sm btn-info">Consultar</a>
+                    </td>
+                </tr>
+            </div>
             @endforeach
         </tbody>
     </table>    

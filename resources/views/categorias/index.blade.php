@@ -10,12 +10,13 @@
         <p class="text-danger">{{ session('erro') }}</p>
     @endif
     <a href="/categorias/create" class="btn btn-success mb-3">Novo Registro</a>
+    <div class="table-responsive">
     <table class="table table-hover table-striped">
         <thead>
             <tr>
             <th>ID</th>
             <th>Categoria</th>
-            <th>Ações</th>
+            <th >Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -28,6 +29,7 @@
                     <a href="/categorias/{{ $c->id }}" class="btn btn-sm btn-info">Consultar</a>
                 </td>
             </tr>
+        </div>
             @endforeach
         </tbody>
     </table>    

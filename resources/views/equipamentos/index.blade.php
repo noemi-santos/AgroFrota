@@ -10,6 +10,7 @@
         <p class="text-danger">{{ session('erro') }}</p>
     @endif
     <a href="/equipamentos/create" class="btn btn-success mb-3">Novo Registro</a>
+    <div class="table-responsive">
     <table class="table table-hover table-striped">
         <thead>
             <tr>
@@ -82,6 +83,7 @@
                         <a href="/equipamentos/{{ $e->id }}" class="btn btn-sm btn-info">Consultar</a>
                     </td>
                 </tr>
+            </div>
             @endforeach
         </tbody>
     </table>
