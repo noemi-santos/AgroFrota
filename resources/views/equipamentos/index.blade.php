@@ -13,11 +13,12 @@
     <div class="table-responsive">
     <table class="table table-hover table-striped">
         <thead>
-            <tr>
-                <th>ID</th>
+            <tr >
+                <th>Categoria</th>
                 <th>Nome</th>
                 <th>Marca</th>
-                <th>modelo</th>
+                <th>Modelo</th>
+                <th>Preço</th>
                 <th>Locador</th>
                 <th>Categoria</th>
                 <th>Ano</th>
@@ -33,11 +34,19 @@
         </thead>
         <tbody>
             @foreach($equipamentos as $e)
-                <tr class="text-center">
-                    <td>{{ $e->id }}</td>
+                <tr class="align-middle">
+                    <td>
+                        @foreach ($categorias as $c)
+                        @if ($e->categoria_id == $c->id)
+                        {{ $c->titulo }}
+                        @endif
+                        @endforeach
+                    </td>
                     <td>{{ $e->nome }}</td>
                     <td>{{ $e->marca }}</td>
                     <td>{{ $e->modelo }}</td>
+                    
+                    <td>{{ $e->preco_periodo }}</td>
                     <td>
                         @foreach ($locador as $l)
                             @if ($e->locador_id == $l->id)
@@ -45,33 +54,21 @@
                             @endif
                         @endforeach
                     </td>
-                    <td>
-                        @foreach ($categorias as $c)
-                            @if ($e->categoria_id == $c->id)
-                                {{ $c->titulo }}
-                            @endif
-                        @endforeach
-                    </td>
-                    <td>{{ $e->ano }}</td>
-                    <td>{{ $e->capacidade }}</td>
-                    <td>{{ $e->preco_periodo }}</td>
-                    <td>{{ $e->disponibilidade_calendario }}</td>
-                    <td>{{ $e->raio_atendimento }}</td>
-                    <td>
+                    <td class="text-center">
                         @if($e->exige_operador_certificado == 0)
                             <img src="{{ asset('images/xmark.svg') }}" width="20rem">
                         @else
                             <img src="{{ asset('images/checkmark.svg') }}" width="20rem">
                         @endif
                     </td>
-                    <td>
+                    <td class="text-center">
                         @if($e->seguro_obrigatorio == 0)
                             <img src="{{ asset('images/xmark.svg') }}" width="20rem">
                         @else
                             <img src="{{ asset('images/checkmark.svg') }}" width="20rem">
                         @endif
                     </td>
-                    <td>
+                    <td class="text-center">
                         @if($e->caucao_obrigatoria == 0)
                             <img src="{{ asset('images/xmark.svg') }}" width="20rem">
                         @else
