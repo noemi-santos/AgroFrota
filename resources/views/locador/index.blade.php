@@ -20,7 +20,7 @@
                 <th class="text-truncate" style="max-width:200px;">Endereco</th>
                 <th>Documentos Válidos</th>
                 <th>Reputação Média</th>
-                <th>Ações</th>
+                <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -32,9 +32,11 @@
                     <td class="text-truncate" style="max-width:200px;">{{ $c->endereco }}</td>
                     <td>{{ $c->getDocumentosValidadosTextoAttribute() }}</td>
                     <td>{{ $c->reputacao_media }}</td>
-                    <td class="d-flex gap-2">
+                    <td class="text-end">
+                    <div class="d-flex flex-wrap justify-content-end gap-2">
                         <a href="/locador/{{ $c->id }}/edit" class="btn btn-sm btn-warning">Editar</a>
                         <a href="/locador/{{ $c->id }}" class="btn btn-sm btn-info">Consultar</a>
+                    </div>
                     </td>
                 </tr>
             </div>

@@ -16,7 +16,7 @@
             <tr>
             <th>ID</th>
             <th>Categoria</th>
-            <th >Ações</th>
+            <th></th>
             </tr>
         </thead>
         <tbody>
@@ -24,9 +24,11 @@
             <tr>
                 <td>{{ $c->id }}</td>
                 <td>{{ $c->titulo }}</td>
-                <td class="d-flex gap-2">
-                    <a href="/categorias/{{ $c->id }}/edit" class="btn btn-sm btn-warning">Editar</a>
-                    <a href="/categorias/{{ $c->id }}" class="btn btn-sm btn-info">Consultar</a>
+                <td class="text-end">
+                    <div class="d-flex flex-wrap justify-content-end gap-2">
+                        <a href="/categorias/{{ $c->id }}/edit" class="btn btn-sm btn-warning">Editar</a>
+                        <a href="/categorias/{{ $c->id }}" class="btn btn-sm btn-info">Consultar</a>
+                    <div>
                 </td>
             </tr>
         </div>

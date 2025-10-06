@@ -19,7 +19,7 @@
                     <th>Email</th>
                     <th>Telefone</th>
                     <th class="text-truncate" style="max-width:200px;" >Endereço</th>
-                    <th>Ações</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -29,11 +29,12 @@
                     <td>{{ $c->email }}</td>
                     <td>{{ $c->telefone }}</td>
                     <td class="text-truncate" style="max-width:200px;">{{ $c->endereco }}</td>
-                    <td>
-                        <div class="d-flex flex-wrap gap-2">
+                    <td class="text-end">
+                        <div class="d-flex flex-wrap justify-content-end gap-2">
                             <a href="/locatario/{{ $c->id }}/edit" class="btn btn-sm btn-warning">Editar</a>
                             <a href="/locatario/{{ $c->id }}" class="btn btn-sm btn-info">Consultar</a>
-                        </td>
+                        </div>
+                    </td>
                     </tr>
                 </div>
                 @endforeach

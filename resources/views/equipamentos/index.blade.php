@@ -28,7 +28,7 @@
                 <th>Operador Cert.</th>
                 <th>Seguro</th>
                 <th>Caução</th>
-                <th>Ações</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -78,9 +78,11 @@
                             <img src="{{ asset('images/checkmark.svg') }}" width="20rem">
                         @endif
                     </td>
-                    <td class="d-flex gap-2">
-                        <a href="/equipamentos/{{ $e->id }}/edit" class="btn btn-sm btn-warning">Editar</a>
-                        <a href="/equipamentos/{{ $e->id }}" class="btn btn-sm btn-info">Consultar</a>
+                    <td class="text-end">
+                        <div class="d-flex flex-wrap justify-content-end gap-2">
+                            <a href="/equipamentos/{{ $e->id }}/edit" class="btn btn-sm btn-warning">Editar</a>
+                            <a href="/equipamentos/{{ $e->id }}" class="btn btn-sm btn-info">Consultar</a>
+                        </div>
                     </td>
                 </tr>
             </div>
