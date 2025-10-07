@@ -8,7 +8,7 @@
 
         <div class="mb-3">
             <label for="titulo" class="form-label">Categoria:</label>
-            <input type="text" id="titulo" name="titulo" class="form-control" required="">
+            <input type="text" id="titulo" name="titulo" class="form-control" placeholder="Digite o nome da categoria" required="">
         </div>
 
         <button type="submit" class="btn btn-primary">Enviar</button>
