@@ -16,8 +16,6 @@
             <tr >
                 <th>Categoria</th>
                 <th>Nome</th>
-                <th>Marca</th>
-                <th>Modelo</th>
                 <th>Preço</th>
                 <th>Locador</th>
                 <th>Categoria</th>
@@ -43,8 +41,6 @@
                         @endforeach
                     </td>
                     <td>{{ $e->nome }}</td>
-                    <td>{{ $e->marca }}</td>
-                    <td>{{ $e->modelo }}</td>
                     
                     <td>{{ $e->preco_periodo }}</td>
                     <td>
