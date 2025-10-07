@@ -47,23 +47,3 @@
 </div>
 
 @endsection
-
-
-<!-- /* efeito leve ao passar o mouse */
-.hover-scale {
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-}
-
-.hover-scale:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
-}
-
-/* botões ocupando a largura em telas pequenas */
-@media (max-width: 576px) {
-    .btn-block {
-        display: block;
-        width: 100%;
-    }
-}
-} -->
