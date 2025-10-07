@@ -17,13 +17,8 @@
                 <th>Categoria</th>
                 <th>Nome</th>
                 <th>Preço</th>
+                <th>Disp. Calendário</th>
                 <th>Locador</th>
-                <th>Categoria</th>
-                <th>Ano</th>
-                <th>Capacidade</th>
-                <th>Preço/Período</th>
-                <th>Disponibilidade</th>
-                <th>Raio</th>
                 <th>Operador Cert.</th>
                 <th>Seguro</th>
                 <th>Caução</th>
@@ -43,6 +38,8 @@
                     <td>{{ $e->nome }}</td>
                     
                     <td>{{ $e->preco_periodo }}</td>
+
+                    <td>{{ $e->disponibilidade_calendario }}</td>
                     <td>
                         @foreach ($locador as $l)
                             @if ($e->locador_id == $l->id)
