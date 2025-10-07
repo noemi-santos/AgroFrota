@@ -10,7 +10,7 @@
         <p class="text-danger">{{ session('erro') }}</p>
     @endif
     <a href="/locador/create" class="btn btn-success mb-3">Novo Registro</a>
-    <div class="table-responsive">
+    <div class="table-responsive rounded-3">
         <table class="table table-hover table-striped">
             <thead>
                 <tr>
