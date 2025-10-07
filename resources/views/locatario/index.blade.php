@@ -10,30 +10,36 @@
         <p class="text-danger">{{ session('erro') }}</p>
     @endif
     <a href="/locatario/create" class="btn btn-success mb-3">Novo Registro</a>
-    <table class="table table-hover table-striped">
-        <thead>
-            <tr>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Telefone</th>
-            <th>Endereço</th>
-            <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($locatario as $c)
-            <tr>
-                <td>{{ $c->nome }}</td>
-                <td>{{ $c->email }}</td>
-                <td>{{ $c->telefone }}</td>
-                <td>{{ $c->endereco }}</td>
-                <td class="d-flex gap-2">
-                    <a href="/locatario/{{ $c->id }}/edit" class="btn btn-sm btn-warning">Editar</a>
-                    <a href="/locatario/{{ $c->id }}" class="btn btn-sm btn-info">Consultar</a>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>    
+
+    <div class="table-responsive">
+        <table class="table table-hover table-striped align-middle">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th class="text-truncate" style="max-width:200px;" >Endereço</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($locatario as $c)
+                <tr>
+                    <td>{{ $c->nome }}</td>
+                    <td>{{ $c->email }}</td>
+                    <td>{{ $c->telefone }}</td>
+                    <td class="text-truncate" style="max-width:200px;">{{ $c->endereco }}</td>
+                    <td class="text-end">
+                        <div class="d-flex flex-wrap justify-content-end gap-2">
+                            <a href="/locatario/{{ $c->id }}/edit" class="btn btn-sm btn-warning">Editar</a>
+                            <a href="/locatario/{{ $c->id }}" class="btn btn-sm btn-info">Consultar</a>
+                        </div>
+                    </td>
+                    </tr>
+                </div>
+                @endforeach
+            </tbody>
+        </table>
+    </div>  
 
 @endsection

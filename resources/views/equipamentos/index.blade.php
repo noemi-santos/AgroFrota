@@ -10,6 +10,7 @@
         <p class="text-danger">{{ session('erro') }}</p>
     @endif
     <a href="/equipamentos/create" class="btn btn-success mb-3">Novo Registro</a>
+    <div class="table-responsive">
     <table class="table table-hover table-striped">
         <thead>
             <tr >
@@ -19,10 +20,16 @@
                 <th>Modelo</th>
                 <th>Preço</th>
                 <th>Locador</th>
-                <th class="text-center">Operador Cert.</th>
-                <th class="text-center">Seguro</th>
-                <th class="text-center">Caução</th>
-                <th>Ações</th>
+                <th>Categoria</th>
+                <th>Ano</th>
+                <th>Capacidade</th>
+                <th>Preço/Período</th>
+                <th>Disponibilidade</th>
+                <th>Raio</th>
+                <th>Operador Cert.</th>
+                <th>Seguro</th>
+                <th>Caução</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -68,13 +75,14 @@
                             <img src="{{ asset('images/checkmark.svg') }}" width="20rem">
                         @endif
                     </td>
-                    <td >
-                        <div class="btn-group">
+                    <td class="text-end">
+                        <div class="d-flex flex-wrap justify-content-end gap-2">
                             <a href="/equipamentos/{{ $e->id }}/edit" class="btn btn-sm btn-warning">Editar</a>
                             <a href="/equipamentos/{{ $e->id }}" class="btn btn-sm btn-info">Consultar</a>
                         </div>
                     </td>
                 </tr>
+            </div>
             @endforeach
         </tbody>
     </table>
