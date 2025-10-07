@@ -11,7 +11,7 @@
     @endif
     <a href="/locatario/create" class="btn btn-success mb-3">Novo Registro</a>
 
-    <div class="table-responsive">
+    <div class="table-responsive rounded-3">
         <table class="table table-hover table-striped align-middle">
             <thead>
                 <tr>

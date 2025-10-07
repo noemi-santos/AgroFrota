@@ -17,7 +17,7 @@
     <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
         <div class="container-fluid"><!-- trocado de .container para .container-fluid para caber melhor no mobile -->
-            <a class="navbar-brand fw-bold" href="#">AgroFrota</a>
+            <a class="navbar-brand fw-bold" href="/">AgroFrota</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Alternar navegação">

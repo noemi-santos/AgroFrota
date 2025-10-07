@@ -7,43 +7,60 @@
     <p class="lead text-muted">Gerencie categorias, equipamentos, locadores e locatários de forma prática e rápida.</p>
 </div>
 
-<div class="row g-4">
-    <div class="col-lg-3 col-md-6 col-sm-12">
-        <div class="card shadow-sm h-100 border-0 rounded-3 hover-scale">
-            <div class="card-body text-center">
-                <h5 class="card-title fw-semibold">Categorias</h5>
-                <p class="card-text text-muted">Gerencie todas as categorias disponíveis.</p>
-                <a href="/categorias" class="btn btn-primary btn-sm btn-block">Abrir</a>
+<div class="container mt-5"> <!-- Adicionei mt-5 para espaçar abaixo do título -->
+    <div class="row g-4">
+ 
+
+        <!-- Card Categorias -->
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="card-body shadow-sm border-0 rounded-3">
+                    <div class="card-body p-3 text-center">
+                        <h5 class="card-title fw-semibold mb-3">Categorias</h5>
+                        <p class="card-text text-muted">Gerencie todas as categorias disponíveis.</p>
+                        <a href="/categorias" class="btn btn-primary btn-sm w-100">Abrir</a>
+                    </div>
+                </div>
+            </div>
+
+        <!-- Card Equipamentos -->
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="card-body shadow-sm border-0 rounded-3">
+                <div class="card-body p-3 text-center">
+                    <h5 class="card-title fw-semibold mb-3">Equipamentos</h5>
+                    <p class="card-text text-muted">Visualize, adicione ou edite equipamentos.</p>
+                    <a href="/equipamentos" class="btn btn-primary btn-sm w-100">Abrir</a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-lg-3 col-md-6 col-sm-12">
-        <div class="card shadow-sm h-100 border-0 rounded-3 hover-scale">
-            <div class="card-body text-center">
-                <h5 class="card-title fw-semibold">Equipamentos</h5>
-                <p class="card-text text-muted">Visualize, adicione ou edite equipamentos.</p>
-                <a href="/equipamentos" class="btn btn-primary btn-sm btn-block">Abrir</a>
+
+        <!-- Card Locadores -->
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="card-body shadow-sm border-0 rounded-3">
+                <div class="card-body p-3 text-center">
+                    <h5 class="card-title fw-semibold mb-3">Locadores</h5>
+                    <p class="card-text text-muted">Gerencie informações dos locadores.</p>
+                    <a href="/locador" class="btn btn-primary btn-sm w-100">Abrir</a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-lg-3 col-md-6 col-sm-12">
-        <div class="card shadow-sm h-100 border-0 rounded-3 hover-scale">
-            <div class="card-body text-center">
-                <h5 class="card-title fw-semibold">Locadores</h5>
-                <p class="card-text text-muted">Gerencie informações dos locadores.</p>
-                <a href="/locador" class="btn btn-primary btn-sm btn-block">Abrir</a>
+
+        <!-- Card Locatários -->
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="card-body shadow-sm border-0 rounded-3">
+                <div class="card-body p-3 text-center">
+                    <h5 class="card-title fw-semibold mb-3">Locatários</h5>
+                    <p class="card-text text-muted">Gerencie informações dos locatários.</p>
+                    <a href="/locatario" class="btn btn-primary btn-sm w-100">Abrir</a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-lg-3 col-md-6 col-sm-12">
-        <div class="card shadow-sm h-100 border-0 rounded-3 hover-scale">
-            <div class="card-body text-center">
-                <h5 class="card-title fw-semibold">Locatários</h5>
-                <p class="card-text text-muted">Visualize e gerencie os locatários.</p>
-                <a href="/locatario" class="btn btn-primary btn-sm btn-block">Abrir</a>
-            </div>
-        </div>
+
     </div>
 </div>
 
 @endsection
+
+
+
+
+
