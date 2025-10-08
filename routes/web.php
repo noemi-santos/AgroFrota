@@ -31,5 +31,5 @@ Route::middleware("auth")->group(function () {
     Route::resource('locador', LocadorController::class);
     Route::resource('locatario', LocatarioController::class);
     Route::post("/logout", [AuthController::class, "Logout"]);
-    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/', action: [HomeController::class, 'index'])->name('home');
 });

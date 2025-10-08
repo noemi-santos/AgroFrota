@@ -13,12 +13,12 @@ class AuthController extends Controller
     //
     public function ShowFormLogin()
     {
-        return view("login");
+        return view("auth.login");
     }
 
     public function ShowFormCadastro()
     {
-        return view("cadastro");
+        return view("auth.cadastro");
     }
 
     public function CadastrarUsuario(Request $request)
