@@ -11,6 +11,7 @@
 
     <!-- CSS customizado -->
     <link rel="stylesheet" href="{{ asset('estilo.css') }}">
+    <link rel="shortcut icon" href="{{ asset('favicon.png') }}">
 </head>
 
 <body>
