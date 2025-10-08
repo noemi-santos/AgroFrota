@@ -17,6 +17,7 @@ Route::resource('equipamentos', EquipamentoController::class);
 Route::resource('categorias', CategoriaController::class);
 Route::resource('locador', LocadorController::class);
 Route::resource('locatario', LocatarioController::class);
+Route::post("/logout", [AuthController::class, "Logout"]);
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get("/login", [AuthController::class, "ShowFormLogin"])->name("login");
