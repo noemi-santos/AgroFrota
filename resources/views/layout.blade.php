@@ -15,7 +15,7 @@
 
 <body>
     <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
         <div class="container-fluid"><!-- trocado de .container para .container-fluid para caber melhor no mobile -->
             <a class="navbar-brand fw-bold" href="/">AgroFrota</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -39,6 +39,12 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="#">Relatórios</a>
+                    </li>
+                    <li class="nav-item">
+                        <form method="POST" action="/logout">
+                            @csrf
+                            <button type="submit" class="btn btn-danger">Logout</button>
+                        </form>
                     </li>
                 </ul>
             </div>
