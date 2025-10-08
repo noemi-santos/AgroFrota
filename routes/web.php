@@ -29,7 +29,6 @@ Route::middleware("auth")->group(function (){
     Route::resource('categorias', CategoriaController::class);
     Route::resource('locador', LocadorController::class);
     Route::resource('locatario', LocatarioController::class);
-    Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::post("/logout", [AuthController::class], "Logout");
-    Route::get("/inicial", function() { return view("inicial"); });
+    Route::get('/', [HomeController::class, 'index'])->name('home');
 });
