@@ -11,7 +11,8 @@ use App\Models\User;
 class AuthController extends Controller
 {
     //
-    public function ShowFormLogin(){
+    public function ShowFormLogin()
+    {
         return view("login");
     }
 
@@ -19,33 +20,32 @@ class AuthController extends Controller
     {
         return view("cadastro");
     }
-    
-    public function CadastrarUsuario( Request $request )
+
+    public function CadastrarUsuario(Request $request)
     {
-        try{
+        try {
             $dados = $request->all();
             $dados["password"] = Hash::make($dados["password"]);
             User::create($dados);
             return redirect()->route("login")->with("Sucesso", "Novo usuario registrado!");
-        } 
-        catch(Exception $e){
+        } catch (\Exception $e) {
             Log::error(
-            "Erro ao criar o usuario: ". $e->getMessage(), 
-            [
-                "stack" => $e->getTraceAsString(),
-                "request" => $request->all()
-            ]);
+                "Erro ao criar o usuario: " . $e->getMessage(),
+                [
+                    "stack" => $e->getTraceAsString(),
+                    "request" => $request->all()
+                ]
+            );
         }
     }
 
-    public function Login( Request $request)
+    public function Login(Request $request)
     {
         $credentials = $request->only("email", "password");
-        if (Auth::attempt($credentials)){
+        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->route("home");
-        }
-        else{
+        } else {
             return redirect()->route("login")->with("erro", "credenciais invalidas");
         }
     }
