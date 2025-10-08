@@ -73,7 +73,7 @@ table.table {
 }
 
 body {
-    background-image: url('https://cdn.pixabay.com/photo/2022/03/22/18/22/farming-7085696_1280.jpg');
+    background-image: url("images/background.jpg");
     background-size: cover;       /* A imagem cobre todo o fundo */
     background-position: center;  /* Centraliza a imagem */
     background-repeat: no-repeat; /* Não repete a imagem */
