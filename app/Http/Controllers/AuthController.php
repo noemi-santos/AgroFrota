@@ -44,7 +44,13 @@ class AuthController extends Controller
         $credentials = $request->only("email", "password");
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->route("home");
+            $user = Auth::user();
+            if ($user->nivel == "ADM"){
+                return redirect()->intended("/home-adm");
+            } elseif ($user->nivel == "CLI"){
+                return redirect()->intended("/home-cli");
+            }
+
         } else {
             return redirect()->route("login")->with("erro", "credenciais invalidas");
         }
