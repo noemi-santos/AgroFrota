@@ -21,6 +21,9 @@ class AuthController extends Controller
 
     public function ShowFormCadastro()
     {
+        if (Auth::check()) {
+            return redirect()->intended(route('home'));
+        }
         return view("auth.cadastro");
     }
 
