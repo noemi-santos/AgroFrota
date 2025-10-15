@@ -13,7 +13,10 @@ class AuthController extends Controller
     //
     public function ShowFormLogin()
     {
-        return view("auth.login");
+        if (Auth::check()) {
+            return redirect()->intended(route('home'));
+        }
+        return view('auth.login');
     }
 
     public function ShowFormCadastro()
@@ -44,7 +47,8 @@ class AuthController extends Controller
         $credentials = $request->only("email", "password");
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->route("home");
+            return redirect()->intended("/home");
+
         } else {
             return redirect()->route("login")->with("erro", "credenciais invalidas");
         }
