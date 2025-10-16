@@ -17,7 +17,7 @@ class NivelCliMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::check() || Auth::user()->nivel != "CLI"){
+        if (!Auth::check() || Auth::user()->access != "CLI"){
             return redirect('/login');
         }
         return $next($request);
