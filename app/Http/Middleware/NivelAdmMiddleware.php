@@ -16,7 +16,7 @@ class NivelAdmMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::check() || Auth::user()->nivel != "ADM"){
+        if (!Auth::check() || Auth::user()->access != "ADM"){
             return redirect('/login');
         }
         return $next($request);

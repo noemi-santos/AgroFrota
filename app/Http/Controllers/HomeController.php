@@ -8,9 +8,9 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        if ($user->nivel == "ADM") {
+        if ($user->access == "ADM") {
             return redirect()->intended("/home-adm");
-        } elseif ($user->nivel == "CLI") {
+        } elseif ($user->access == "CLI") {
             return redirect()->intended("/home-cli");
         }
     }
