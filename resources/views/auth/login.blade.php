@@ -1,15 +1,3 @@
-<!--
- public function Login(Request $request)
-    {
-        $credentials = $request->only("email", "password");
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->route("home");
-        } else {
-            return redirect()->route("login")->with("erro", "credenciais invalidas");
-        }
-    }
--->
 @extends('layout')
 
 @section('conteudo')

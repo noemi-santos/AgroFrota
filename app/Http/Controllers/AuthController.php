@@ -13,18 +13,18 @@ class AuthController extends Controller
     //
     public function ShowFormLogin()
     {
-        if (Auth::check()) {
-            return redirect()->intended(route('home'));
+        if (!Auth::check()) {
+            return view('auth.login');
         }
-        return view('auth.login');
+        return redirect()->intended(route('home'));
     }
 
     public function ShowFormCadastro()
     {
-        if (Auth::check()) {
-            return redirect()->intended(route('home'));
+        if (!Auth::check()) {
+            return view("auth.cadastro");
         }
-        return view("auth.cadastro");
+        return redirect()->intended(route('home'));
     }
 
     public function CadastrarUsuario(Request $request)
@@ -42,6 +42,7 @@ class AuthController extends Controller
                     "request" => $request->all()
                 ]
             );
+            return redirect()->intended('/cadastrar');
         }
     }
 
