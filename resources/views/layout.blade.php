@@ -19,36 +19,6 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
         <div class="container-fluid"><!-- trocado de .container para .container-fluid para caber melhor no mobile -->
             <a class="navbar-brand fw-bold" href="/">AgroFrota</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Alternar navegação">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdown1" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Cadastros
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdown1">
-                            <li><a class="dropdown-item" href="/categorias">Categorias</a></li>
-                            <li><a class="dropdown-item" href="/equipamentos">Equipamentos</a></li>
-                            <li><a class="dropdown-item" href="/locador">Locadores</a></li>
-                            <li><a class="dropdown-item" href="/locatario">Locatários</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">Relatórios</a>
-                    </li>
-                    <li class="nav-item">
-                        <form method="POST" action="/logout">
-                            @csrf
-                            <button type="submit" class="btn btn-danger">Logout</button>
-                        </form>
-                    </li>
-                </ul>
-            </div>
         </div>
     </nav>
 
