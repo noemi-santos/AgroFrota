@@ -37,7 +37,7 @@
                             <li><a class="dropdown-item" href="#">Minhas Locacoes</a></li>
                             <li><a class="dropdown-item" href="#">Meus Anuncios</a></li>
                             <li><a class="dropdown-item" href="#">Relatórios</a></li>
-                            <li><a class="dropdown-item" href="#">Minha Conta</a></li>
+                            <li><a class="dropdown-item" href="/minhaConta">Minha Conta</a></li>
                             <li>
                                 <form method="POST" action="/logout" class="dropdown-item">
                                     @csrf

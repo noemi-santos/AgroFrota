@@ -24,20 +24,21 @@ class User extends Authenticatable
         
         'telefone',
         'endereco',
-        'cnpj_cpf',
-        'documentos_validados',
-        'reputacao_media',
+        'cpf',
+        'cnpj',
     ];
-
+    
     /**
      * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
+    *
+    * @var list<string>
+    */
     protected $hidden = [
         'password',
         'access',
         'remember_token',
+        'documentos_validados',
+        'reputacao_media',
     ];
 
     /**

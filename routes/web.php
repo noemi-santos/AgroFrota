@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EquipamentoController;
 use App\Http\Controllers\CategoriaController;
@@ -32,8 +33,6 @@ Route::middleware("auth")->group(function () {
         });
         Route::resource('equipamentos', EquipamentoController::class);
         Route::resource('categorias', CategoriaController::class);
-        Route::resource('locador', LocadorController::class);
-        Route::resource('locatario', LocatarioController::class);
     });
 
     Route::middleware([NivelCliMiddleware::class])->group(function () {
@@ -42,6 +41,8 @@ Route::middleware("auth")->group(function () {
         });
         Route::get('/buscar', [EquipamentoController::class, 'index']);
         Route::get('/anunciar', [EquipamentoController::class, 'create']);
+        Route::get('/minhaConta', [ClienteController::class, 'edit']);
+        Route::patch('/minhaConta', [ClienteController::class, 'updateCredentials']);
         //Route::get('/locacoes', [HomeController::class, 'index'])->name('home');
         //Route::get('/anuncios', [HomeController::class, 'index'])->name('home');
     });

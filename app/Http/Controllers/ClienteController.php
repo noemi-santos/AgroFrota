@@ -15,6 +15,11 @@ class ClienteController extends Controller
         try {
             $user = Auth::user();
 
+            if (!Hash::check($request->input('passwordOld'), $user->password)) {
+                return redirect()->route("home")
+                    ->with("erro", "Senha atual incorreta!");
+            }
+
             $dataToUpdate = [];
 
             if ($request->filled('name')) {
