@@ -37,8 +37,8 @@
         <div class="col-lg-3 col-md-6 col-sm-12">
             <div class="card-body shadow-sm border-0 rounded-3">
                 <div class="card-body p-3 text-center">
-                    <h5 class="card-title fw-semibold mb-3">Locadores</h5>
-                    <p class="card-text text-muted">Gerencie informações dos locadores.</p>
+                    <h5 class="card-title fw-semibold mb-3">Locacoes</h5>
+                    <p class="card-text text-muted">Gerencie informações das Locacoes.</p>
                     <a href="/locador" class="btn btn-primary btn-sm w-100">Abrir</a>
                 </div>
             </div>
@@ -48,8 +48,8 @@
         <div class="col-lg-3 col-md-6 col-sm-12">
             <div class="card-body shadow-sm border-0 rounded-3">
                 <div class="card-body p-3 text-center">
-                    <h5 class="card-title fw-semibold mb-3">Locatários</h5>
-                    <p class="card-text text-muted">Gerencie informações dos locatários.</p>
+                    <h5 class="card-title fw-semibold mb-3">Usuarios</h5>
+                    <p class="card-text text-muted">Gerencie informações dos Usuarios.</p>
                     <a href="/locatario" class="btn btn-primary btn-sm w-100">Abrir</a>
                 </div>
             </div>
