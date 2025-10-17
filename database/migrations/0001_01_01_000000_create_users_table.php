@@ -19,13 +19,13 @@ return new class extends Migration {
             $table->string('password');
             $table->enum('access', ['ADM', 'CLI'])->default('CLI');
 
-            $table->string('telefone');
-            $table->string('endereco');
-            $table->string('cpf');
-            $table->string('cnpj');
-            $table->boolean('documentos_validados');
-            $table->float('reputacao_media');
-            
+            $table->string('telefone')->nullable();
+            $table->string('endereco')->nullable();
+            $table->string('cpf')->nullable();
+            $table->string('cnpj')->nullable();
+            $table->boolean('documentos_validados')->default(false);
+            $table->float('reputacao_media')->default(0);
+
             $table->rememberToken();
         });
 
