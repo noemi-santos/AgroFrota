@@ -21,6 +21,12 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        
+        'telefone',
+        'endereco',
+        'cnpj_cpf',
+        'documentos_validados',
+        'reputacao_media',
     ];
 
     /**
