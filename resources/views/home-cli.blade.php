@@ -13,7 +13,7 @@
 
             <!-- Card Categorias -->
             <div class="col-lg-3 col-md-6 col-sm-12">
-                <a href="#" class="btn btn-primary btn-sm w-100">
+                <a href="/buscar" class="btn btn-primary btn-sm w-100">
                     <div class="card-body shadow-sm border-0 rounded-3">
                         <div class="card-body p-3 text-center">
                             <h5 class="card-title fw-semibold mb-3">Buscar</h5>
@@ -25,7 +25,7 @@
 
             <!-- Card Equipamentos -->
             <div class="col-lg-3 col-md-6 col-sm-12">
-                <a href="#" class="btn btn-primary btn-sm w-100">
+                <a href="/anunciar" class="btn btn-primary btn-sm w-100">
                     <div class="card-body shadow-sm border-0 rounded-3">
                         <div class="card-body p-3 text-center">
                             <h5 class="card-title fw-semibold mb-3">Anunciar</h5>

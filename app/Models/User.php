@@ -21,17 +21,24 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        
+        'telefone',
+        'endereco',
+        'cpf',
+        'cnpj',
     ];
-
+    
     /**
      * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
+    *
+    * @var list<string>
+    */
     protected $hidden = [
         'password',
         'access',
         'remember_token',
+        'documentos_validados',
+        'reputacao_media',
     ];
 
     /**

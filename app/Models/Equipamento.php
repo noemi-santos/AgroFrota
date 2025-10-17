@@ -18,6 +18,6 @@ class Equipamento extends Model
     }
     public function locador()
     {
-        return $this->belongsTo(Locador::class, 'locador_id', 'id');
+        return $this->belongsTo(User::class, 'locador_id', 'id');
     }
 }
