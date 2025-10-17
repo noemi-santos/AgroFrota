@@ -40,6 +40,10 @@ Route::middleware("auth")->group(function () {
         Route::get('/home-cli', function () {
             return view("home-cli");
         });
+        Route::get('/buscar', [EquipamentoController::class, 'index']);
+        Route::get('/anunciar', [EquipamentoController::class, 'create']);
+        //Route::get('/locacoes', [HomeController::class, 'index'])->name('home');
+        //Route::get('/anuncios', [HomeController::class, 'index'])->name('home');
     });
 
 });
