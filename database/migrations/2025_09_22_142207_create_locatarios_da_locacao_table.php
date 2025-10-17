@@ -21,7 +21,7 @@ return new class extends Migration
 
             // Foreign Keys
             $table->foreignId('locacao_id')->constrained('locacao')->onDelete('restrict')->onUpdate('restrict');
-            $table->foreignId('locatario_id')->constrained('locatario')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreignId('locatario_id')->constrained('users')->onDelete('restrict')->onUpdate('restrict');
         });
     }
 

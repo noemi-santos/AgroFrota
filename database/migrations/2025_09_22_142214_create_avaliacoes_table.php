@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->string('cumprimento_contrato');
 
             $table->foreignId('locacao_id')->constrained('locacao')->onDelete('restrict')->onUpdate('restrict');
-            $table->foreignId('locadores_id')->constrained('locatariosdalocacao')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreignId('locatariodalocacao_id')->constrained('locatariosdalocacao')->onDelete('restrict')->onUpdate('restrict');
 
         });
     }

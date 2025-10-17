@@ -18,6 +18,14 @@ return new class extends Migration {
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('access', ['ADM', 'CLI'])->default('CLI');
+
+            $table->string('telefone');
+            $table->string('endereco');
+            $table->string('cpf');
+            $table->string('cnpj');
+            $table->boolean('documentos_validados');
+            $table->float('reputacao_media');
+            
             $table->rememberToken();
         });
 
