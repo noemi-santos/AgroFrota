@@ -34,10 +34,9 @@
                         <ul class="dropdown-menu" aria-labelledby="dropdown1">
                             <li><a class="dropdown-item" href="/categorias">Categorias</a></li>
                             <li><a class="dropdown-item" href="/equipamentos">Equipamentos</a></li>
-                            <li><a class="dropdown-item" href="/locador">Locadores</a></li>
-                            <li><a class="dropdown-item" href="/locatario">Locatários</a></li>
+                            <li><a class="dropdown-item" href="#">Usuarios</a></li>
                             <li><a class="dropdown-item" href="#">Relatórios</a></li>
-                            <li><a class="dropdown-item" href="#">Minha Conta</a></li>
+                            <li><a class="dropdown-item" href="/minhaConta">Minha Conta</a></li>
                             <li>
                                 <form method="POST" action="/logout" class="dropdown-item">
                                     @csrf

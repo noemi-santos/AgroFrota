@@ -26,6 +26,8 @@ Route::middleware("auth")->group(function () {
 
     Route::post("/logout", [AuthController::class, "Logout"]);
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/minhaConta', [ClienteController::class, 'edit']);
+    Route::patch('/minhaConta', [ClienteController::class, 'updateCredentials']);
 
     Route::middleware([NivelAdmMiddleware::class])->group(function () {
         Route::get('/home-adm', function () {
@@ -41,8 +43,6 @@ Route::middleware("auth")->group(function () {
         });
         Route::get('/buscar', [EquipamentoController::class, 'index']);
         Route::get('/anunciar', [EquipamentoController::class, 'create']);
-        Route::get('/minhaConta', [ClienteController::class, 'edit']);
-        Route::patch('/minhaConta', [ClienteController::class, 'updateCredentials']);
         //Route::get('/locacoes', [HomeController::class, 'index'])->name('home');
         //Route::get('/anuncios', [HomeController::class, 'index'])->name('home');
     });
