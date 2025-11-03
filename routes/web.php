@@ -12,8 +12,10 @@ use App\Http\Controllers\AuthController;
 use App\Http\Middleware\NivelAdmMiddleware;
 use App\Http\Middleware\NivelCliMiddleware;
 
+Route::get('/',[CarrinhoController::class, 'mostrarEquipamento']);
 
-Route::get("/", function () {
+
+Route::get("/login", function () {
     return redirect()->intended("/login");
 });
 
