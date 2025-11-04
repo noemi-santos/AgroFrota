@@ -27,9 +27,9 @@ class EquipamentoController extends Controller
      */
     public function create()
     {
-        //
         $categorias = Categoria::all();
-        $locador = User::all();
+        // Filtra apenas usuários ADM (locadores)
+        $locador = User::where('access', 'ADM')->get();
         return view("equipamentos.create", compact('categorias', 'locador'));
     }
 
@@ -38,9 +38,16 @@ class EquipamentoController extends Controller
      */
     public function store(Request $request)
     {
-        //
         try {
-            Equipamento::create($request->all());
+            $data = $request->all();
+            
+            // Se tem foto, faz o upload
+            if ($request->hasFile('foto')) {
+                $path = $request->file('foto')->store('equipamentos', 'public');
+                $data['image_path'] = $path;
+            }
+
+            Equipamento::create($data);
             return redirect()->route("equipamentos.index")
                 ->with("sucesso", "Registro inserido!");
         } catch (\Exception $e) {
@@ -118,5 +125,17 @@ class EquipamentoController extends Controller
             return redirect()->route("equipamentos.index")
                 ->with("erro", "Erro ao excluir!");
         }
+    }
+    public function indexPublic()
+    {
+        // Busca anúncios com relacionamentos
+        $anuncios = \App\Models\Anuncio::with(['equipamento', 'user'])
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // Escolhe o layout com base no nível de acesso
+        $layout = (auth()->check() && auth()->user()->access === 'ADM') ? 'layouts.layout-adm' : 'layouts.layout-cli';
+
+        return view('equipamentos.public', compact('anuncios'))->with('layout', $layout);
     }
 }

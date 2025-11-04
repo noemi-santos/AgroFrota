@@ -1,9 +1,9 @@
-@extends('layout')
+@extends('layouts.layout-adm')
 
 @section('conteudo')
 
     <h1>Novo equipamento</h1>
-    <form method="post" action="/equipamentos">
+    <form method="post" action="/equipamentos" enctype="multipart/form-data">
         @CSRF
 
         <div class="mb-3">
@@ -17,6 +17,10 @@
         <div class="mb-3">
             <label for="modelo" class="form-label">Modelo:</label>
             <input type="text" id="modelo" name="modelo" class="form-control" required="">
+        </div>
+        <div class="mb-3">
+            <label for="foto" class="form-label">Foto do Equipamento:</label>
+            <input type="file" id="foto" name="foto" class="form-control" accept="image/*">
         </div>
         <div class="mb-3">
             <label for="ano" class="form-label">Ano:</label>
@@ -60,7 +64,7 @@
             <label for="locador_id" class="form-label">Selecione o Locador:</label>
             <select class="form-select" name="locador_id" id="locador_id">
                 @foreach($locador as $l)
-                    <option value="{{$l->id}}">{{ $l->nome }}</option>
+                    <option value="{{$l->id}}">{{ $l->name }}</option>
                 @endforeach
             </select>
         </div>

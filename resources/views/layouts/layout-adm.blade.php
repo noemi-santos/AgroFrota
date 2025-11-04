@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AgroFrota - cliente</title>
+    <title>AgroFrota - adm</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -25,17 +25,17 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <p class="m-0">Olá, administador</p>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown1" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            Paginas
+                            Cadastros
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dropdown1">
-                            <li><a class="dropdown-item" href="#">Buscar</a></li>
-                            <li><a class="dropdown-item" href="#">Anunciar</a></li>
-                            <li><a class="dropdown-item" href="#">Minhas Locacoes</a></li>
-                            <li><a class="dropdown-item" href="#">Meus Anuncios</a></li>
+                            <li><a class="dropdown-item" href="/categorias">Categorias</a></li>
+                            <li><a class="dropdown-item" href="/equipamentos">Equipamentos</a></li>
+                            <li><a class="dropdown-item" href="#">Usuarios</a></li>
                             <li><a class="dropdown-item" href="#">Relatórios</a></li>
                             <li><a class="dropdown-item" href="/minhaConta">Minha Conta</a></li>
                             <li>

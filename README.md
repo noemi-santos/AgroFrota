@@ -53,13 +53,38 @@ Crie um banco chamado `agrofrota` no MySQL:
 CREATE DATABASE agrofrota;
 ```
 
-### 6. Execute as migrações
+### 6. Execute as migrações e seeders
 ```bash
-# Execute as migrações para criar todas as tabelas
-php artisan migrate
+# Execute as migrações para criar todas as tabelas e popular com dados iniciais
+php artisan migrate --seed
 ```
 
-### 7. Inicie o servidor
+### 7. Usuários Padrão (criados pelos seeders)
+
+#### Administrador
+- Email: admin@agrofrota.com
+- Senha: 123456
+- Tipo: ADM
+
+#### Locatários
+1. João Silva
+   - Email: joao@email.com
+   - Senha: 123456
+   - Tipo: CLI
+
+2. Maria Santos
+   - Email: maria@email.com
+   - Senha: 123456
+   - Tipo: CLI
+
+3. Pedro Oliveira
+   - Email: pedro@email.com
+   - Senha: 123456
+   - Tipo: CLI
+
+> ℹ️ **Nota**: Estes usuários são criados automaticamente ao executar `php artisan db:seed` ou `php artisan migrate --seed`
+
+### 8. Inicie o servidor
 ```bash
 php artisan serve
 ```
@@ -121,6 +146,13 @@ php artisan tinker
 ## 📝 Funcionalidades
 
 - ✅ Gestão de Categorias
+  > Categorias padrão (criadas pelos seeders):
+  > - Tratores
+  > - Colheitadeiras
+  > - Plantadeiras
+  > - Implementos
+  > - Irrigação
+  > - Pulverizadores
 - ✅ Gestão de Equipamentos
 - ✅ Sistema de Locação
 - ✅ Gestão de Usuários (Locadores/Locatários)
