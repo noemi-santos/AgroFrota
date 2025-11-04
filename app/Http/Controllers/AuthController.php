@@ -51,7 +51,7 @@ class AuthController extends Controller
         $credentials = $request->only("email", "password");
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended("/home");
+            return redirect()->intended("/");
 
         } else {
             return redirect()->route("login")->with("erro", "credenciais invalidas");
