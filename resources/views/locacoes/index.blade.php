@@ -50,7 +50,7 @@
                             <td class="text-end">
                                 <div class="d-flex flex-wrap justify-content-end gap-2">
                                     <a href="#" class="btn btn-sm btn-warning">Editar</a>
-                                    <a href="#" class="btn btn-sm btn-info">Consultar</a>
+                                    <a href="{{ route('locacoes.show', $l->id) }}" class="btn btn-sm btn-info">Consultar</a>
                                 </div>
                             </td>
                         </tr>

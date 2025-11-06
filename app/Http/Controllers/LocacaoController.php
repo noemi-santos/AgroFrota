@@ -87,6 +87,13 @@ class LocacaoController extends Controller
     public function show(string $id)
     {
         //
+        $locador = Auth::user();
+        $locacao = Locacao::findOrFail($id);
+        if ($locador->id === $locacao->created_by) {
+            $equipamento = Equipamento::findOrFail($locacao->equipamento_id);
+            return view("locacoes.show", compact("locador", 'locacao', 'equipamento'));
+        }
+        return view("locacoes.index");
     }
 
     /**
