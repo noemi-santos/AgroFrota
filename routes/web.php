@@ -60,6 +60,7 @@ Route::middleware("auth")->group(function () {
             // Aqui você integraria com o Model/DB. Por ora apenas simula sucesso.
             return redirect()->back()->with('sucesso', 'Anúncio (simulado) enviado!');
         });
+        Route::get('/locacoes', [LocacaoController::class, 'index']);
         Route::get('/locacoes/{id}', [LocacaoController::class, 'create']);
         Route::post('/locacoes/{equipamento}', [LocacaoController::class, 'store'])->name(name: 'locacoes.store');
         //Route::get('/locacoes', [HomeController::class, 'index'])->name('home');

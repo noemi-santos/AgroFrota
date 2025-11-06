@@ -18,6 +18,11 @@ class LocacaoController extends Controller
     public function index()
     {
         //
+        $locador = Auth::user();
+        $locacoes = Locacao::where('created_by', $locador->id)->get();
+        $equipamentoIds = $locacoes->pluck('equipamento_id');
+        $equipamentos = Equipamento::whereIn('id', $equipamentoIds)->get();
+        return view("locacoes.index", compact("locador", 'locacoes', 'equipamentos'));
     }
 
     /**
@@ -71,7 +76,7 @@ class LocacaoController extends Controller
                 ->with("sucesso", "Registro inserido!");
         } catch (\Exception $e) {
             echo "Erro ao salvar o registro da locacao! " . $e->getMessage();
-            
+
         }
 
     }

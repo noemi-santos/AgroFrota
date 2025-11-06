@@ -39,7 +39,7 @@
                         <ul class="dropdown-menu" aria-labelledby="dropdown1">
                             <li><a class="dropdown-item" href="#">Buscar</a></li>
                             <li><a class="dropdown-item" href="/anuncios/create">Anunciar</a></li>
-                            <li><a class="dropdown-item" href="#">Minhas Locacoes</a></li>
+                            <li><a class="dropdown-item" href="/locacoes">Minhas Locacoes</a></li>
                             <li><a class="dropdown-item" href="#">Meus Anuncios</a></li>
                             <li><a class="dropdown-item" href="#">Relatórios</a></li>
                             <li><a class="dropdown-item" href="/minhaConta">Minha Conta</a></li>
