@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -16,7 +15,7 @@ return new class extends Migration
             $table->timestamps();
             $table->date('data_inicio');
             $table->date('data_fim');
-            $table->float('valor_individual');
+            $table->float('valor_individual')->default(0);
             $table->enum('status_pagamento', ['Incompleto', 'Processando', 'Completo'])->default('Incompleto');
 
             // Foreign Keys
