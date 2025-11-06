@@ -20,9 +20,7 @@ return new class extends Migration
             $table->boolean('tipo_locacao');
             $table->float('valor_total');
             $table->string('status_pagamento');
-
             // Foreign Keys
-            $table->foreignId('locatario_id')->constrained('users')->onDelete('restrict')->onUpdate('restrict');
             $table->foreignId('equipamento_id')->constrained('equipamento')->onDelete('restrict')->onUpdate('restrict');
         });
     }
