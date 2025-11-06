@@ -17,7 +17,7 @@ return new class extends Migration
             $table->date('data_inicio');
             $table->date('data_fim');
             $table->float('valor_individual');
-            $table->string('status_pagamento');
+            $table->enum('status_pagamento', ['Incompleto', 'Processando', 'Completo'])->default('Incompleto');
 
             // Foreign Keys
             $table->foreignId('locacao_id')->constrained('locacao')->onDelete('restrict')->onUpdate('restrict');

@@ -16,14 +16,13 @@ return new class extends Migration
             $table->timestamps();
             $table->date('data_inicio');
             $table->date('data_fim');
-            $table->string('status_equipamento');
             $table->boolean('tipo_locacao');
             $table->float('valor_total');
-            $table->string('status_pagamento');
-
+            $table->enum('status_equipamento', ['Aguardando', 'Em Transporte', 'Em Uso'])->default('Aguardando');
+            $table->enum('status_pagamento', ['Incompleto', 'Parcial', 'Completo'])->default('Incompleto');
             // Foreign Keys
-            $table->foreignId('locatario_id')->constrained('users')->onDelete('restrict')->onUpdate('restrict');
             $table->foreignId('equipamento_id')->constrained('equipamento')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreignId('created_by')->constrained('users')->onDelete('restrict')->onUpdate('restrict');
         });
     }
 
