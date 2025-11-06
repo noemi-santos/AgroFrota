@@ -9,6 +9,7 @@ use App\Models\Equipamento;
 use App\Models\Locacao;
 use App\Models\LocatarioDaLocacao;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class LocacaoController extends Controller
 {
@@ -94,6 +95,36 @@ class LocacaoController extends Controller
             return view("locacoes.show", compact("locador", 'locacao', 'equipamento'));
         }
         return view("locacoes.index");
+    }
+
+
+    public function createLocatarioDaLocacao(string $id)
+    {
+        //
+        $locadores = User::all();
+        $locacao = Locacao::findOrFail($id);
+        return view("locacoes.create", compact('locacao','locadores'));
+    }
+
+    public function storeLocatarioDaLocacao(Request $request)
+    {
+        LocatarioDaLocacao::create(
+            [
+                'data_inicio' => $request['data_inicio'],
+                'data_fim' => $request['data_fim'],
+                'locacao_id' => $request['locacao_id'],
+                'locatario_id' => $request['id_colab'],
+            ]
+        );
+        $colabList = LocatarioDaLocacao::where('locacao_id', $request['locacao_id'])->get();
+        $divideBy = $colabList->count();
+        if ($divideBy > 0) {
+
+            $totalValue = Locacao::findOrFail($request['locacao_id'])->valor_total;
+            $valorIndividual = $totalValue / $divideBy;
+            LocatarioDaLocacao::where('locacao_id', $request['locacao_id'])->update(['valor_individual' => $valorIndividual]);
+        }
+        return back()->with('sucesso', 'Participante adicionado e valor dividido com sucesso!');
     }
 
     /**
