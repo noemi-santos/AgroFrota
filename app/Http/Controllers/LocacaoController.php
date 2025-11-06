@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Models\Equipamento;
 use App\Models\Locacao;
+use App\Models\LocatarioDaLocacao;
 use Illuminate\Support\Facades\Auth;
 
 class LocacaoController extends Controller
@@ -46,27 +47,31 @@ class LocacaoController extends Controller
             $days = max(1, $startDate->diffInDays($endDate->copy()->startOfDay()) + 1);
             $equipamentoSafe = Equipamento::findOrFail($equipamento->id);
             $valorTotal = $equipamentoSafe->preco_periodo * $days;
+            $dataComplete = array_merge(
+                $data,
+                [
+                    'equipamento_id' => $equipamentoSafe->id,
+                    'valor_total' => $valorTotal,
+                    'created_by' => Auth::user()->id,
+                ]
+            );
+            $locacao = Locacao::create($dataComplete);
 
-            Locacao::create(
-                array_merge(
-                    $data,
-                    [
-                        'equipamento_id' => $equipamentoSafe->id,
-                        'valor_total' => $valorTotal,
-                        'created_by' => Auth::user()->id,
-                    ]
-                )
+            LocatarioDaLocacao::create(
+                [
+                    'data_inicio' => $dataComplete['data_inicio'],
+                    'data_fim' => $dataComplete['data_fim'],
+                    'valor_individual' => $dataComplete['valor_total'],
+                    'locacao_id' => $locacao->id,
+                    'locatario_id' => $dataComplete['created_by'],
+                ]
             );
 
             return redirect()->route("equipamentos.index")
                 ->with("sucesso", "Registro inserido!");
         } catch (\Exception $e) {
-            Log::error("Erro ao salvar o registro da locacao! " . $e->getMessage(), [
-                'trace' => $e->getTraceAsString(),
-                'request' => $request->all()
-            ]);
-            return redirect()->route("equipamentos.index")
-                ->with("erro", "Erro ao inserir!");
+            echo "Erro ao salvar o registro da locacao! " . $e->getMessage();
+            
         }
 
     }
