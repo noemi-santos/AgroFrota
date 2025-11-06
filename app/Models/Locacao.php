@@ -10,7 +10,7 @@ class Locacao extends Model
     protected $table = "locacao";
     public $incrementing = true;
 
-    protected $fillable = ['data_inicio', 'data_fim', 'status_equipamento', 'tipo_locacao', 'valor_total', 'status_pagamento','equipamento_id'];
+    protected $fillable = ['data_inicio', 'data_fim', 'status_equipamento', 'tipo_locacao', 'valor_total', 'status_pagamento','equipamento_id','created_by'];
 
     public function equipamento()
     {
