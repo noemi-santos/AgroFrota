@@ -13,11 +13,12 @@ use App\Http\Controllers\AnuncioController;
 use App\Http\Middleware\NivelAdmMiddleware;
 use App\Http\Middleware\NivelCliMiddleware;
 
-Route::get('/', [EquipamentoController::class, 'indexPublic'])->name('home');
+Route::get('/', [HomeController::class, 'indexPublic'])->name('home-cli');
 
 
 Route::get("/login", [AuthController::class, "ShowFormLogin"])->name("login");
 Route::post("/login", [AuthController::class, "Login"]);
+
 Route::get("/cadastrar", [AuthController::class, "ShowFormCadastro"]);
 Route::post("/cadastrar", [AuthController::class, "CadastrarUsuario"]);
 
@@ -30,15 +31,12 @@ Route::middleware("auth")->group(function () {
     Route::patch('/minhaConta', [ClienteController::class, 'updateCredentials']);
 
     Route::middleware([NivelAdmMiddleware::class])->group(function () {
-        Route::get('/adm/home-adm', function () {
-            return view("adm.home-adm");
-        });
         Route::resource('equipamentos', EquipamentoController::class);
         Route::resource('categorias', CategoriaController::class);
     });
 
     Route::middleware([NivelCliMiddleware::class])->group(function () {
-        Route::get('/clientes/home-cli', function () {
+        Route::get('home-cli', function () {
             return view("home-cli");
         });
         Route::get('/buscar', [EquipamentoController::class, 'index']);

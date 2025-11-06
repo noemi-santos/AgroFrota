@@ -1,6 +1,6 @@
-@extends($layout ?? 'layouts.home-cli')
+@extends($layout)
 
-@section('title', 'AgroFrota - Equipamentos Disponíveis')
+@section('title', 'AgroFrota - Homepage')
 
 @section('conteudo')
 <div class="container py-4">
