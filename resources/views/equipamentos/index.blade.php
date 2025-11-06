@@ -43,9 +43,9 @@
 
                     <td>{{ $e->disponibilidade_calendario }}</td>
                     <td>
-                        @foreach ($locador as $l)
+                        @foreach ($users as $l)
                             @if ($e->locador_id == $l->id)
-                                {{ $l->nome }}
+                                {{ $l->name }}
                             @endif
                         @endforeach
                     </td>

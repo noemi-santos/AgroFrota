@@ -38,6 +38,9 @@
                         <a class="nav-link" href="/anuncios/create">Anunciar</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/equipamentos">Equipamentos</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="#">Minhas Locações</a>
                     </li>
                     <li class="nav-item">

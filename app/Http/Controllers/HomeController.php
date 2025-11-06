@@ -8,11 +8,8 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        if ($user->access == "ADM") {
-            return redirect()->intended("/home-adm");
-        } elseif ($user->access == "CLI") {
-            return redirect()->intended("/home-cli");
-        }
+        $layout = ($user->access === 'ADM') ? 'layouts.admin' : 'layouts.default';
+        return view('home.index', compact('user'))->with('layout', $layout);
     }
 
     public function indexPublic()

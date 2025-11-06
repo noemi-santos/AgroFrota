@@ -15,12 +15,18 @@ class EquipamentoController extends Controller
      */
     public function index()
     {
-        //
-        $equipamentos = Equipamento::all();
         $categorias = Categoria::all();
-        $locador = User::all();
+        $users = User::all();
         $layout = (auth()->check() && auth()->user()->access === 'ADM') ? 'layouts.admin' : 'layouts.default';
-        return view("equipamentos.index", compact("equipamentos", 'categorias', 'locador'))->with('layout', $layout);
+        
+        // Se for ADM, vê todos os equipamentos, se não, só os próprios
+        if (auth()->user()->access === 'ADM') {
+            $equipamentos = Equipamento::all();
+        } else {
+            $equipamentos = Equipamento::where('locador_id', auth()->user()->id)->get();
+        }
+        
+        return view("equipamentos.index", compact("equipamentos", 'categorias', 'users'))->with('layout', $layout);
     }
 
     /**
@@ -29,9 +35,9 @@ class EquipamentoController extends Controller
     public function create()
     {
         $categorias = Categoria::all();
-        // Filtra apenas usuários ADM (locadores)
-        $locador = User::where('access', 'ADM')->get();
-        return view("equipamentos.create", compact('categorias', 'locador'));
+        $users = User::all();
+        $layout = (auth()->check() && auth()->user()->access === 'ADM') ? 'layouts.admin' : 'layouts.default';
+        return view("equipamentos.create", compact('categorias', 'users', 'layout'));
     }
 
     /**
@@ -67,11 +73,18 @@ class EquipamentoController extends Controller
      */
     public function show(string $id)
     {
-        //
         $equipamento = Equipamento::findOrFail($id);
+        
+        // Verifica se o usuário tem permissão para ver este equipamento
+        if (auth()->user()->access !== 'ADM' && $equipamento->locador_id !== auth()->user()->id) {
+            return redirect()->route("equipamentos.index")
+                ->with("erro", "Você não tem permissão para visualizar este equipamento!");
+        }
+        
         $categoria = Categoria::findOrFail($equipamento->categoria_id);
-        $locador = User::findOrFail($equipamento->locador_id);
-        return view("equipamentos.show", compact("equipamento", "categoria", "locador"));
+        $users = User::findOrFail($equipamento->locador_id);
+        $layout = (auth()->check() && auth()->user()->access === 'ADM') ? 'layouts.admin' : 'layouts.default';
+        return view("equipamentos.show", compact("equipamento", "categoria", "users", "layout"));
     }
 
     /**
@@ -79,11 +92,19 @@ class EquipamentoController extends Controller
      */
     public function edit(string $id)
     {
-        //
         $equipamento = Equipamento::findOrFail($id);
+        
+        // Verifica se o usuário tem permissão para editar este equipamento
+        if (auth()->user()->access !== 'ADM' && $equipamento->locador_id !== auth()->user()->id) {
+            return redirect()->route("equipamentos.index")
+                ->with("erro", "Você não tem permissão para editar este equipamento!");
+        }
+        
         $categorias = Categoria::all();
-        $locador = User::all();
-        return view("equipamentos.edit", compact("equipamento", "categorias", "locador"));
+        // Se for ADM, vê todos os usuários, se não, só vê ele mesmo
+        $users = auth()->user()->access === 'ADM' ? User::all() : User::where('id', auth()->user()->id)->get();
+        $layout = (auth()->check() && auth()->user()->access === 'ADM') ? 'layouts.admin' : 'layouts.default';
+        return view("equipamentos.edit", compact("equipamento", "categorias", "users", "layout"));
     }
 
     /**
@@ -91,9 +112,15 @@ class EquipamentoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
         try {
             $equipamento = Equipamento::findOrFail($id);
+            
+            // Verifica se o usuário tem permissão para atualizar este equipamento
+            if (auth()->user()->access !== 'ADM' && $equipamento->locador_id !== auth()->user()->id) {
+                return redirect()->route("equipamentos.index")
+                    ->with("erro", "Você não tem permissão para alterar este equipamento!");
+            }
+            
             $equipamento->update($request->all());
             return redirect()->route("equipamentos.index")
                 ->with("sucesso", "Registro alterado!");
@@ -112,9 +139,15 @@ class EquipamentoController extends Controller
      */
     public function destroy(string $id)
     {
-        //
         try {
             $equipamento = Equipamento::findOrFail($id);
+            
+            // Verifica se o usuário tem permissão para excluir este equipamento
+            if (auth()->user()->access !== 'ADM' && $equipamento->locador_id !== auth()->user()->id) {
+                return redirect()->route("equipamentos.index")
+                    ->with("erro", "Você não tem permissão para excluir este equipamento!");
+            }
+            
             $equipamento->delete();
             return redirect()->route("equipamentos.index")
                 ->with("sucesso", "Registro excluído!");

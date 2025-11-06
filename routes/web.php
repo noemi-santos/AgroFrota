@@ -30,15 +30,16 @@ Route::middleware("auth")->group(function () {
     Route::get('/minhaConta', [ClienteController::class, 'edit']);
     Route::patch('/minhaConta', [ClienteController::class, 'updateCredentials']);
 
+    // Rotas comuns a ADM e CLI
+    Route::resource('/equipamentos', EquipamentoController::class);
+
+    // Rotas exclusivas de ADM
     Route::middleware([NivelAdmMiddleware::class])->group(function () {
-        Route::resource('/equipamentos', EquipamentoController::class);
         Route::resource('/categorias', CategoriaController::class);
     });
 
+    // Rotas exclusivas de CLI
     Route::middleware([NivelCliMiddleware::class])->group(function () {
-        Route::get('home-cli', function () {
-            return view("home-cli");
-        });
         Route::get('/buscar', [EquipamentoController::class, 'index']);
         Route::get('/anunciar', [EquipamentoController::class, 'create']);
         // Rotas para Anúncios (formulário simples)
