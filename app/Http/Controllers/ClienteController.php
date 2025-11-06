@@ -63,8 +63,9 @@ class ClienteController extends Controller
 
     public function edit()
     {
-        //
+        //se for necessário, pegar o layout baseado no nível de acesso
+        $layout = (auth()->check() && auth()->user()->access === 'ADM') ? 'layouts.admin' : 'layouts.default';
         $user = Auth::user();
-        return view("users.edit", compact("user"));
+        return view("users.edit", compact("user"))->with('layout', $layout);
     }
 }

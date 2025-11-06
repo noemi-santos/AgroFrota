@@ -1,10 +1,10 @@
-@extends('layout')
+@extends('layouts.admin')
 
 @section('conteudo')
 
 <div class="text-center my-5">
     <h1 class="display-4 fw-bold">Bem-vindo ao AgroFrota - Admin</h1>
-    <h5 class="lead text-muted"><strong>Gerencie categorias, equipamentos, locadores e locatários de forma prática e rápida.</strong></h5>
+    <h5 class="lead text-muted"><strong>Gerencie categorias, equipamentos, usuários e locações de forma prática e rápida.</strong></h5>
 </div>
 
 <div class="container mt-5"> <!-- Adicionei mt-5 para espaçar abaixo do título -->
@@ -37,7 +37,7 @@
         <div class="col-lg-3 col-md-6 col-sm-12">
             <div class="card-body shadow-sm border-0 rounded-3">
                 <div class="card-body p-3 text-center">
-                    <h5 class="card-title fw-semibold mb-3">Locacoes</h5>
+                    <h5 class="card-title fw-semibold mb-3">Locações</h5>
                     <p class="card-text text-muted">Gerencie informações das Locacoes.</p>
                     <a href="/locador" class="btn btn-primary btn-sm w-100">Abrir</a>
                 </div>

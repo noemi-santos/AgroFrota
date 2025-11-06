@@ -1,4 +1,4 @@
-@extends('layout')
+@extends($layout)
 
 @section('conteudo')
 
@@ -35,7 +35,9 @@
                         @endif
                         @endforeach
                     </td>
-                    <td>{{ $e->nome }}</td>
+                    <td style="max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="{{ $e->nome }}">
+                    {{ Str::limit($e->nome, 20) }}
+                    </td>
                     
                     <td>{{ $e->preco_periodo }}</td>
 

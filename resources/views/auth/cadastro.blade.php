@@ -23,7 +23,7 @@
         'password',
     ];
 -->
-@extends('layout')
+@extends('layouts.default')
 
 @section('conteudo')
     <h1>Novo User</h1>

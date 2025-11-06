@@ -20,11 +20,8 @@
         <div class="container-fluid"><!-- trocado de .container para .container-fluid para caber melhor no mobile -->
             <a class="navbar-brand fw-bold" href="/">AgroFrota</a>
             
-            <div id="menu">
-                @auth
-                    <p class="m-0">Olá, {{ auth()->user()->name ?? 'usuário' }}</p>
-                @endauth
-
+            <div id="menu" class="d-flex align-items-center justify-content-between" >
+                
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link" href="#">Buscar</a>
@@ -35,7 +32,7 @@
                         <a class="nav-link" href="/login">Entrar</a>
                     </li>
                     @endguest
-
+                    
                     @auth
                     <li class="nav-item">
                         <a class="nav-link" href="/anuncios/create">Anunciar</a>
@@ -47,7 +44,7 @@
                         <a class="nav-link" href="#">Meus Anúncios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Relatórios</a>
+                        <a class="nav-link" href="#">Histórico</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/minhaConta">Minha Conta</a>
@@ -60,6 +57,9 @@
                     </li>
                     @endauth
                 </ul>
+                @auth
+                    <p class="m-3">Olá, {{ auth()->user()->name ?? 'usuário' }}</p>
+                @endauth
             </div>
         </div>
     </nav>
