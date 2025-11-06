@@ -1,4 +1,4 @@
-@extends('layout-cli')
+@extends('layout')
 
 @section('conteudo')
 
