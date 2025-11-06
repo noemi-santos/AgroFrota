@@ -4,20 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Equipamento extends Model
+class Locacao extends Model
 {
     //
-    protected $table = "equipamento";
+    protected $table = "locacao";
     public $incrementing = true;
 
-    protected $fillable = ['nome', 'marca', 'modelo', 'image_path', 'ano', 'capacidade', 'preco_periodo', 'disponibilidade_calendario', 'raio_atendimento', 'exige_operador_certificado', 'seguro_obrigatorio', 'caucao_obrigatoria', 'locador_id', 'categoria_id'];
+    protected $fillable = ['data_inicio', 'data_fim', 'status_equipamento', 'tipo_locacao', 'valor_total', 'status_pagamento','equipamento_id'];
 
-    public function categoria()
+    public function equipamento()
     {
-        return $this->belongsTo(Categoria::class, 'categoria_id', 'id');
-    }
-    public function locador()
-    {
-        return $this->belongsTo(User::class, 'locador_id', 'id');
+        return $this->belongsTo(Equipamento::class, "equipamento_id", "id");
     }
 }
