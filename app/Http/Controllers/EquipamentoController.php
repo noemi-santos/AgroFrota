@@ -134,7 +134,7 @@ class EquipamentoController extends Controller
             ->get();
 
         // Escolhe o layout com base no nível de acesso
-        $layout = (auth()->check() && auth()->user()->access === 'ADM') ? 'layouts.layout-adm' : 'layouts.layout-cli';
+        $layout = (auth()->check() && auth()->user()->access === 'ADM') ? 'layouts.home-adm' : 'layouts.home-cli';
 
         return view('equipamentos.public', compact('anuncios'))->with('layout', $layout);
     }

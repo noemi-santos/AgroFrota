@@ -1,6 +1,6 @@
-@extends($layout ?? 'layouts.home-cli')
+@extends($layout)
 
-@section('title', 'AgroFrota - Equipamentos Disponíveis')
+@section('title', 'AgroFrota - Homepage')
 
 @section('conteudo')
 <div class="container py-4">
@@ -44,10 +44,6 @@
 
                         {{-- Botão para mais detalhes --}}
                         <a href="#" class="btn btn-primary w-100">Ver Detalhes</a>
-                        
-
-                        <a href="/locacoes/{{ $anuncio->equipamento_id }}" class="btn btn-primary w-100">Criar Locacao</a>
-                        
                     </div>
 
                     {{-- Região --}}
