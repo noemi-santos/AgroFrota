@@ -22,9 +22,11 @@ class LocacaoController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(string $id)
     {
         //
+        $equipamento = Equipamento::findOrFail($id);
+        return view("locacoes.create", compact('equipamento'));
     }
 
     /**
