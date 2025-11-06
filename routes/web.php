@@ -4,8 +4,7 @@ use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EquipamentoController;
 use App\Http\Controllers\CategoriaController;
-use App\Http\Controllers\LocatarioController;
-use App\Http\Controllers\LocadorController;
+use App\Http\Controllers\LocacaoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AnuncioController;
@@ -61,6 +60,8 @@ Route::middleware("auth")->group(function () {
             // Aqui você integraria com o Model/DB. Por ora apenas simula sucesso.
             return redirect()->back()->with('sucesso', 'Anúncio (simulado) enviado!');
         });
+        Route::get('/locacoes/{id}', [LocacaoController::class, 'create']);
+        Route::post('/locacoes/{equipamento}', [LocacaoController::class, 'store'])->name(name: 'locacoes.store');
         //Route::get('/locacoes', [HomeController::class, 'index'])->name('home');
         //Route::get('/anuncios', [HomeController::class, 'index'])->name('home');
     });

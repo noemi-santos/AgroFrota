@@ -43,8 +43,8 @@ class LocacaoController extends Controller
 
             $startDate = Carbon::createFromFormat("Y-m-d", $data['data_inicio'])->startOfDay();
             $endDate = Carbon::createFromFormat("Y-m-d", $data['data_fim'])->endOfDay();
-            $days = max(1, $startDate->diffInDays($endDate->copy()->startOfDay()) + 0);
-            $equipamentoSafe = Equipamento::findOrFail($equipamento['id'])->get();
+            $days = max(1, $startDate->diffInDays($endDate->copy()->startOfDay()) + 1);
+            $equipamentoSafe = Equipamento::findOrFail($equipamento->id);
             $valorTotal = $equipamentoSafe->preco_periodo * $days;
 
             Locacao::create(

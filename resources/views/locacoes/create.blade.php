@@ -3,7 +3,7 @@
 @section('conteudo')
 
     <h1>Nova Locacao</h1>
-    <form method="post" action="/locacoes" enctype="multipart/form-data">
+    <form method="post" action="{{ route('locacoes.store', $equipamento) }}">
         @CSRF
 
         <div class="mb-3">
@@ -23,11 +23,11 @@
             <h3>Total: R$ <span id="valor_total">0.00</span></h3>
         </div>
         <div class="mb-3">
-            <input type="hidden" id="hidden_tipo" name="tipo_locacao" value="0">
-            <input type="checkbox" id="tipo_locacao" name="tipo_locacao" value="1" class="form-control">
             <label for="tipo_locacao" class="form-label">tipo_locacao:</label>
+            <input type="hidden" id="tipo_locacao" name="tipo_locacao" value="0">
+            <input type="checkbox" id="tipo_locacao" name="tipo_locacao" value="1">
         </div>
-        
+
 
 
         <button type="submit" class="btn btn-primary">Enviar</button>
