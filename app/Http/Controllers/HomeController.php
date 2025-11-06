@@ -24,7 +24,9 @@ class HomeController extends Controller
 
         // Escolhe o layout com base no nível de acesso
         $layout = (auth()->check() && auth()->user()->access === 'ADM') ? 'layouts.admin' : 'layouts.default';
+    
+        // se o usúario está logado no admin, vai retornar home-adm.blade.php senão home.public.blade.php
+        return view($layout === 'layouts.admin' ? 'home.home-adm' : 'home.public', compact('anuncios'))->with('layout', $layout);
 
-        return view('home.public', compact('anuncios'))->with('layout', $layout);
     }
 }

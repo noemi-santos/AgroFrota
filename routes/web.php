@@ -31,8 +31,8 @@ Route::middleware("auth")->group(function () {
     Route::patch('/minhaConta', [ClienteController::class, 'updateCredentials']);
 
     Route::middleware([NivelAdmMiddleware::class])->group(function () {
-        Route::resource('equipamentos', EquipamentoController::class);
-        Route::resource('categorias', CategoriaController::class);
+        Route::resource('/equipamentos', EquipamentoController::class);
+        Route::resource('/categorias', CategoriaController::class);
     });
 
     Route::middleware([NivelCliMiddleware::class])->group(function () {

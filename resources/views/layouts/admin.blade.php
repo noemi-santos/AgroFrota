@@ -20,7 +20,6 @@
         <div class="container-fluid"><!-- trocado de .container para .container-fluid para caber melhor no mobile -->
             <a class="navbar-brand fw-bold" href="/">AgroFrota</a>
             <div id="menu" class="d-flex align-items-center justify-content-between" >
-                <p class="m-0">Olá, administrador</p>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link" href="/categorias">Categorias</a>
@@ -44,6 +43,9 @@
                         </form>
                     </li>
                 </ul>
+                @auth
+                    <p class="m-3">Olá, administrador(a) {{ auth()->user()->name ?? 'usuário' }}</p>
+                @endauth
             </div>
         </div>
     </nav>

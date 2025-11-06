@@ -19,7 +19,8 @@ class EquipamentoController extends Controller
         $equipamentos = Equipamento::all();
         $categorias = Categoria::all();
         $locador = User::all();
-        return view("equipamentos.index", compact("equipamentos", 'categorias', 'locador'));
+        $layout = (auth()->check() && auth()->user()->access === 'ADM') ? 'layouts.admin' : 'layouts.default';
+        return view("equipamentos.index", compact("equipamentos", 'categorias', 'locador'))->with('layout', $layout);
     }
 
     /**
@@ -126,16 +127,5 @@ class EquipamentoController extends Controller
                 ->with("erro", "Erro ao excluir!");
         }
     }
-    public function indexPublic()
-    {
-        // Busca anúncios com relacionamentos
-        $anuncios = \App\Models\Anuncio::with(['equipamento', 'user'])
-            ->orderBy('created_at', 'desc')
-            ->get();
-
-        // Escolhe o layout com base no nível de acesso
-        $layout = (auth()->check() && auth()->user()->access === 'ADM') ? 'layouts.home-adm' : 'layouts.home-cli';
-
-        return view('equipamentos.public', compact('anuncios'))->with('layout', $layout);
-    }
+    
 }
