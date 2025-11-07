@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\QueryException;
 class AdminController extends Controller
 {
     //
@@ -124,6 +125,36 @@ class AdminController extends Controller
             ]);
             return redirect()->route("adm.user.list")
                 ->with("erro", "Erro ao atualizar!");
+        }
+    }
+
+    public function ShowUser(string $id)
+    {
+        $user = User::findOrFail($id);
+        return view("adm.users.show", compact("user", 'id'));
+    }
+
+    public function UserDelete(string $id)
+    {
+        //
+        try {
+            $user = User::findOrFail($id);
+            $user->delete();
+            return redirect()->route("adm.user.list")
+                ->with("sucesso", "Registro excluído!");
+        } catch (QueryException $e) {
+            // Error code 1451 = cannot delete or update because it's linked to another table
+            if ($e->errorInfo[1] == 1451) {
+                return redirect()->route("adm.user.list")
+                    ->with('erro', 'Não é possível excluir este usuário, pois ele está vinculado a uma locação.');
+            }
+        } catch (\Exception $e) {
+            Log::error("Erro ao excluir o registro do equipamento! " . $e->getMessage(), [
+                'trace' => $e->getTraceAsString(),
+                'id' => $id
+            ]);
+            return redirect()->route("adm.user.list")
+                ->with("erro", "Erro ao excluir!");
         }
     }
 

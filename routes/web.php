@@ -36,7 +36,8 @@ Route::middleware("auth")->group(function () {
         Route::get('/adm/users', [AdminController::class, 'ViewUserList'])->name('adm.user.list');
         Route::get('/adm/users/create', [AdminController::class, 'ViewCreateUser'])->name('adm.user.create');
         Route::post('/adm/users/create', [AdminController::class, 'CreateUser'])->name('adm.user.create');
-        Route::get('/adm/users/{id}', [AdminController::class, 'store'])->name('adm.user.show');
+        Route::get('/adm/users/{id}', [AdminController::class, 'ShowUser'])->name('adm.user.show');
+        Route::delete('/adm/users/{id}', [AdminController::class, 'UserDelete'])->name('adm.user.show');
         Route::get('/adm/users/{id}/edit', [AdminController::class, 'ViewEditUser'])->name('adm.user.ViewEdit');
         Route::patch('/adm/users/edit', [AdminController::class, 'EditUser'])->name('adm.user.edit');
 
