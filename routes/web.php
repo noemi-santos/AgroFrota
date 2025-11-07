@@ -62,7 +62,7 @@ Route::middleware("auth")->group(function () {
         Route::get('/locacoes/show/{id}', [LocacaoController::class, 'show'])->name( 'locacoes.show');
         Route::get('/locacoes/create/{id}', [LocacaoController::class, 'create'])->name( 'locacoes.create');
         Route::get('/locacoes/colab/create/{id}', [LocacaoController::class, 'createLocatarioDaLocacao'])->name( 'locacoes.showAdd');
-        Route::post('/locacoes/colab/add/{id}', [LocacaoController::class, 'storeLocatarioDaLocacao'])->name( 'locacoes.addColab');
+        Route::post('/locacoes/colab/create/', [LocacaoController::class, 'storeLocatarioDaLocacao'])->name( 'locacoes.addColab');
         Route::post('/locacoes/{equipamento}', [LocacaoController::class, 'store'])->name('locacoes.store');
         //Route::get('/locacoes', [HomeController::class, 'index'])->name('home');
         //Route::get('/anuncios', [HomeController::class, 'index'])->name('home');

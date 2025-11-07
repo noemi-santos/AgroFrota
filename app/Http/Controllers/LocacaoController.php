@@ -103,7 +103,7 @@ class LocacaoController extends Controller
         //
         $locadores = User::all();
         $locacao = Locacao::findOrFail($id);
-        return view("locacoes.create", compact('locacao','locadores'));
+        return view("locacoes.addColab", compact('locacao','locadores', 'id'));
     }
 
     public function storeLocatarioDaLocacao(Request $request)
