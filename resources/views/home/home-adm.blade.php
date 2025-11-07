@@ -33,6 +33,17 @@
             </div>
         </div>
 
+        <!-- Card Locadores -->
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="card-body shadow-sm border-0 rounded-3">
+                <div class="card-body p-3 text-center">
+                    <h5 class="card-title fw-semibold mb-3">Locações</h5>
+                    <p class="card-text text-muted">Gerencie informações das Locacoes.</p>
+                    <a href="/adm/locacoes" class="btn btn-primary btn-sm w-100">Abrir</a>
+                </div>
+            </div>
+        </div>
+
         <!-- Card Locatários -->
         <div class="col-lg-3 col-md-6 col-sm-12">
             <div class="card-body shadow-sm border-0 rounded-3">
