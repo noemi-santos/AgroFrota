@@ -270,4 +270,53 @@ class AdminController extends Controller
         }
     }
 
+    public function ViewCreateLocacaoEquipamentos()
+    {
+        $anuncios = \App\Models\Anuncio::with(['equipamento', 'user'])
+            ->orderBy('created_at', 'desc')
+            ->get();
+        $equipamento = Equipamento::all();
+        return view("adm.locacoes.equipamentos", compact('anuncios'));
+    }
+
+
+    public function ViewCreateLocacao(string $id)
+    {
+        $users = User::all();
+        $equipamento = Equipamento::findOrFail($id);
+        return view("adm.locacoes.create", compact('equipamento', 'users'));
+    }
+
+    public function CreateLocacao(Request $request)
+    {
+        try {
+            $data = $request->validate([
+                'data_inicio' => ['required', 'date'],
+                'data_fim' => ['required', 'date', 'after_or_equal:data_inicio'],
+                'tipo_locacao' => ['required', 'boolean'],
+            ]);
+
+            $startDate = Carbon::createFromFormat("Y-m-d", $data['data_inicio'])->startOfDay();
+            $endDate = Carbon::createFromFormat("Y-m-d", $data['data_fim'])->endOfDay();
+            $days = max(1, $startDate->diffInDays($endDate->copy()->startOfDay()) + 1);
+            $equipamento = Equipamento::findOrFail($request->equipamento_id);
+            $valorTotal = $equipamento->preco_periodo * $days;
+            $dataComplete = array_merge(
+                $data,
+                [
+                    'equipamento_id' => $request->equipamento_id,
+                    'valor_total' => $valorTotal,
+                    'created_by' => $request->created_by,
+                ]
+            );
+            $locacao = Locacao::create($dataComplete);
+
+            return redirect()->route("adm.locacao.list")
+                ->with("sucesso", "Registro inserido!");
+        } catch (\Exception $e) {
+            echo "Erro ao salvar o registro da locacao! " . $e->getMessage();
+
+        }
+
+    }
 }

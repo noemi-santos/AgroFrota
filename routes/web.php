@@ -43,8 +43,9 @@ Route::middleware("auth")->group(function () {
         Route::patch('/adm/users/edit', [AdminController::class, 'EditUser'])->name('adm.user.edit');
 
         Route::get('/adm/locacoes', [AdminController::class, 'ViewLocacaoList'])->name('adm.locacao.list');
-
-
+        Route::get('/adm/locacoes/create/equipamentos', [AdminController::class, 'ViewCreateLocacaoEquipamentos'])->name('adm.locacao.create.equipamentos');
+        Route::get('/adm/locacoes/create/{id}', [AdminController::class, 'ViewCreateLocacao'])->name('adm.locacao.ViewCreate');
+        Route::post('/adm/locacoes/create/{id}', [AdminController::class, 'CreateLocacao'])->name('adm.locacao.create');
         Route::get('/adm/locacoes/{id}', [AdminController::class, 'ShowLocacao'])->name('adm.locacao.show');
         Route::delete('/adm/locacoes/{id}', [AdminController::class, 'LocacaoDelete'])->name('adm.locacao.show');
         Route::get('/adm/locacoes/{id}/edit', [AdminController::class, 'ViewEditLocacao'])->name('adm.locacao.ViewEdit');

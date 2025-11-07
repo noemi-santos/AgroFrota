@@ -9,7 +9,7 @@
     @if(session('erro'))
         <p class="text-danger">{{ session('erro') }}</p>
     @endif
-    <a href="/adm/locacoes/create" class="btn btn-success mb-3">Nova Locacao</a>
+    <a href="{{ route('adm.locacao.create.equipamentos')}}" class="btn btn-success mb-3">Nova Locacao</a>
     <div class="table-responsive rounded-3">
         <table class="table table-hover table-striped">
             <thead>
