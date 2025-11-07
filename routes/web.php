@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EquipamentoController;
@@ -32,6 +33,14 @@ Route::middleware("auth")->group(function () {
     Route::middleware([NivelAdmMiddleware::class])->group(function () {
         Route::resource('/equipamentos', EquipamentoController::class);
         Route::resource('/categorias', CategoriaController::class);
+        Route::get('/adm/users', [AdminController::class, 'ViewUserList'])->name('adm.user.list');
+        Route::get('/adm/users/create', [AdminController::class, 'ViewCreateUser'])->name('adm.user.create');
+        Route::post('/adm/users/create', [AdminController::class, 'CreateUser'])->name('adm.user.create');
+        Route::get('/adm/users/{id}', [AdminController::class, 'ShowUser'])->name('adm.user.show');
+        Route::delete('/adm/users/{id}', [AdminController::class, 'UserDelete'])->name('adm.user.show');
+        Route::get('/adm/users/{id}/edit', [AdminController::class, 'ViewEditUser'])->name('adm.user.ViewEdit');
+        Route::patch('/adm/users/edit', [AdminController::class, 'EditUser'])->name('adm.user.edit');
+
     });
 
     Route::middleware([NivelCliMiddleware::class])->group(function () {
@@ -59,10 +68,10 @@ Route::middleware("auth")->group(function () {
             return redirect()->back()->with('sucesso', 'Anúncio (simulado) enviado!');
         });
         Route::get('/locacoes', [LocacaoController::class, 'index']);
-        Route::get('/locacoes/show/{id}', [LocacaoController::class, 'show'])->name( 'locacoes.show');
-        Route::get('/locacoes/create/{id}', [LocacaoController::class, 'create'])->name( 'locacoes.create');
-        Route::get('/locacoes/colab/create/{id}', [LocacaoController::class, 'createLocatarioDaLocacao'])->name( 'locacoes.showAdd');
-        Route::post('/locacoes/colab/create/', [LocacaoController::class, 'storeLocatarioDaLocacao'])->name( 'locacoes.addColab');
+        Route::get('/locacoes/show/{id}', [LocacaoController::class, 'show'])->name('locacoes.show');
+        Route::get('/locacoes/create/{id}', [LocacaoController::class, 'create'])->name('locacoes.create');
+        Route::get('/locacoes/colab/create/{id}', [LocacaoController::class, 'createLocatarioDaLocacao'])->name('locacoes.showAdd');
+        Route::post('/locacoes/colab/create/', [LocacaoController::class, 'storeLocatarioDaLocacao'])->name('locacoes.addColab');
         Route::post('/locacoes/{equipamento}', [LocacaoController::class, 'store'])->name('locacoes.store');
         //Route::get('/locacoes', [HomeController::class, 'index'])->name('home');
         //Route::get('/anuncios', [HomeController::class, 'index'])->name('home');

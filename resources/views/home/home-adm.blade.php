@@ -50,7 +50,7 @@
                 <div class="card-body p-3 text-center">
                     <h5 class="card-title fw-semibold mb-3">Usuarios</h5>
                     <p class="card-text text-muted">Gerencie informações dos Usuarios.</p>
-                    <a href="/locatario" class="btn btn-primary btn-sm w-100">Abrir</a>
+                    <a href="/adm/users" class="btn btn-primary btn-sm w-100">Abrir</a>
                 </div>
             </div>
         </div>
