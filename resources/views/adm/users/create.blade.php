@@ -2,7 +2,7 @@
 
 @section('conteudo')
     <h1>Novo User</h1>
-    <form method="post" action="/cadastrar" enctype="multipart/form-data">
+    <form method="post" action="{{ route('adm.user.create') }}" enctype="multipart/form-data">
         @CSRF
         <div class="mb-3">
             <label for="name" class="form-label">Nome Completo</label>
