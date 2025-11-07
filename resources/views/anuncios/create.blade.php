@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends($layout)
 
 @section('conteudo')
 
