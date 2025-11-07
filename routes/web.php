@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EquipamentoController;
@@ -32,6 +33,12 @@ Route::middleware("auth")->group(function () {
     Route::middleware([NivelAdmMiddleware::class])->group(function () {
         Route::resource('/equipamentos', EquipamentoController::class);
         Route::resource('/categorias', CategoriaController::class);
+        Route::get('/adm/users', [AdminController::class, 'ViewUserList'])->name('adm.user.list');
+        Route::get('/adm/users/create', [AdminController::class, 'ViewCreateUser'])->name('adm.user.create');
+        Route::post('/adm/users/create', [AdminController::class, 'CreateUser'])->name('adm.user.create');
+        Route::get('/adm/users/{id}', [AdminController::class, 'store'])->name('adm.user.show');
+        Route::get('/adm/users/{id}/edit', [AdminController::class, 'store'])->name('adm.user.edit');
+
     });
 
     Route::middleware([NivelCliMiddleware::class])->group(function () {

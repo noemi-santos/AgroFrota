@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Hash;
 class AdminController extends Controller
 {
     //
@@ -41,6 +42,38 @@ class AdminController extends Controller
             ]);
             return redirect()->route("users.index")
                 ->with("erro", "Erro ao alterar!");
+        }
+    }
+
+
+    public function ViewUserList()
+    {
+        //
+        $users = User::all();
+        return view("adm.users.list", compact("users"));
+    }
+
+    public function ViewCreateUser()
+    {
+        return view("adm.users.create");
+    }
+
+    public function CreateUser(Request $request)
+    {
+        try {
+            $dados = $request->all();
+            $dados["password"] = Hash::make($dados["password"]);
+            User::create($dados);
+            return redirect()->route("adm.user.list")->with("Sucesso", "Novo usuario registrado!");
+        } catch (\Exception $e) {
+            Log::error(
+                "Erro ao criar o usuario: " . $e->getMessage(),
+                [
+                    "stack" => $e->getTraceAsString(),
+                    "request" => $request->all()
+                ]
+            );
+            return redirect()->intended(route("adm.user.list"));
         }
     }
 
