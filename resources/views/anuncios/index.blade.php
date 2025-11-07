@@ -49,34 +49,39 @@
                             </div>
                         </form>
 
-                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                        <div class="row row-cols-1 row-cols-md-3 g-3">
                             @forelse($anuncios as $anuncio)
                                 <div class="col">
                                     <div class="card h-100 shadow-sm">
                                         <img src="{{ asset('storage/' . $anuncio->equipamento->image_path) }}"
                                             class="card-img-top"
                                             alt="Foto de {{ $anuncio->equipamento->nome }}"
-                                            style="height: 200px; object-fit: cover;">
+                                            style="height: 150px; object-fit: cover;"
+                                        >
 
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{ $anuncio->nome }}</h5>
-                                            <p class="card-text">
+                                        <div class="card-body p-2">
+                                             <h5 class="card-title mb-1" title="{{ $anuncio->nome }}" title="{{ $anuncio->nome }}" style="font-size: 1rem; line-height: 1.1;">
+                                                {{ Str::limit($anuncio->nome, 25) }}</h5>
+                                        
+                                            <p class="card-text mb-1" style="font-size: 0.85rem; max-height: 1.8em; overflow: hidden;">
                                                 <small class="text-muted">
                                                     {{ $anuncio->equipamento->marca }} {{ $anuncio->equipamento->modelo }}
                                                 </small>
                                             </p>
-                                            <h6 class="card-subtitle mb-2">
+                                            <h6 class="card-subtitle mb-1" style="font-size: 0.9rem;">
                                                 <span class="text-muted">Diária:</span>
                                                 <strong class="text-success">
                                                     R$ {{ number_format($anuncio->valor_diaria, 2, ',', '.') }}
                                                 </strong>
                                             </h6>
-                                            <p class="card-text">
+                                            <p class="card-text mb-1" style="font-size: 0.8rem;">
                                                 <small class="text-muted">
                                                     Anunciado por: {{ $anuncio->user->name }}
                                                 </small>
                                             </p>
-                                            <a href="#" class="btn btn-primary w-100">Ver Detalhes</a>
+                                            <a href="{{ route('anuncios.show', $anuncio->id) }}" class="btn btn-primary w-100">
+                                                Ver Detalhes
+                                            </a>
                                         </div>
 
                                         <div class="card-footer">

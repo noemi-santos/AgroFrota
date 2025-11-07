@@ -43,7 +43,7 @@
                         </p>
 
                         {{-- Botão para mais detalhes --}}
-                        <a href="#" class="btn btn-primary w-100">Ver Detalhes</a>
+                        <a href="{{ route('anuncios.show', $anuncio->id) }}" class="btn btn-primary w-100">Ver Detalhes</a>
                         <a href="{{ route('locacoes.create', $anuncio->equipamento_id) }}" class="btn btn-primary w-100">Locar</a>
                     </div>
 

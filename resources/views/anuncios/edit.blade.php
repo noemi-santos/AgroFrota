@@ -56,6 +56,7 @@
             <input type="text" id="regiao" name="regiao" class="form-control" 
                    value="{{ old('regiao', $anuncio->regiao) }}" required>
         </div>
+        
 
         <button type="submit" class="btn btn-success">Salvar Alterações</button>
         <a href="{{ url()->previous() }}" class="btn btn-secondary">Voltar</a>
