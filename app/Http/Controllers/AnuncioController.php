@@ -7,25 +7,24 @@ use App\Models\Anuncio;
 use App\Models\Equipamento;
 use App\Models\Categoria;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
 
 class AnuncioController extends Controller
 {
     /**
-     * Show create form for Anuncio with equipamentos list
+     * Exibe o formulário de criação de um novo anúncio
      */
     public function create()
     {
-        // Busca equipamentos ordenados por nome
+        // Busca equipamentos com seus relacionamentos
         $equipamentos = Equipamento::orderBy('nome')
-            ->with(['categoria', 'locador']) // Carrega relacionamentos
+            ->with(['categoria', 'locador'])
             ->get();
         
         return view('anuncios.create', compact('equipamentos'));
     }
 
     /**
-     * Store a newly created Anuncio with file upload
+     * Armazena um novo anúncio
      */
     public function store(Request $request)
     {
@@ -37,21 +36,22 @@ class AnuncioController extends Controller
         ]);
 
         try {
-            // Adiciona user_id e cria o anúncio
-            $data['user_id'] = auth()->id();
+            $data['user_id'] = auth()->id(); // vincula ao usuário logado
             Anuncio::create($data);
 
-            return redirect()->back()->with('sucesso', 'Anúncio criado com sucesso!');
+            return redirect()->route('anuncios.index')->with('sucesso', 'Anúncio criado com sucesso!');
         } catch (\Exception $e) {
             Log::error('Erro ao salvar Anuncio: ' . $e->getMessage(), [
                 'trace' => $e->getTraceAsString(),
                 'data' => $data
             ]);
-            return redirect()->back()->with('erro', 'Erro ao criar anúncio');
+            return redirect()->back()->with('erro', 'Erro ao criar anúncio.');
         }
     }
 
-
+    /**
+     * Exibe a listagem de anúncios com filtros
+     */
     public function index(Request $request)
     {
         $query = Anuncio::with([
@@ -61,17 +61,15 @@ class AnuncioController extends Controller
             'user'
         ]);
 
-        // Captura os filtros (já tratados)
+        // Filtros
         $termo = $request->query('termo');
         $categoria = $request->query('categoria');
 
-        // Filtro por termo (nome ou região do equipamento)
+        // Filtro por termo (nome ou região)
         if (!empty($termo)) {
-            $query->whereHas('equipamento', function ($q) use ($termo) {
-                $q->where(function ($sub) use ($termo) {
-                    $sub->where('nome', 'like', "%{$termo}%")
-                        ->orWhere('regiao', 'like', "%{$termo}%");
-                });
+            $query->where(function ($q) use ($termo) {
+                $q->where('nome', 'like', "%{$termo}%")
+                  ->orWhere('regiao', 'like', "%{$termo}%");
             });
         }
 
@@ -83,10 +81,10 @@ class AnuncioController extends Controller
         }
 
         // Consulta final
-        $anuncios = $query->latest()->get(); // latest() = orderBy('created_at', 'desc')
+        $anuncios = $query->latest()->get();
         $categorias = Categoria::all();
 
-    // Layout dinâmico
+        // Layout dinâmico (ADM ou padrão)
         $layout = (auth()->check() && auth()->user()->access === 'ADM')
             ? 'layouts.admin'
             : 'layouts.default';
@@ -94,5 +92,119 @@ class AnuncioController extends Controller
         return view('anuncios.index', compact('anuncios', 'categorias', 'layout'));
     }
 
+    /**
+     * Exibe formulário de edição de um anúncio existente
+     */
+    public function edit($id)
+    {
+        $anuncio = Anuncio::findOrFail($id);
+
+        // Permissão: ADM ou dono do anúncio
+        if (auth()->user()->access !== 'ADM' && $anuncio->user_id !== auth()->id()) {
+            return redirect()->route('anuncios.index')->with('erro', 'Você não tem permissão para editar este anúncio.');
+        }
+
+        $equipamentos = Equipamento::all();
+        $layout = (auth()->check() && auth()->user()->access === 'ADM')
+            ? 'layouts.admin'
+            : 'layouts.default';
+
+        return view('anuncios.edit', compact('anuncio', 'equipamentos', 'layout'));
+    }
+
+    /**
+     * Atualiza um anúncio existente
+     */
+    public function update(Request $request, $id)
+    {
+        $anuncio = Anuncio::findOrFail($id);
+
+        // Verificação de permissão
+        if (auth()->user()->access !== 'ADM' && $anuncio->user_id !== auth()->id()) {
+            return redirect()->route('anuncios.index')->with('erro', 'Você não tem permissão para editar este anúncio.');
+        }
+
+        $request->validate([
+            'nome' => 'required|string|max:255',
+            'equipamento_id' => 'required|exists:equipamento,id',
+            'valor_diaria' => 'required|numeric|min:0',
+            'regiao' => 'required|string|max:255',
+        ]);
+
+        $anuncio->update([
+            'nome' => $request->nome,
+            'equipamento_id' => $request->equipamento_id,
+            'valor_diaria' => $request->valor_diaria,
+            'regiao' => $request->regiao,
+        ]);
+
+        return redirect()->route('anuncios.show', $id)->with('sucesso', 'Anúncio atualizado com sucesso!');
+    }
+
+    /**
+     * Remove um anúncio
+     */
+    public function destroy($id)
+    {
+        $anuncio = Anuncio::findOrFail($id);
+
+        // Permissão: ADM pode tudo; cliente só o próprio
+        if (auth()->user()->access !== 'ADM' && $anuncio->user_id !== auth()->id()) {
+            return redirect()->route('anuncios.index')->with('erro', 'Você não tem permissão para excluir este anúncio.');
+        }
+
+        $anuncio->delete();
+        return redirect()->route('anuncios.index')->with('sucesso', 'Anúncio excluído com sucesso!');
+    }
+
+    /**
+     * Exibe detalhes de um anúncio
+     */
+    public function show($id)
+    {
+        $anuncio = Anuncio::with(['equipamento', 'equipamento.categoria', 'equipamento.locador'])
+            ->find($id);
+
+        if (!$anuncio) {
+            return redirect()->route('anuncios.index')->with('erro', 'Anúncio não encontrado.');
+        }
+
+        return view('anuncios.show', compact('anuncio'));
+    }
+    
+    public function meusAnuncios()
+    {
+    $usuario = auth()->user();
+
+    // Detecta se é admin
+    $isAdmin = $usuario->access === 'ADM';
+
+    if ($isAdmin) {
+        // Admin vê todos os anúncios
+        $anuncios = Anuncio::with(['equipamento.categoria'])
+            ->orderBy('created_at', 'desc')
+            ->get();
+    } else {
+        // Cliente vê apenas os anúncios dos seus equipamentos
+        $anuncios = Anuncio::with(['equipamento.categoria'])
+            ->whereHas('equipamento', function ($query) use ($usuario) {
+                $query->where('user_id', $usuario->id);
+            })
+            ->orderBy('created_at', 'desc')
+            ->get();
+    }
+
+    // Layout dinâmico
+    $layout = $isAdmin ? 'layoutADM' : 'layout';
+
+    // Categorias para a view (útil se você tiver filtros)
+    $categorias = \App\Models\Categoria::all();
+
+    return view('anuncios.meus-anuncios', compact('anuncios', 'layout', 'categorias'));
 }
+
+
+
+}
+
 

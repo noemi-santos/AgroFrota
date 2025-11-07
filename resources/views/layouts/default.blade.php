@@ -44,7 +44,7 @@
                         <a class="nav-link" href="/locacoes">Minhas Locações</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Meus Anúncios</a>
+                        <a class="nav-link" href="{{ route('anuncios.meus') }}">Meus Anúncios</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Histórico</a>

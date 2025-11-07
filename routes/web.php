@@ -33,9 +33,20 @@ Route::middleware("auth")->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/minhaConta', [ClienteController::class, 'edit']);
     Route::patch('/minhaConta', [ClienteController::class, 'updateCredentials']);
+    Route::get('/meus-anuncios', [AnuncioController::class, 'meusAnuncios'])
+    ->name('anuncios.meus');
+    
+    // CRUD de Anúncios (somente logados podem criar, editar, deletar)
+    Route::get('/anuncios/create', [AnuncioController::class, 'create'])->name('anuncios.create');
+    Route::get('/anunciar', [AnuncioController::class, 'create'])->name('anunciar');
+    Route::post('/anuncios', [AnuncioController::class, 'store'])->name('anuncios.store');
+    Route::get('/anuncios/{id}/edit', [AnuncioController::class, 'edit'])->name('anuncios.edit');
+    Route::put('/anuncios/{id}', [AnuncioController::class, 'update'])->name('anuncios.update');
+    Route::delete('/anuncios/{id}', [AnuncioController::class, 'destroy'])->name('anuncios.destroy');
+    
     
     Route::resource('/equipamentos', EquipamentoController::class);
-
+    
     Route::middleware([NivelAdmMiddleware::class])->group(function () {
         Route::resource('/categorias', CategoriaController::class);
 
@@ -57,30 +68,12 @@ Route::middleware("auth")->group(function () {
         Route::patch('/adm/locacoes/edit', [AdminController::class, 'EditLocacao'])->name('adm.locacao.edit');
 
     });
-
+    
     Route::middleware([NivelCliMiddleware::class])->group(function () {
         Route::get('home-cli', function () {
             return view("home-cli");
         });
-        Route::get('/anunciar', [EquipamentoController::class, 'create']);
-        // Rotas para Anúncios (formulário simples)
-        Route::get('/anuncios/create', [AnuncioController::class, 'create'])->name('anuncios.create');
-        Route::post('/anuncios', [AnuncioController::class, 'store'])->name('anuncios.store');
-        // Rota simples/boilerplate de exemplo para 'anunciar'
-        Route::get('/anunciar-simples', function () {
-            return view('anunciar');
-        })->name('anunciar.simples');
-
-        Route::post('/anunciar-simples', function (\Illuminate\Http\Request $request) {
-            $request->validate([
-                'titulo' => 'required|string|max:255',
-                'descricao' => 'nullable|string',
-                'preco' => 'nullable|numeric'
-            ]);
-
-            // Aqui você integraria com o Model/DB. Por ora apenas simula sucesso.
-            return redirect()->back()->with('sucesso', 'Anúncio (simulado) enviado!');
-        });
+        
         Route::get('/locacoes', [LocacaoController::class, 'index']);
         Route::get('/locacoes/show/{id}', [LocacaoController::class, 'show'])->name('locacoes.show');
         Route::get('/locacoes/create/{id}', [LocacaoController::class, 'create'])->name('locacoes.create');
@@ -90,5 +83,6 @@ Route::middleware("auth")->group(function () {
         //Route::get('/locacoes', [HomeController::class, 'index'])->name('home');
         //Route::get('/anuncios', [HomeController::class, 'index'])->name('home');
     });
-
+    
 });
+Route::get('/anuncios/{id}', [AnuncioController::class, 'show'])->name('anuncios.show');

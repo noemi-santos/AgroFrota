@@ -16,7 +16,7 @@
             <input value="{{$categoria->titulo}}" type="text" id="titulo" name="titulo" class="form-control" required="">
         </div>
 
-        <button type="submit" class="btn btn-primary">Enviar</button>
+        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
         <a href="{{ url()->previous() }}" class="btn btn-secondary">Voltar</a>
     </form>
 

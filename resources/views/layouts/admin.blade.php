@@ -28,7 +28,10 @@
                         <a class="nav-link" href="/equipamentos">Equipamentos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Usuários</a>
+                        <a class="nav-link" href="/adm/users">Usuários</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('anuncios.meus') }}">Anúncios</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Relatórios</a>
