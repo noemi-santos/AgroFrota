@@ -9,9 +9,9 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         if ($user->access == "ADM") {
-            return redirect()->intended("/home-adm");
+            return redirect()->intended("/");
         } elseif ($user->access == "CLI") {
-            return redirect()->intended("/home-cli");
+            return redirect()->intended("/");
         }
     }
 
