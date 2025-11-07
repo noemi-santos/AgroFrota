@@ -13,13 +13,43 @@ class EquipamentoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-        $equipamentos = Equipamento::all();
+        $query = Equipamento::query();
         $categorias = Categoria::all();
+        $layout = 'layouts.default'; // Layout padrão para usuários não logados
         $locador = User::all();
-        $layout = (auth()->check() && auth()->user()->access === 'ADM') ? 'layouts.admin' : 'layouts.default';
+
+        if (auth()->check()) {
+            $layout = (auth()->user()->access === 'ADM') ? 'layouts.admin' : 'layouts.default';
+        }
+
+        // // Aplica o filtro de busca se houver termo
+        // if ($termo = $request->get('termo')) {
+        //     $query->where(function($q) use ($termo) {
+        //         $q->where('nome', 'like', '%' . $termo . '%')
+        //           ->orWhere('descricao', 'like', '%' . $termo . '%');
+        //     });
+        // }
+
+        // // Filtro por categoria
+        // if ($categoria = $request->get('categoria')) {
+        //     $query->where('categoria_id', $categoria);
+        // }
+
+        // se o usuário não for ADM, filtrar apenas os SEUS equipamentos
+        if (auth()->user()->access !== 'ADM') {
+            $query->where('locador_id', auth()->id());
+        }
+
+        $equipamentos = $query->paginate(9)->withQueryString();
+        
+        // Se a requisição veio da rota /buscar, usa a view de busca
+        if ($request->is('buscar')) {
+            return view('buscar.index', compact('equipamentos', 'categorias', 'locador'))->with('layout', $layout);
+        }
+        
+        // Se não, retorna a view padrão de equipamentos
         return view("equipamentos.index", compact("equipamentos", 'categorias', 'locador'))->with('layout', $layout);
     }
 
@@ -29,9 +59,18 @@ class EquipamentoController extends Controller
     public function create()
     {
         $categorias = Categoria::all();
-        // Filtra apenas usuários ADM (locadores)
-        $locador = User::where('access', 'ADM')->get();
-        return view("equipamentos.create", compact('categorias', 'locador'));
+        $locador = User::all();
+
+        // se o usuário não for ADM, é apenas para exibir ele no $locador
+        // caso seja ADM, $locador pode ter todos os usuários
+
+        if (auth()->user()->access !== 'ADM') {
+            $locador = User::where('id', auth()->id())->get();
+        }
+
+        $layout = (auth()->user()->access === 'ADM') ? 'layouts.admin' : 'layouts.default';
+
+        return view("equipamentos.create", compact('categorias', 'locador'))->with('layout', $layout);
     }
 
     /**
@@ -71,7 +110,9 @@ class EquipamentoController extends Controller
         $equipamento = Equipamento::findOrFail($id);
         $categoria = Categoria::findOrFail($equipamento->categoria_id);
         $locador = User::findOrFail($equipamento->locador_id);
-        return view("equipamentos.show", compact("equipamento", "categoria", "locador"));
+        $layout = (auth()->user()->access === 'ADM') ? 'layouts.admin' : 'layouts.default';
+
+        return view("equipamentos.show", compact("equipamento", "categoria", "locador"))->with('layout', $layout);
     }
 
     /**
@@ -83,7 +124,15 @@ class EquipamentoController extends Controller
         $equipamento = Equipamento::findOrFail($id);
         $categorias = Categoria::all();
         $locador = User::all();
-        return view("equipamentos.edit", compact("equipamento", "categorias", "locador"));
+
+        $layout = (auth()->user()->access === 'ADM') ? 'layouts.admin' : 'layouts.default';
+
+        // se o usuário NÃO for ADM, $locador deve ter apenas o registro dele mesmo.
+        if (auth()->user()->access !== 'ADM') {
+            $locador = User::where('id', auth()->id())->get();
+        }
+
+        return view("equipamentos.edit", compact("equipamento", "categorias", "locador"))->with('layout', $layout);
     }
 
     /**

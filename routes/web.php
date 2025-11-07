@@ -8,12 +8,16 @@ use App\Http\Controllers\LocacaoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AnuncioController;
+use App\Http\Controllers\BuscarController;
 
 use App\Http\Middleware\NivelAdmMiddleware;
 use App\Http\Middleware\NivelCliMiddleware;
 
 Route::get('/', [HomeController::class, 'indexPublic'])->name('home-cli');
 
+// Rota pública de busca
+//Route::get('/buscar', [BuscarController::class, 'index'])->name('buscar');
+Route::get('/anuncios', [AnuncioController::class, 'index'])->name('anuncios.index');
 
 Route::get("/login", [AuthController::class, "ShowFormLogin"])->name("login");
 Route::post("/login", [AuthController::class, "Login"]);
@@ -28,9 +32,10 @@ Route::middleware("auth")->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/minhaConta', [ClienteController::class, 'edit']);
     Route::patch('/minhaConta', [ClienteController::class, 'updateCredentials']);
+    
+    Route::resource('/equipamentos', EquipamentoController::class);
 
     Route::middleware([NivelAdmMiddleware::class])->group(function () {
-        Route::resource('/equipamentos', EquipamentoController::class);
         Route::resource('/categorias', CategoriaController::class);
     });
 
@@ -38,7 +43,6 @@ Route::middleware("auth")->group(function () {
         Route::get('home-cli', function () {
             return view("home-cli");
         });
-        Route::get('/buscar', [EquipamentoController::class, 'index']);
         Route::get('/anunciar', [EquipamentoController::class, 'create']);
         // Rotas para Anúncios (formulário simples)
         Route::get('/anuncios/create', [AnuncioController::class, 'create'])->name('anuncios.create');

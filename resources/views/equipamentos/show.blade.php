@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends($layout)
 
 @section('conteudo')
 
@@ -53,7 +53,7 @@
     </div>
     <div class="mb-3">
         <label for="locador_id" class="form-label">Locador:</label>
-        <input disabled value="{{$locador->nome}}" type="text" id="locador_id" name="locador_id" class="form-control" required="">
+        <input disabled value="{{$locador->name}}" type="text" id="locador_id" name="locador_id" class="form-control" required="">
     </div>
     <div class="mb-3">
         <label for="categoria_id" class="form-label">Categoria:</label>
