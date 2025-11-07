@@ -1,4 +1,4 @@
-@extends('layouts.layout-cli')
+@extends($layout)
 
 @section('conteudo')
 
