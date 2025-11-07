@@ -1,4 +1,4 @@
-@extends($layout ?? 'layouts.home-cli')
+@extends($layout)
 
 @section('title', 'AgroFrota - Equipamentos Disponíveis')
 

@@ -1,29 +1,4 @@
-<!--
- public function CadastrarUsuario(Request $request)
-    {
-        try {
-            $dados = $request->all();
-            $dados["password"] = Hash::make($dados["password"]);
-            User::create($dados);
-            return redirect()->route("login")->with("Sucesso", "Novo usuario registrado!");
-        } catch (\Exception $e) {
-            Log::error(
-                "Erro ao criar o usuario: " . $e->getMessage(),
-                [
-                    "stack" => $e->getTraceAsString(),
-                    "request" => $request->all()
-                ]
-            );
-        }
-    }
-
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
--->
-@extends('layouts.default')
+@extends($layout)
 
 @section('conteudo')
     <h1>Novo User</h1>

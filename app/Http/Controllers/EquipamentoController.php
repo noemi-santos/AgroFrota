@@ -19,8 +19,7 @@ class EquipamentoController extends Controller
         $equipamentos = Equipamento::all();
         $categorias = Categoria::all();
         $locador = User::all();
-        $layout = (auth()->check() && auth()->user()->access === 'ADM') ? 'layouts.admin' : 'layouts.default';
-        return view("equipamentos.index", compact("equipamentos", 'categorias', 'locador'))->with('layout', $layout);
+        return view("equipamentos.index", compact("equipamentos", 'categorias', 'locador'));
     }
 
     /**
