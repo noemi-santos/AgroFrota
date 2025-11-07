@@ -3,7 +3,7 @@
 @section('conteudo')
 
     <h1>Alterar equipamento</h1>
-    <form method="post" action="/equipamentos/{{ $equipamento->id }}">
+    <form method="post" action="/equipamentos/{{ $equipamento->id }}" enctype="multipart/form-data">
         @CSRF
         @METHOD('PUT')
 
@@ -97,6 +97,28 @@
                 @endforeach
             </select>
         </div>
+
+            <!-- IMAGEM ATUAL -->
+        @if($equipamento->image_path)
+            <div class="mb-3">
+                <label class="form-label">Imagem Atual:</label>
+                <div>
+                    <img src="{{ asset('storage/' . $equipamento->image_path) }}" 
+                        alt="Imagem do equipamento" style="max-width: 200px; max-height: 150px; object-fit: cover;">
+                </div>
+                <div class="form-check mt-2">
+                    <input type="checkbox" name="remover_imagem" value="1" id="remover_imagem" class="form-check-input">
+                    <label for="remover_imagem" class="form-check-label">Remover imagem atual</label>
+                </div>
+            </div>
+        @endif
+
+        <div class="mb-3">
+            <label for="foto" class="form-label">Nova Imagem (opcional):</label>
+            <input type="file" id="foto" name="foto" class="form-control" accept="image/*">
+        </div>
+
+        
 
         <button type="submit" class="btn btn-primary">Salvar Alterações</button>
         <a href="{{ url()->previous() }}" class="btn btn-secondary">Voltar</a>

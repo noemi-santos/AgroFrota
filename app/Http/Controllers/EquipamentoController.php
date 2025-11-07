@@ -139,20 +139,30 @@ class EquipamentoController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
-        //
+    {  
         try {
             $equipamento = Equipamento::findOrFail($id);
-            $equipamento->update($request->all());
+            $data = $request->all();
+
+            // Se veio uma nova foto
+            if ($request->hasFile('foto')) {
+                // Faz o upload da nova imagem
+                $path = $request->file('foto')->store('equipamentos', 'public');
+                $data['image_path'] = $path;
+            }
+
+            $equipamento->update($data);
+
             return redirect()->route("equipamentos.index")
-                ->with("sucesso", "Registro alterado!");
-        } catch (\Exception $e) {
+                            ->with("sucesso", "Registro alterado!");
+            } 
+        catch (\Exception $e) {
             Log::error("Erro ao alterar o registro do equipamento! " . $e->getMessage(), [
                 'trace' => $e->getTraceAsString(),
                 'request' => $request->all()
             ]);
             return redirect()->route("equipamentos.index")
-                ->with("erro", "Erro ao alterar!");
+                            ->with("erro", "Erro ao alterar!");
         }
     }
 
