@@ -49,7 +49,7 @@
 
                             <td class="text-end">
                                 <div class="d-flex flex-wrap justify-content-end gap-2">
-                                    <a href="#" class="btn btn-sm btn-warning">Editar</a>
+                                    <a href="{{ route('adm.locacao.ViewEdit', $l->id) }}" class="btn btn-sm btn-warning">Editar</a>
                                     <a href="#" class="btn btn-sm btn-warning">ADD</a>
                                     <a href="{{ route('adm.locacao.show', $l->id) }}" class="btn btn-sm btn-info">Consultar</a>
                                 </div>
