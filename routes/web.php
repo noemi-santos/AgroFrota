@@ -41,6 +41,8 @@ Route::middleware("auth")->group(function () {
         Route::get('/adm/users/{id}/edit', [AdminController::class, 'ViewEditUser'])->name('adm.user.ViewEdit');
         Route::patch('/adm/users/edit', [AdminController::class, 'EditUser'])->name('adm.user.edit');
 
+        Route::get('/adm/locacoes', [AdminController::class, 'ViewLocacaoList'])->name('adm.locacao.list');
+
     });
 
     Route::middleware([NivelCliMiddleware::class])->group(function () {

@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\QueryException;
+use App\Models\User;
+use App\Models\Locacao;
+use App\Models\Equipamento;
 class AdminController extends Controller
 {
     //
@@ -158,5 +160,12 @@ class AdminController extends Controller
         }
     }
 
+    public function ViewLocacaoList()
+    {
+        //
+        $locacoes = Locacao::all();
+        $equipamentos = Equipamento::all();
+        return view("adm.locacoes.list", compact("locacoes", "equipamentos"));
+    }
 
 }
