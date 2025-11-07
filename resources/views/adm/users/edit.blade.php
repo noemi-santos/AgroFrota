@@ -3,10 +3,10 @@
 @section('conteudo')
 
     <h1>Atualizar Usuario</h1>
-    <form method="post" action="/minhaConta">
+    <form method="post" action="{{ route('adm.user.edit') }}">
         @CSRF
         @METHOD('PATCH')
-
+        <input type="hidden" value="{{ $user->id }}" id="id" name="id">
         <div class="mb-3">
             <label for="name" class="form-label">Nome:</label>
             <input value="{{$user->name}}" type="text" id="name" name="name" class="form-control" required="">
@@ -14,10 +14,6 @@
         <div class="mb-3">
             <label for="email" class="form-label">Email:</label>
             <input value="{{$user->email}}" type="email" id="email" name="email" class="form-control" required="">
-        </div>
-        <div class="mb-3">
-            <label for="passwordOld" class="form-label">Senha velha:</label>
-            <input value="" type="password" id="passwordOld" name="passwordOld" class="form-control" required="">
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Senha nova:</label>
