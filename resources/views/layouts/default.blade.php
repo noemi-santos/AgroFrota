@@ -24,7 +24,7 @@
                 
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Buscar</a>
+                        <a class="nav-link" href="{{ route('anuncios.index') }}">Buscar</a>
                     </li>
                     
                     @guest
@@ -36,6 +36,9 @@
                     @auth
                     <li class="nav-item">
                         <a class="nav-link" href="/anuncios/create">Anunciar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/equipamentos">Equipamentos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/locacoes">Minhas Locações</a>

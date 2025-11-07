@@ -45,7 +45,7 @@
                     <td>
                         @foreach ($locador as $l)
                             @if ($e->locador_id == $l->id)
-                                {{ $l->nome }}
+                                {{ $l->name }}
                             @endif
                         @endforeach
                     </td>

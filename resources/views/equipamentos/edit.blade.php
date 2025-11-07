@@ -77,9 +77,9 @@
             <select class="form-select" name="locador_id" id="locador_id">
                 @foreach($locador as $l)
                     @if ($equipamento->locador_id == $l->id)
-                        <option selected value="{{$l->id}}">{{ $l->nome }}</option>
+                        <option selected value="{{$l->id}}">{{ $l->name }}</option>
                     @else
-                        <option value="{{$l->id}}">{{ $l->nome }}</option>
+                        <option value="{{$l->id}}">{{ $l->name }}</option>
                     @endif
                 @endforeach
             </select>
