@@ -148,10 +148,10 @@ class AdminController extends Controller
             // Error code 1451 = cannot delete or update because it's linked to another table
             if ($e->errorInfo[1] == 1451) {
                 return redirect()->route("adm.user.list")
-                    ->with('erro', 'Não é possível excluir este usuário, pois ele está vinculado a uma locação.');
+                    ->with('erro', 'Não é possível excluir este usuário, pois ele está vinculado a outros registros.');
             }
         } catch (\Exception $e) {
-            Log::error("Erro ao excluir o registro do equipamento! " . $e->getMessage(), [
+            Log::error("Erro ao excluir o registro do user! " . $e->getMessage(), [
                 'trace' => $e->getTraceAsString(),
                 'id' => $id
             ]);
@@ -166,6 +166,37 @@ class AdminController extends Controller
         $locacoes = Locacao::all();
         $equipamentos = Equipamento::all();
         return view("adm.locacoes.list", compact("locacoes", "equipamentos"));
+    }
+
+    public function ShowLocacao(string $id)
+    {
+        $locacao = Locacao::findOrFail($id);
+        $equipamento = Equipamento::findOrFail($locacao->equipamento_id);
+        return view("adm.locacoes.show", compact("locacao","equipamento", 'id'));
+    }
+
+    public function LocacaoDelete(string $id)
+    {
+        //
+        try {
+            $locacao = Locacao::findOrFail($id);
+            $locacao->delete();
+            return redirect()->route("adm.locacao.list")
+                ->with("sucesso", "Registro excluído!");
+        } catch (QueryException $e) {
+            // Error code 1451 = cannot delete or update because it's linked to another table
+            if ($e->errorInfo[1] == 1451) {
+                return redirect()->route("adm.locacao.list")
+                    ->with('erro', 'Não é possível excluir esta locacao, pois ela está vinculada a outros registros.');
+            }
+        } catch (\Exception $e) {
+            Log::error("Erro ao excluir o registro da locacao! " . $e->getMessage(), [
+                'trace' => $e->getTraceAsString(),
+                'id' => $id
+            ]);
+            return redirect()->route("adm.locacao.list")
+                ->with("erro", "Erro ao excluir!");
+        }
     }
 
 }

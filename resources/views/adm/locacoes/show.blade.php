@@ -3,8 +3,10 @@
 @section('conteudo')
 
     <h1>Dados da Locacao</h1>
-    <form method="post" action="">
+    <form method="post" action="{{ route('adm.locacao.show', $locacao->id) }}">
         @CSRF
+        @METHOD('DELETE')
+
         <div class="mb-3">
             <label class="form-label">{{ $equipamento->nome }}</label>
         </div>
@@ -53,6 +55,12 @@
         <div class="mb-3">
             <label class="form-label">{{ $locacao->status_pagamento }}</label>
         </div>
+
+        <p>Deseja excluir esse registro?</p>
+        <button type="submit" class="btn btn-danger">Sim</button>
+        <a href="#" class="btn btn-secondary" onClick="history.back()">
+            Não
+        </a>
     </form>
 
 @endsection
