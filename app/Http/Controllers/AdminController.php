@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LocatarioDaLocacao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
@@ -10,6 +11,7 @@ use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Locacao;
 use App\Models\Equipamento;
+use App\Models\Avaliacao;
 class AdminController extends Controller
 {
     //
@@ -319,4 +321,93 @@ class AdminController extends Controller
         }
 
     }
+
+
+    public function ViewAvaliacaoList()
+    {
+        $avaliacoes = Avaliacao::all();
+        return view("adm.avaliacoes.list", compact("avaliacoes"));
+    }
+
+    public function EditAvaliacao(string $id)
+    {
+        if (auth()->user()->access !== 'ADM') {
+            return redirect()->route('anuncios.index')->with('erro', 'Você não tem permissão para editar este anúncio.');
+        }
+        $avaliacao = Avaliacao::findOrFail($id);
+        $locacoes = Locacao::all();
+        $locatariosdaslocacoes = LocatarioDaLocacao::all();
+        return view("adm.avaliacoes.show", compact("avaliacao", 'locacoes', 'locatariosdaslocacoes'));
+    }
+    /*
+        public function CreateAvaliacao($id)
+        {
+            if (!Avaliacao::where('locacao_id', $id)->exists()) {
+                $locacao = Locacao::findOrFail($id);
+                $equipamento = Equipamento::findOrFail($locacao->equipamento_id);
+                return view("locacoes.avaliacoes.create", compact('locacao', 'equipamento'));
+            }
+            return redirect()->route('locacoes.avaliar.edit', $id);
+        }
+
+        public function StoreAvaliacao(Request $request)
+        {
+            try {
+                $data = array_merge(
+                    $request->all(),
+                    [
+                        'locacao_id' => $request->id,
+                        'locatariodalocacao_id' => LocatarioDaLocacao::where('locatario_id', Auth::user()->id)->where('locacao_id', $request->id)->value('id'),
+                    ]
+                );
+                $avaliacao = Avaliacao::create($data);
+                return redirect()->route("locacoes.index")
+                    ->with("sucesso", "Registro inserido!");
+            } catch (\Exception $e) {
+                Log::error("Erro ao salvar o registro da avaliacao! " . $e->getMessage(), [
+                    'trace' => $e->getTraceAsString(),
+                    'request' => $request->all()
+                ]);
+                return redirect()->route("locacoes.index")
+                    ->with("erro", "Erro ao inserir!" . $e->getMessage());
+            }
+        }
+
+
+        public function UpdateAvaliacao(Request $request)
+        {
+            //
+            try {
+                $avaliacao = Avaliacao::findOrFail($request->id);
+                $avaliacao->update($request->all());
+                return redirect()->route("locacoes.index")
+                    ->with("sucesso", "Registro alterado!");
+            } catch (\Exception $e) {
+                Log::error("Erro ao alterar o registro da avaliacao! " . $e->getMessage(), [
+                    'trace' => $e->getTraceAsString(),
+                    'request' => $request->all()
+                ]);
+                return redirect()->route("locacoes.index")
+                    ->with("erro", "Erro ao alterar!");
+            }
+        }
+
+
+        public function DestroyAvaliacao(string $id)
+        {
+            try {
+                $avaliacao = Avaliacao::findOrFail($id);
+                $avaliacao->delete();
+                return redirect()->route("locacoes.index")
+                    ->with("sucesso", "Registro excluído!");
+            } catch (\Exception $e) {
+                Log::error("Erro ao excluir o registro da avaliacao! " . $e->getMessage(), [
+                    'trace' => $e->getTraceAsString(),
+                    'id' => $id
+                ]);
+                return redirect()->route("locacoes.index")
+                    ->with("erro", "Erro ao excluir!");
+            }
+        }
+    */
 }

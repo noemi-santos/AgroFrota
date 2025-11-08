@@ -60,13 +60,13 @@
 
 
 
-        <button type="submit" onclick="document.getElementById('methodField').value='PATCH'">
-            Save changes
+        <button type="submit" class="btn btn-primary" onclick="document.getElementById('methodField').value='PATCH'">
+            Salvar Mudancas
         </button>
 
-        <button type="submit" formaction="{{ route('locacoes.avaliar.destroy', $avaliacao->id) }}"
+        <button type="submit" class="btn btn-primary" formaction="{{ route('locacoes.avaliar.destroy', $avaliacao->id) }}"
             onclick="document.getElementById('methodField').value='DELETE'">
-            Delete
+            Deletar
         </button>
 
 

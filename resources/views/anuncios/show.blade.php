@@ -50,6 +50,9 @@
                     <p><strong>Comentario:</strong>
                         {{ $a->comentario }}
                     </p>
+                    <div>
+                        <a href="{{ route('anuncios.edit', $a->id) }}" class="btn btn-warning">Editar</a>
+                    </div>
                 </div>
             @endforeach
 
