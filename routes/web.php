@@ -84,6 +84,9 @@ Route::middleware("auth")->group(function () {
 
         Route::get('/locacoes/avaliar/{id}', [AvaliacaoController::class, 'Create'])->name('locacoes.avaliar');
         Route::post('/locacoes/avaliar/store/', [AvaliacaoController::class, 'Store'])->name('locacoes.avaliar.store');
+        Route::get('/locacoes/avaliar/{id}/edit', [AvaliacaoController::class, 'Edit'])->name('locacoes.avaliar.edit');
+        Route::patch('/locacoes/avaliar/edit', [AvaliacaoController::class, 'Update'])->name('locacoes.avaliar.update');
+        Route::delete('/locacoes/avaliar/edit/{id}', [AvaliacaoController::class, 'Destroy'])->name('locacoes.avaliar.destroy');
         //Route::get('/locacoes', [HomeController::class, 'index'])->name('home');
         //Route::get('/anuncios', [HomeController::class, 'index'])->name('home');
     });

@@ -13,9 +13,12 @@ class AvaliacaoController extends Controller
 {
     public function Create($id)
     {
-        $locacao = Locacao::findOrFail($id);
-        $equipamento = Equipamento::findOrFail($locacao->equipamento_id);
-        return view("locacoes.avaliacoes.create", compact('locacao', 'equipamento'));
+        if (!Avaliacao::where('locacao_id', $id)->exists()) {
+            $locacao = Locacao::findOrFail($id);
+            $equipamento = Equipamento::findOrFail($locacao->equipamento_id);
+            return view("locacoes.avaliacoes.create", compact('locacao', 'equipamento'));
+        }
+        return redirect()->route('locacoes.avaliar.edit', $id);
     }
 
     public function Store(Request $request)
@@ -41,26 +44,47 @@ class AvaliacaoController extends Controller
         }
     }
 
-
-    public function Show(string $id)
-    {
-        //
-    }
-
-
     public function Edit(string $id)
     {
-        //
+        $avaliacao = Avaliacao::where('locacao_id', $id)->firstOrFail();
+        $locacao = Locacao::findOrFail($id);
+        $equipamento = Equipamento::findOrFail($locacao->equipamento_id);
+        return view("locacoes.avaliacoes.show", compact("avaliacao", 'equipamento'));
     }
 
-    public function Update(Request $request, string $id)
+    public function Update(Request $request)
     {
         //
+        try {
+            $avaliacao = Avaliacao::findOrFail($request->id);
+            $avaliacao->update($request->all());
+            return redirect()->route("locacoes.index")
+                ->with("sucesso", "Registro alterado!");
+        } catch (\Exception $e) {
+            Log::error("Erro ao alterar o registro da avaliacao! " . $e->getMessage(), [
+                'trace' => $e->getTraceAsString(),
+                'request' => $request->all()
+            ]);
+            return redirect()->route("locacoes.index")
+                ->with("erro", "Erro ao alterar!");
+        }
     }
 
 
     public function Destroy(string $id)
     {
-        //
+        try {
+            $avaliacao = Avaliacao::findOrFail($id);
+            $avaliacao->delete();
+            return redirect()->route("locacoes.index")
+                ->with("sucesso", "Registro excluído!");
+        } catch (\Exception $e) {
+            Log::error("Erro ao excluir o registro da avaliacao! " . $e->getMessage(), [
+                'trace' => $e->getTraceAsString(),
+                'id' => $id
+            ]);
+            return redirect()->route("locacoes.index")
+                ->with("erro", "Erro ao excluir!");
+        }
     }
 }
