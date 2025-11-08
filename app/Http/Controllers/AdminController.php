@@ -322,13 +322,6 @@ class AdminController extends Controller
 
     }
 
-
-    public function ViewAvaliacaoList()
-    {
-        $avaliacoes = Avaliacao::all();
-        return view("adm.avaliacoes.list", compact("avaliacoes"));
-    }
-
     public function EditAvaliacao(string $id)
     {
         if (auth()->user()->access !== 'ADM') {
