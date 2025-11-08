@@ -51,7 +51,7 @@
                         {{ $a->comentario }}
                     </p>
                     <div>
-                        <a href="{{ route('anuncios.edit', $a->id) }}" class="btn btn-warning">Editar</a>
+                        <a href="{{ route('adm.avaliar.edit', $a->id) }}" class="btn btn-warning">Editar</a>
                     </div>
                 </div>
             @endforeach

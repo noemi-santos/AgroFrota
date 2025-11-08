@@ -328,9 +328,11 @@ class AdminController extends Controller
             return redirect()->route('anuncios.index')->with('erro', 'Você não tem permissão para editar este anúncio.');
         }
         $avaliacao = Avaliacao::findOrFail($id);
+        $locacao = Locacao::findOrFail($avaliacao->locacao_id);
+        $equipamento = Equipamento::findOrFail($locacao->equipamento_id);
         $locacoes = Locacao::all();
         $locatariosdaslocacoes = LocatarioDaLocacao::all();
-        return view("adm.avaliacoes.show", compact("avaliacao", 'locacoes', 'locatariosdaslocacoes'));
+        return view("adm.avaliacoes.show", compact("avaliacao", 'locacoes', 'locatariosdaslocacoes', 'equipamento'));
     }
 
     public function UpdateAvaliacao(Request $request)
@@ -338,14 +340,14 @@ class AdminController extends Controller
         try {
             $avaliacao = Avaliacao::findOrFail($request->id);
             $avaliacao->update($request->all());
-            return redirect()->route("anuncios.show")
+            return redirect()->route('anuncios.meus')
                 ->with("sucesso", "Registro alterado!");
         } catch (\Exception $e) {
             Log::error("Erro ao alterar o registro da avaliacao! " . $e->getMessage(), [
                 'trace' => $e->getTraceAsString(),
                 'request' => $request->all()
             ]);
-            return redirect()->route('anuncios.show')
+            return redirect()->route('anuncios.meus')
                 ->with("erro", "Erro ao alterar!");
         }
     }
@@ -355,14 +357,14 @@ class AdminController extends Controller
         try {
             $avaliacao = Avaliacao::findOrFail($id);
             $avaliacao->delete();
-            return redirect()->route('anuncios.show')
+            return redirect()->route('anuncios.meus')
                 ->with("sucesso", "Registro excluído!");
         } catch (\Exception $e) {
             Log::error("Erro ao excluir o registro da avaliacao! " . $e->getMessage(), [
                 'trace' => $e->getTraceAsString(),
                 'id' => $id
             ]);
-            return redirect()->route('anuncios.show')
+            return redirect()->route('anuncios.meus')
                 ->with("erro", "Erro ao excluir!");
         }
     }

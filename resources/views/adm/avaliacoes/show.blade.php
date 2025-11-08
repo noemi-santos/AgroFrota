@@ -69,7 +69,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="locatariodalocacao_id" class="form-label">equipamento_id</label>
+            <label for="locatariodalocacao_id" class="form-label">locatariodalocacao_id</label>
             <select name="locatariodalocacao_id" id="locatariodalocacao_id" class="form-select" required>
                 @foreach($locatariosdaslocacoes as $l)
                     <option value="{{ $l->id }}" {{ $avaliacao->locatariodalocacao_id == $l->id ? 'selected' : '' }}>
