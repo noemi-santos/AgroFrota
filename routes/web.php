@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AvaliacaoController;
 use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EquipamentoController;
@@ -34,8 +35,8 @@ Route::middleware("auth")->group(function () {
     Route::get('/minhaConta', [ClienteController::class, 'edit']);
     Route::patch('/minhaConta', [ClienteController::class, 'updateCredentials']);
     Route::get('/meus-anuncios', [AnuncioController::class, 'meusAnuncios'])
-    ->name('anuncios.meus');
-    
+        ->name('anuncios.meus');
+
     // CRUD de Anúncios (somente logados podem criar, editar, deletar)
     Route::get('/anuncios/create', [AnuncioController::class, 'create'])->name('anuncios.create');
     Route::get('/anunciar', [AnuncioController::class, 'create'])->name('anunciar');
@@ -43,10 +44,10 @@ Route::middleware("auth")->group(function () {
     Route::get('/anuncios/{id}/edit', [AnuncioController::class, 'edit'])->name('anuncios.edit');
     Route::put('/anuncios/{id}', [AnuncioController::class, 'update'])->name('anuncios.update');
     Route::delete('/anuncios/{id}', [AnuncioController::class, 'destroy'])->name('anuncios.destroy');
-    
-    
+
+
     Route::resource('/equipamentos', EquipamentoController::class);
-    
+
     Route::middleware([NivelAdmMiddleware::class])->group(function () {
         Route::resource('/categorias', CategoriaController::class);
 
@@ -68,21 +69,24 @@ Route::middleware("auth")->group(function () {
         Route::patch('/adm/locacoes/edit', [AdminController::class, 'EditLocacao'])->name('adm.locacao.edit');
 
     });
-    
+
     Route::middleware([NivelCliMiddleware::class])->group(function () {
         Route::get('home-cli', function () {
             return view("home-cli");
         });
-        
-        Route::get('/locacoes', [LocacaoController::class, 'index']);
+
+        Route::get('/locacoes', [LocacaoController::class, 'index'])->name('locacoes.index');
         Route::get('/locacoes/show/{id}', [LocacaoController::class, 'show'])->name('locacoes.show');
         Route::get('/locacoes/create/{id}', [LocacaoController::class, 'create'])->name('locacoes.create');
         Route::get('/locacoes/colab/create/{id}', [LocacaoController::class, 'createLocatarioDaLocacao'])->name('locacoes.showAdd');
         Route::post('/locacoes/colab/create/', [LocacaoController::class, 'storeLocatarioDaLocacao'])->name('locacoes.addColab');
         Route::post('/locacoes/{equipamento}', [LocacaoController::class, 'store'])->name('locacoes.store');
+
+        Route::get('/locacoes/avaliar/{id}', [AvaliacaoController::class, 'Create'])->name('locacoes.avaliar');
+        Route::post('/locacoes/avaliar/store/', [AvaliacaoController::class, 'Store'])->name('locacoes.avaliar.store');
         //Route::get('/locacoes', [HomeController::class, 'index'])->name('home');
         //Route::get('/anuncios', [HomeController::class, 'index'])->name('home');
     });
-    
+
 });
 Route::get('/anuncios/{id}', [AnuncioController::class, 'show'])->name('anuncios.show');
