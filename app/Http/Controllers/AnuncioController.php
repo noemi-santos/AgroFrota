@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Anuncio;
 use App\Models\Equipamento;
 use App\Models\Categoria;
+use App\Models\Avaliacao;
+use App\Models\Locacao;
 use Illuminate\Support\Facades\Log;
 
 class AnuncioController extends Controller
@@ -19,7 +21,7 @@ class AnuncioController extends Controller
         $equipamentos = Equipamento::orderBy('nome')
             ->with(['categoria', 'locador'])
             ->get();
-        
+
         return view('anuncios.create', compact('equipamentos'));
     }
 
@@ -69,7 +71,7 @@ class AnuncioController extends Controller
         if (!empty($termo)) {
             $query->where(function ($q) use ($termo) {
                 $q->where('nome', 'like', "%{$termo}%")
-                  ->orWhere('regiao', 'like', "%{$termo}%");
+                    ->orWhere('regiao', 'like', "%{$termo}%");
             });
         }
 
@@ -168,40 +170,46 @@ class AnuncioController extends Controller
         if (!$anuncio) {
             return redirect()->route('anuncios.index')->with('erro', 'Anúncio não encontrado.');
         }
+        
+        $avaliacoes = Avaliacao::where(
+            'locacao_id',
+            Locacao::where('equipamento_id', $anuncio->equipamento_id)->value('id')
+        )->get();
 
-        return view('anuncios.show', compact('anuncio'));
+
+        return view('anuncios.show', compact('anuncio', 'avaliacoes'));
     }
-    
+
     public function meusAnuncios()
     {
-    $usuario = auth()->user();
+        $usuario = auth()->user();
 
-    // Detecta se é admin
-    $isAdmin = $usuario->access === 'ADM';
+        // Detecta se é admin
+        $isAdmin = $usuario->access === 'ADM';
 
-    if ($isAdmin) {
-        // Admin vê todos os anúncios
-        $anuncios = Anuncio::with(['equipamento.categoria'])
-            ->orderBy('created_at', 'desc')
-            ->get();
-    } else {
-        // Cliente vê apenas os anúncios dos seus equipamentos
-        $anuncios = Anuncio::with(['equipamento.categoria'])
-            ->whereHas('equipamento', function ($query) use ($usuario) {
-                $query->where('user_id', $usuario->id);
-            })
-            ->orderBy('created_at', 'desc')
-            ->get();
+        if ($isAdmin) {
+            // Admin vê todos os anúncios
+            $anuncios = Anuncio::with(['equipamento.categoria'])
+                ->orderBy('created_at', 'desc')
+                ->get();
+        } else {
+            // Cliente vê apenas os anúncios dos seus equipamentos
+            $anuncios = Anuncio::with(['equipamento.categoria'])
+                ->whereHas('equipamento', function ($query) use ($usuario) {
+                    $query->where('user_id', $usuario->id);
+                })
+                ->orderBy('created_at', 'desc')
+                ->get();
+        }
+
+        // Layout dinâmico
+        $layout = $isAdmin ? 'layoutADM' : 'layout';
+
+        // Categorias para a view (útil se você tiver filtros)
+        $categorias = \App\Models\Categoria::all();
+
+        return view('anuncios.meus-anuncios', compact('anuncios', 'layout', 'categorias'));
     }
-
-    // Layout dinâmico
-    $layout = $isAdmin ? 'layoutADM' : 'layout';
-
-    // Categorias para a view (útil se você tiver filtros)
-    $categorias = \App\Models\Categoria::all();
-
-    return view('anuncios.meus-anuncios', compact('anuncios', 'layout', 'categorias'));
-}
 
 
 
