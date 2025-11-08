@@ -4,7 +4,7 @@
 
     <h1>Editar Avaliacao</h1>
     <h1>{{ $equipamento->nome }}</h1>
-    <form method="POST" action="{{ route('locacoes.avaliar.update', $avaliacao->id) }}">
+    <form method="POST" action="{{ route('adm.avaliar.update', $avaliacao->id) }}">
         @CSRF
         <input type="hidden" name="_method" id="methodField" value="PATCH">
 
@@ -57,14 +57,34 @@
             <input type="checkbox" id="cumprimento_contrato" name="cumprimento_contrato" value="1" {{ $avaliacao->cumprimento_contrato == "1" ? 'checked' : '' }}>
         </div>
 
+        <div class="mb-3">
+            <label for="locacao_id" class="form-label">locacao_id</label>
+            <select name="locacao_id" id="locacao_id" class="form-select" required>
+                @foreach($locacoes as $l)
+                    <option value="{{ $l->id }}" {{ $avaliacao->locacao_id == $l->id ? 'selected' : '' }}>
+                        {{ $l->id }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="locatariodalocacao_id" class="form-label">locatariodalocacao_id</label>
+            <select name="locatariodalocacao_id" id="locatariodalocacao_id" class="form-select" required>
+                @foreach($locatariosdaslocacoes as $l)
+                    <option value="{{ $l->id }}" {{ $avaliacao->locatariodalocacao_id == $l->id ? 'selected' : '' }}>
+                        {{ $l->id }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
 
 
-
-        <button type="submit" class="btn btn-primary" onclick="document.getElementById('methodField').value='PATCH'">
+        <button type="submit" onclick="document.getElementById('methodField').value='PATCH'">
             Salvar Mudancas
         </button>
 
-        <button type="submit" class="btn btn-primary" formaction="{{ route('locacoes.avaliar.destroy', $avaliacao->id) }}"
+        <button type="submit" formaction="{{ route('adm.avaliar.destroy', $avaliacao->id) }}"
             onclick="document.getElementById('methodField').value='DELETE'">
             Deletar
         </button>

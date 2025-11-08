@@ -68,6 +68,12 @@ Route::middleware("auth")->group(function () {
         Route::get('/adm/locacoes/{id}/edit', [AdminController::class, 'ViewEditLocacao'])->name('adm.locacao.ViewEdit');
         Route::patch('/adm/locacoes/edit', [AdminController::class, 'EditLocacao'])->name('adm.locacao.edit');
 
+        Route::get('/adm/avaliar/{id}', [AdminController::class, 'Create'])->name('adm.avaliar');
+        Route::post('/adm/avaliar/store/', [AdminController::class, 'Store'])->name('adm.avaliar.store');
+        Route::get('/adm/avaliar/{id}/edit', [AdminController::class, 'EditAvaliacao'])->name('adm.avaliar.edit');
+        Route::patch('/adm/avaliar/edit', [AdminController::class, 'UpdateAvaliacao'])->name('adm.avaliar.update');
+        Route::delete('/adm/avaliar/edit/{id}', [AdminController::class, 'DestroyAvaliacao'])->name('adm.avaliar.destroy');
+
     });
 
     Route::middleware([NivelCliMiddleware::class])->group(function () {

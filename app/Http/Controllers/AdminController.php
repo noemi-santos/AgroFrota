@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LocatarioDaLocacao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
@@ -10,6 +11,7 @@ use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Locacao;
 use App\Models\Equipamento;
+use App\Models\Avaliacao;
 class AdminController extends Controller
 {
     //
@@ -318,5 +320,52 @@ class AdminController extends Controller
 
         }
 
+    }
+
+    public function EditAvaliacao(string $id)
+    {
+        if (auth()->user()->access !== 'ADM') {
+            return redirect()->route('anuncios.index')->with('erro', 'Você não tem permissão para editar este anúncio.');
+        }
+        $avaliacao = Avaliacao::findOrFail($id);
+        $locacao = Locacao::findOrFail($avaliacao->locacao_id);
+        $equipamento = Equipamento::findOrFail($locacao->equipamento_id);
+        $locacoes = Locacao::all();
+        $locatariosdaslocacoes = LocatarioDaLocacao::all();
+        return view("adm.avaliacoes.show", compact("avaliacao", 'locacoes', 'locatariosdaslocacoes', 'equipamento'));
+    }
+
+    public function UpdateAvaliacao(Request $request)
+    {
+        try {
+            $avaliacao = Avaliacao::findOrFail($request->id);
+            $avaliacao->update($request->all());
+            return redirect()->route('anuncios.meus')
+                ->with("sucesso", "Registro alterado!");
+        } catch (\Exception $e) {
+            Log::error("Erro ao alterar o registro da avaliacao! " . $e->getMessage(), [
+                'trace' => $e->getTraceAsString(),
+                'request' => $request->all()
+            ]);
+            return redirect()->route('anuncios.meus')
+                ->with("erro", "Erro ao alterar!");
+        }
+    }
+
+    public function DestroyAvaliacao(string $id)
+    {
+        try {
+            $avaliacao = Avaliacao::findOrFail($id);
+            $avaliacao->delete();
+            return redirect()->route('anuncios.meus')
+                ->with("sucesso", "Registro excluído!");
+        } catch (\Exception $e) {
+            Log::error("Erro ao excluir o registro da avaliacao! " . $e->getMessage(), [
+                'trace' => $e->getTraceAsString(),
+                'id' => $id
+            ]);
+            return redirect()->route('anuncios.meus')
+                ->with("erro", "Erro ao excluir!");
+        }
     }
 }
