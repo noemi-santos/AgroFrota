@@ -49,6 +49,7 @@
 
                             <td class="text-end">
                                 <div class="d-flex flex-wrap justify-content-end gap-2">
+                                    <a href="{{ route('locacoes.avaliar', $l->id) }}" class="btn btn-sm btn-warning">Avaliar</a>
                                     <a href="{{ route('locacoes.showAdd', $l->id) }}" class="btn btn-sm btn-warning">ADD</a>
                                     <a href="{{ route('locacoes.show', $l->id) }}" class="btn btn-sm btn-info">Consultar</a>
                                 </div>
