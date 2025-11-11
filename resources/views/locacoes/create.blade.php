@@ -22,12 +22,8 @@
         <div class="mb-3 text-light text-red">
             <h3>Total: R$ <span id="valor_total">0.00</span></h3>
         </div>
-        <div class="mb-3">
-            <label for="tipo_locacao" class="form-label">tipo_locacao:</label>
-            <input type="hidden" id="tipo_locacao" name="tipo_locacao" value="0">
-            <input type="checkbox" id="tipo_locacao" name="tipo_locacao" value="1">
-        </div>
-
+        <input type="hidden" id="tipo_locacao" name="tipo_locacao" value="0">
+        
 
 
         <button type="submit" class="btn btn-primary">Enviar</button>

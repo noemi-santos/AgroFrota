@@ -59,7 +59,7 @@
                                             style="height: 150px; object-fit: cover;"
                                         >
 
-                                        <div class="card-body p-2 d-flex flex-column justify-content-between">
+                                        <div class="card-body p-2 ">
                                             <div class="">
                                                 <h5 class="card-title mb-1" title="{{ $anuncio->nome }}" title="{{ $anuncio->nome }}" style="font-size: 1rem; line-height: 1.1;">
                                                     {{ Str::limit($anuncio->nome, 25) }}</h5>
@@ -86,8 +86,9 @@
                                                 <a href="{{ route('anuncios.show', $anuncio->id) }}" class="btn btn-primary w-100">
                                                     Ver Detalhes
                                                 </a>
-
+                                                @if($user->access != 'ADM')
                                                 <a href="{{ route('locacoes.create', $anuncio->equipamento_id) }}" class="btn btn-primary w-100 mt-2">Locar</a>
+                                                @endif
                                             </div>
                                         </div>
 

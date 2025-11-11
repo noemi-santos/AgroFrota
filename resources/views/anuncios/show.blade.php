@@ -50,9 +50,6 @@
                     <p><strong>Comentario:</strong>
                         {{ $a->comentario }}
                     </p>
-                    <div>
-                        <a href="{{ route('adm.avaliar.edit', $a->id) }}" class="btn btn-warning">Editar</a>
-                    </div>
                 </div>
             @endforeach
 
@@ -60,7 +57,6 @@
     </div>
 
     <div class="mt-3">
-        <a href="{{ route('anuncios.edit', $anuncio->id) }}" class="btn btn-warning">Editar</a>
         <a href="{{ url()->previous() }}" class="btn btn-secondary">Voltar</a>
     </div>
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Anuncio;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Equipamento;
 use App\Models\Categoria;
 use App\Models\Avaliacao;
@@ -91,7 +92,8 @@ class AnuncioController extends Controller
             ? 'layouts.admin'
             : 'layouts.default';
 
-        return view('anuncios.index', compact('anuncios', 'categorias', 'layout'));
+        $user = Auth::user();
+        return view('anuncios.index', compact('anuncios', 'categorias', 'layout','user'));
     }
 
     /**

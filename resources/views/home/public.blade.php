@@ -43,8 +43,8 @@
                         </p>
 
                         {{-- Botão para mais detalhes --}}
-                        <a href="{{ route('anuncios.show', $anuncio->id) }}" class="btn btn-primary w-100">Ver Detalhes</a>
-                        <a href="{{ route('locacoes.create', $anuncio->equipamento_id) }}" class="btn btn-primary w-100">Locar</a>
+                        <a href="{{ route('anuncios.show', $anuncio->id) }}" class="btn btn-primary w-100">Ver Desssstalhes</a>
+                        {{if($user->access == 'ADM') echo "<!--"}}<a href="{{ route('locacoes.create', $anuncio->equipamento_id) }}" class="btn btn-primary w-100">zzLocar</a>{{if($user->access == 'ADM') echo "-->"}}
                     </div>
 
                     {{-- Região --}}

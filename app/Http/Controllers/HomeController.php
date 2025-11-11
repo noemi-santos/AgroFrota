@@ -56,7 +56,8 @@ class HomeController extends Controller
             ? 'layouts.admin'
             : 'layouts.default';
 
-        return view('anuncios.index', compact('anuncios', 'categorias', 'layout'));
+        $user = Auth::user();
+        return view('anuncios.index', compact('anuncios', 'categorias', 'layout','user'));
 
     }
 }
