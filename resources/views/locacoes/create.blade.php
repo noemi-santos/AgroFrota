@@ -2,7 +2,7 @@
 
 @section('conteudo')
 
-    <h1>Nova Locacao</h1>
+    <h1>Nova Locação</h1>
     <form method="post" action="{{ route('locacoes.store', $equipamento) }}">
         @CSRF
 
@@ -19,7 +19,7 @@
             <label for="data_fim" class="form-label">data_fim:</label>
             <input type="date" id="data_fim" name="data_fim" class="form-control" required="">
         </div>
-        <div class="mb-3">
+        <div class="mb-3 text-light text-red">
             <h3>Total: R$ <span id="valor_total">0.00</span></h3>
         </div>
         <div class="mb-3">

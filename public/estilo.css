@@ -41,7 +41,7 @@ input.form-control:focus, select.form-control:focus {
 
 /* Cabeçalhos */
 h1, h2, h3 {
-    color: green;
+    color: inherit;
     text-align: center;
 }
 

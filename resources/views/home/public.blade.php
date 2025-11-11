@@ -4,7 +4,7 @@
 
 @section('conteudo')
 <div class="container py-4">
-    <h1 class="mb-4 text-center">Equipamentos Disponíveis</h1>
+    <h1 class="mb-4 text-center">Equipamentos Disponíveis - PUBLIC</h1>
 
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         @forelse($anuncios as $anuncio)

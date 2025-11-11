@@ -58,6 +58,7 @@ class AvaliacaoController extends Controller
         try {
             $avaliacao = Avaliacao::findOrFail($request->id);
             $avaliacao->update($request->all());
+
             return redirect()->route("locacoes.index")
                 ->with("sucesso", "Registro alterado!");
         } catch (\Exception $e) {

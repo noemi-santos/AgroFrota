@@ -3,7 +3,7 @@
 @section('conteudo')
 
     <div class="text-center my-5">
-        <h1 class="display-4 fw-bold">Bem-vindo ao AgroFrota - Cliente</h1>
+        <h1 class="display-4 fw-bold">Bem-vindo ao AgroFrota - Cliente HOME-CLI</h1>
         <h5 class="lead text-muted"><strong>Busque e Anuncie equipamentos para alugar de forma prática e rápida.</strong></h5>
     </div>
 

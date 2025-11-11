@@ -2,7 +2,7 @@
 
 @section('conteudo')
 
-    <h2>Locacoes</h2>
+    <h2>Locações</h2>
     @if(session('sucesso'))
         <p class="text-success">{{ session('sucesso') }}</p>
     @endif

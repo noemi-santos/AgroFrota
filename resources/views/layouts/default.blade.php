@@ -46,9 +46,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('anuncios.meus') }}">Meus Anúncios</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Histórico</a>
-                    </li>
+                    <!--<li class="nav-item">-->
+                        <!--<a class="nav-link" href="#">Histórico</a>-->
+                    <!--</li>-->
                     <li class="nav-item">
                         <a class="nav-link" href="/minhaConta">Minha Conta</a>
                     </li>

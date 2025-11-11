@@ -2,7 +2,7 @@
 
 @section('conteudo')
 
-    <h1>Dados da Locacao</h1>
+    <h1>Dados da Locação</h1>
     <form method="post" action="">
         @CSRF
         <div class="mb-3">
