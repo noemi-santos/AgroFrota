@@ -92,8 +92,11 @@ class AnuncioController extends Controller
             ? 'layouts.admin'
             : 'layouts.default';
 
-        $user = Auth::user();
-        return view('anuncios.index', compact('anuncios', 'categorias', 'layout','user'));
+        if (Auth::user() != null) {
+            $user = Auth::user();
+            return view('anuncios.index', compact('anuncios', 'categorias', 'layout', 'user'));
+        } else
+            return view('anuncios.index', compact('anuncios', 'categorias', 'layout'));
     }
 
     /**
@@ -172,7 +175,7 @@ class AnuncioController extends Controller
         if (!$anuncio) {
             return redirect()->route('anuncios.index')->with('erro', 'Anúncio não encontrado.');
         }
-        
+
         $avaliacoes = Avaliacao::where(
             'locacao_id',
             Locacao::where('equipamento_id', $anuncio->equipamento_id)->value('id')

@@ -86,7 +86,7 @@
                                                 <a href="{{ route('anuncios.show', $anuncio->id) }}" class="btn btn-primary w-100">
                                                     Ver Detalhes
                                                 </a>
-                                                @if($user->access != 'ADM')
+                                                @if(($user->access ?? null)!= 'ADM')
                                                 <a href="{{ route('locacoes.create', $anuncio->equipamento_id) }}" class="btn btn-primary w-100 mt-2">Locar</a>
                                                 @endif
                                             </div>
