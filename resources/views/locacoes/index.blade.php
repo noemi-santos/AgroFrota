@@ -17,8 +17,9 @@
                     <th>Marca</th>
                     <th>Inicio</th>
                     <th>Fim</th>
-                    <th>Compartilhada</th>
-                    <th>Total</th>
+                    <th>Qtd. Colab</th>
+                    <th>Preco Total</th>
+                    <th>Preco Indiv.</th>
                     <th>Status</th>
                     <th>Pagamento</th>
                     <th></th>
@@ -42,8 +43,9 @@
 
                             <td>{{ $l->data_inicio }}</td>
                             <td>{{ $l->data_fim }}</td>
-                            <td>{{ $l->tipo_locacao }}</td>
+                            <td>{{ $locatariosDasLocacoes->where('locacao_id', $l->id)->count() }}</td>
                             <td>{{ $l->valor_total }}</td>
+                            <td>{{ $l->valor_total / $locatariosDasLocacoes->where('locacao_id', $l->id)->count() }}</td>
                             <td>{{ $l->status_equipamento }}</td>
                             <td>{{ $l->status_pagamento }}</td>
 
