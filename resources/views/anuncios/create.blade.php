@@ -35,16 +35,19 @@
             <select name="equipamento_id" id="equipamento_id" class="form-select" required>
                 <option value="">Selecione um equipamento</option>
                 @foreach($equipamentos as $equip)
-                    <option value="{{ $equip->id }}" {{ old('equipamento_id') == $equip->id ? 'selected' : '' }}>
-                        {{ $equip->nome }} - {{ $equip->marca }} {{ $equip->modelo }} ({{ $equip->ano }})
-                    </option>
+                    @if($user->id == $equip->locador_id)
+                        <option value="{{ $equip->id }}" {{ old('equipamento_id') == $equip->id ? 'selected' : '' }}>
+                            {{ $equip->nome }} - {{ $equip->marca }} {{ $equip->modelo }} ({{ $equip->ano }})
+                        </option>
+                    @endif
                 @endforeach
             </select>
         </div>
 
         <div class="mb-3">
             <label for="valor_diaria" class="form-label">Valor da Diária</label>
-            <input type="number" step="0.01" id="valor_diaria" name="valor_diaria" class="form-control" value="{{ old('valor_diaria') }}" required>
+            <input type="number" step="0.01" id="valor_diaria" name="valor_diaria" class="form-control"
+                value="{{ old('valor_diaria') }}" required>
         </div>
 
         <div class="mb-3">

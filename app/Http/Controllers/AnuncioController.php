@@ -22,8 +22,8 @@ class AnuncioController extends Controller
         $equipamentos = Equipamento::orderBy('nome')
             ->with(['categoria', 'locador'])
             ->get();
-
-        return view('anuncios.create', compact('equipamentos'));
+        $user = Auth::user();
+        return view('anuncios.create', compact('equipamentos','user'));
     }
 
     /**
