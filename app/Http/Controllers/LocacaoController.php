@@ -23,7 +23,8 @@ class LocacaoController extends Controller
         $locacoes = Locacao::where('created_by', $locador->id)->get();
         $equipamentoIds = $locacoes->pluck('equipamento_id');
         $equipamentos = Equipamento::whereIn('id', $equipamentoIds)->get();
-        return view("locacoes.index", compact("locador", 'locacoes', 'equipamentos'));
+        $locatariosDasLocacoes = LocatarioDaLocacao::all();
+        return view("locacoes.index", compact("locador", 'locacoes', 'equipamentos', 'locatariosDasLocacoes'));
     }
 
     /**
@@ -103,7 +104,7 @@ class LocacaoController extends Controller
         //
         $locadores = User::all();
         $locacao = Locacao::findOrFail($id);
-        return view("locacoes.addColab", compact('locacao','locadores', 'id'));
+        return view("locacoes.addColab", compact('locacao', 'locadores', 'id'));
     }
 
     public function storeLocatarioDaLocacao(Request $request)
