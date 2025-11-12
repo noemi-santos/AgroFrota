@@ -7,6 +7,8 @@
         @CSRF
 
         <input type="hidden" id='locacao_id' name='locacao_id' value="{{ $locacao->id }}">
+        <input type="hidden" id="data_inicio" name="data_inicio" value="{{ $locacao->data_inicio }}" required="">
+        <input type="hidden" id="data_fim" name="data_fim" value="{{ $locacao->data_fim }}" required="">
 
         <div class="mb-3">
             <label for="id_colab" class="form-label">Selecione o Locatario:</label>
@@ -17,14 +19,6 @@
             </select>
         </div>
 
-        <div class="mb-3">
-            <label for="data_inicio" class="form-label">data_inicio:</label>
-            <input type="date" id="data_inicio" name="data_inicio" class="form-control" required="">
-        </div>
-        <div class="mb-3">
-            <label for="data_fim" class="form-label">data_fim:</label>
-            <input type="date" id="data_fim" name="data_fim" class="form-control" required="">
-        </div>
         <button type="submit" class="btn btn-primary">Enviar</button>
     </form>
 
