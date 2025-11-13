@@ -34,14 +34,11 @@
             <label for="preco_periodo" class="form-label">Preco do Periodo:</label>
             <input type="number" id="preco_periodo" name="preco_periodo" class="form-control" required="">
         </div>
+        <input type="hidden" id="disponibilidade_calendario" name="disponibilidade_calendario" value="-" required="">
+
         <div class="mb-3">
-            <label for="disponibilidade_calendario" class="form-label">Disponibilidade Calendario:</label>
-            <input type="text" id="disponibilidade_calendario" name="disponibilidade_calendario" class="form-control"
-                required="">
-        </div>
-        <div class="mb-3">
-            <label for="raio_atendimento" class="form-label">Raio de Atendimento (km):</label>
-            <input type="number" id="raio_atendimento" name="raio_atendimento" class="form-control" required="">
+            <label for="regiao" class="form-label">Região:</label>
+            <input type="text" id="regiao" name="regiao" class="form-control" required="">
         </div>
 
         <div class="mb-3">

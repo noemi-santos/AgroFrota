@@ -29,7 +29,7 @@ class EquipamentoSeeder extends Seeder
                 'capacidade' => '90 cv',
                 'preco_periodo' => 800.00, // Diária
                 'disponibilidade_calendario' => 'Segunda a Sábado',
-                'raio_atendimento' => 100, // km
+                'regiao' => 'São Paulo',
                 'exige_operador_certificado' => true,
                 'seguro_obrigatorio' => true,
                 'caucao_obrigatoria' => true,
@@ -45,7 +45,7 @@ class EquipamentoSeeder extends Seeder
                 'capacidade' => 'Plataforma 20 pés',
                 'preco_periodo' => 1200.00,
                 'disponibilidade_calendario' => 'Segunda a Domingo',
-                'raio_atendimento' => 150,
+                'regiao' => 'São Paulo',
                 'exige_operador_certificado' => true,
                 'seguro_obrigatorio' => true,
                 'caucao_obrigatoria' => true,
@@ -61,7 +61,7 @@ class EquipamentoSeeder extends Seeder
                 'capacidade' => '9 linhas',
                 'preco_periodo' => 600.00,
                 'disponibilidade_calendario' => 'Segunda a Sexta',
-                'raio_atendimento' => 80,
+                'regiao' => 'Porto Seguro',
                 'exige_operador_certificado' => false,
                 'seguro_obrigatorio' => true,
                 'caucao_obrigatoria' => true,
