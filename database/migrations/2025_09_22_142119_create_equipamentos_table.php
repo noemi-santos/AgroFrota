@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('capacidade');
             $table->float('preco_periodo');
             $table->string('disponibilidade_calendario');
-            $table->float('raio_atendimento');
+            $table->string('regiao');
             $table->boolean('exige_operador_certificado');
             $table->boolean('seguro_obrigatorio');
             $table->boolean('caucao_obrigatoria');
