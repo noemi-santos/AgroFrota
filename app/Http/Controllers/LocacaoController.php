@@ -99,8 +99,9 @@ class LocacaoController extends Controller
 
     public function createLocatarioDaLocacao(string $id)
     {
-        $locadores = User::where('access', '!=', 'ADM')->get();
         $locacao = Locacao::findOrFail($id);
+        $locadoresExistentes = LocatarioDaLocacao::where('locacao_id', $id)->pluck('locatario_id');
+        $locadores = User::where('access', '!=', 'ADM')->whereNotIn('id', $locadoresExistentes)->get();
         return view("locacoes.addColab", compact('locacao', 'locadores', 'id'));
     }
 

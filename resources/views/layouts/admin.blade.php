@@ -19,7 +19,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
         <div class="container-fluid"><!-- trocado de .container para .container-fluid para caber melhor no mobile -->
             <a class="navbar-brand fw-bold" href="/">AgroFrota</a>
-            <div id="menu" class="d-flex align-items-center justify-content-between" >
+            <div id="menu" class="d-flex align-items-center justify-content-between">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link" href="/categorias">Categorias</a>
@@ -28,13 +28,16 @@
                         <a class="nav-link" href="/equipamentos">Equipamentos</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/adm/locacoes">Locações</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/adm/users">Usuários</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('anuncios.meus') }}">Anúncios</a>
                     </li>
                     <!--<li class="nav-item">-->
-                        <!--<a class="nav-link" href="#">Relatórios</a>-->
+                    <!--<a class="nav-link" href="#">Relatórios</a>-->
                     <!--</li>-->
                     <li class="nav-item">
                         <a class="nav-link" href="/minhaConta">Minha Conta</a>
