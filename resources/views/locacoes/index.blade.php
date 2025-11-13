@@ -45,7 +45,11 @@
                             <td>{{ Carbon\Carbon::parse($l->data_fim)->format('d/m/Y') }}</td>
                             <td>{{ $locatariosDasLocacoes->where('locacao_id', $l->id)->count() }}</td>
                             <td>{{ $l->valor_total }}</td>
-                            <td>{{ $l->valor_total / $locatariosDasLocacoes->where('locacao_id', $l->id)->count() }}</td>
+                            @php
+                                $qtd = $locatariosDasLocacoes->where('locacao_id', $l->id)->count();
+                                $individual = $qtd > 0 ? $l->valor_total / $qtd : 0;
+                            @endphp
+                            <td>{{ number_format($individual, 2, ',', '.') }}</td>
                             <td>{{ $l->status_equipamento }}</td>
                             <td>{{ $l->status_pagamento }}</td>
 

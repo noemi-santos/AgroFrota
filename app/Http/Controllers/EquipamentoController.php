@@ -43,12 +43,12 @@ class EquipamentoController extends Controller
         }
 
         $equipamentos = $query->paginate(9)->withQueryString();
-        
+
         // Se a requisição veio da rota /buscar, usa a view de busca
         if ($request->is('buscar')) {
             return view('buscar.index', compact('equipamentos', 'categorias', 'locador'))->with('layout', $layout);
         }
-        
+
         // Se não, retorna a view padrão de equipamentos
         return view("equipamentos.index", compact("equipamentos", 'categorias', 'locador'))->with('layout', $layout);
     }
@@ -80,7 +80,7 @@ class EquipamentoController extends Controller
     {
         try {
             $data = $request->all();
-            
+
             // Se tem foto, faz o upload
             if ($request->hasFile('foto')) {
                 $path = $request->file('foto')->store('equipamentos', 'public');
@@ -96,7 +96,7 @@ class EquipamentoController extends Controller
                 'request' => $request->all()
             ]);
             return redirect()->route("equipamentos.index")
-                ->with("erro", "Erro ao inserir!");
+                ->with("erro", "Erro ao inserir!" . $e->getMessage());
         }
 
     }
@@ -139,7 +139,7 @@ class EquipamentoController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {  
+    {
         try {
             $equipamento = Equipamento::findOrFail($id);
             $data = $request->all();
@@ -154,15 +154,14 @@ class EquipamentoController extends Controller
             $equipamento->update($data);
 
             return redirect()->route("equipamentos.index")
-                            ->with("sucesso", "Registro alterado!");
-            } 
-        catch (\Exception $e) {
+                ->with("sucesso", "Registro alterado!");
+        } catch (\Exception $e) {
             Log::error("Erro ao alterar o registro do equipamento! " . $e->getMessage(), [
                 'trace' => $e->getTraceAsString(),
                 'request' => $request->all()
             ]);
             return redirect()->route("equipamentos.index")
-                            ->with("erro", "Erro ao alterar!");
+                ->with("erro", "Erro ao alterar!");
         }
     }
 
@@ -186,5 +185,5 @@ class EquipamentoController extends Controller
                 ->with("erro", "Erro ao excluir!");
         }
     }
-    
+
 }

@@ -10,7 +10,7 @@ class Equipamento extends Model
     protected $table = "equipamento";
     public $incrementing = true;
 
-    protected $fillable = ['nome', 'marca', 'modelo', 'image_path', 'ano', 'capacidade', 'preco_periodo', 'disponibilidade_calendario', 'raio_atendimento', 'exige_operador_certificado', 'seguro_obrigatorio', 'caucao_obrigatoria', 'locador_id', 'categoria_id'];
+    protected $fillable = ['nome', 'marca', 'modelo', 'image_path', 'ano', 'capacidade', 'preco_periodo', 'disponibilidade_calendario', 'regiao', 'exige_operador_certificado', 'seguro_obrigatorio', 'caucao_obrigatoria', 'locador_id', 'categoria_id'];
 
     public function categoria()
     {

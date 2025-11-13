@@ -31,13 +31,12 @@
         <label for="preco_periodo" class="form-label">Preco do Periodo:</label>
         <input disabled value="{{$equipamento->preco_periodo}}" type="text" id="preco_periodo" name="preco_periodo" class="form-control" required="">
     </div>
+
+        <input disabled value="{{$equipamento->disponibilidade_calendario}}" type="hidden" id="disponibilidade_calendario" name="disponibilidade_calendario" class="form-control" required="">
+
     <div class="mb-3">
-        <label for="disponibilidade_calendario" class="form-label">Disponibilidade Calendario:</label>
-        <input disabled value="{{$equipamento->disponibilidade_calendario}}" type="text" id="disponibilidade_calendario" name="disponibilidade_calendario" class="form-control" required="">
-    </div>
-    <div class="mb-3">
-        <label for="raio_atendimento" class="form-label">Raio de Atendimento (km):</label>
-        <input disabled value="{{$equipamento->raio_atendimento}}" type="text" id="raio_atendimento" name="raio_atendimento" class="form-control" required="">
+        <label for="regiao" class="form-label">Região:</label>
+        <input disabled value="{{$equipamento->regiao}}" type="text" id="regiao" name="regiao" class="form-control" required="">
     </div>
     <div class="mb-3">
         <label for="exige_operador_certificado" class="form-label">Operador Certificado:</label>
