@@ -53,7 +53,7 @@ class AuthController extends Controller
             $request->session()->regenerate();
             return redirect("/");
         } else {
-            return redirect()->route("login")->with("erro", "credenciais invalidas");
+            return redirect()->route("login")->with("erro", "credenciais inválidas");
         }
     }
 
