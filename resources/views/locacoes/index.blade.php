@@ -41,8 +41,8 @@
                                 @endif
                             @endforeach
 
-                            <td>{{ $l->data_inicio }}</td>
-                            <td>{{ $l->data_fim }}</td>
+                            <td>{{ Carbon\Carbon::parse($l->data_inicio)->format('d/m/Y') }}</td>
+                            <td>{{ Carbon\Carbon::parse($l->data_fim)->format('d/m/Y') }}</td>
                             <td>{{ $locatariosDasLocacoes->where('locacao_id', $l->id)->count() }}</td>
                             <td>{{ $l->valor_total }}</td>
                             <td>{{ $l->valor_total / $locatariosDasLocacoes->where('locacao_id', $l->id)->count() }}</td>

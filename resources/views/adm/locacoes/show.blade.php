@@ -38,10 +38,10 @@
             <label class="form-label">{{ $equipamento->caucao_obrigatoria }}</label>
         </div>
         <div class="mb-3">
-            <label class="form-label">{{ $locacao->data_inicio }}</label>
+            <label class="form-label">{{ \Carbon\Carbon::parse($locacao->data_inicio)->format('d/m/Y') }}</label>
         </div>
         <div class="mb-3">
-            <label class="form-label">{{ $locacao->data_fim }}</label>
+            <label class="form-label">{{ \Carbon\Carbon::parse($locacao->data_fim)->format('d/m/Y') }}</label>
         </div>
         <div class="mb-3">
             <label class="form-label">{{ $locacao->status_equipamento }}</label>

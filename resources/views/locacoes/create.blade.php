@@ -2,7 +2,10 @@
 
 @section('conteudo')
 
+<section class="container card">
+
     <h1>Nova Locação</h1>
+
     <form method="post" action="{{ route('locacoes.store', $equipamento) }}">
         @CSRF
 
@@ -23,15 +26,18 @@
             <h3>Total: R$ <span id="valor_total">0.00</span></h3>
         </div>
         <input type="hidden" id="tipo_locacao" name="tipo_locacao" value="0">
-        
+
 
 
         <button type="submit" class="btn btn-primary">Enviar</button>
     </form>
 
-
     <script>
-        const valorDia = {{ $equipamento->preco_periodo }};
+        const valorDia = {
+            {
+                $equipamento - > preco_periodo
+            }
+        };
 
         function calcularTotal() {
             const inicio = document.getElementById('data_inicio').value;
@@ -58,5 +64,5 @@
         document.getElementById('data_inicio').addEventListener('change', calcularTotal);
         document.getElementById('data_fim').addEventListener('change', calcularTotal);
     </script>
-
+</section>
 @endsection

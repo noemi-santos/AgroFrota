@@ -74,13 +74,11 @@ class LocacaoController extends Controller
                 ]
             );
 
-            return redirect()->route("equipamentos.index")
-                ->with("sucesso", "Registro inserido!");
+            return redirect()->route("locacoes.index")
+                ->with("sucesso", "Locação criada com sucesso!");
         } catch (\Exception $e) {
             echo "Erro ao salvar o registro da locacao! " . $e->getMessage();
-
         }
-
     }
 
     /**
