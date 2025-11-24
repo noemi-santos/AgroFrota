@@ -176,9 +176,9 @@ class AnuncioController extends Controller
             return redirect()->route('anuncios.index')->with('erro', 'Anúncio não encontrado.');
         }
 
-        $avaliacoes = Avaliacao::where(
+        $avaliacoes = Avaliacao::whereIn(
             'locacao_id',
-            Locacao::where('equipamento_id', $anuncio->equipamento_id)->value('id')
+            Locacao::where('equipamento_id', $anuncio->equipamento_id)->pluck('id')
         )->get();
 
 
