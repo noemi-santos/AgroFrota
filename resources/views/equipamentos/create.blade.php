@@ -57,14 +57,9 @@
             <label for="caucao_obrigatoria" class="form-label">Caução Obrigatória</label>
         </div>
 
-        <div class="mb-3">
-            <label for="locador_id" class="form-label">Selecione o Locador:</label>
-            <select class="form-select" name="locador_id" id="locador_id">
-                @foreach($locador as $l)
-                    <option value="{{$l->id}}">{{ $l->name }}</option>
-                @endforeach
-            </select>
-        </div>
+        @foreach($locador as $l)
+            <input type="hidden" id="locador_id" name="locador_id" value="{{ $l->id }}">
+        @endforeach
 
         <div class="mb-3">
             <label for="categoria_id" class="form-label">Selecione a Categoria:</label>
